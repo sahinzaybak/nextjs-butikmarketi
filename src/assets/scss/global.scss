@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 * {
-
   &,
   &:before,
   &:after {
@@ -28,8 +26,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding: 0;
   margin: 0;
-  font-family: 'Montserrat';
-
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 500;
 }
 
 blockquote,
@@ -124,7 +122,6 @@ section {
 label {
   margin-bottom: 0;
 }
-
 
 .custom-container {
   position: relative;

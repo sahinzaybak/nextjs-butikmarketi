@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 
 * {
   &,
@@ -26,7 +26,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding: 0;
   margin: 0;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 500;
 }
 
@@ -101,7 +101,7 @@ button:focus {
 a,
 button {
   user-select: none;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 button {
@@ -129,7 +129,7 @@ label {
   width: 95%;
   margin: 0 auto;
   z-index: 99;
-  &.product{
+  &.product {
     @media (max-width: 600px) {
       overflow: hidden;
     }

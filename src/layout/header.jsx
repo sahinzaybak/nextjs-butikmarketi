@@ -14,7 +14,7 @@ const Header = () => {
   let categoryList = useSelector(state => state.category.categoryList) //Dolan kategori listesini al.
 
   useEffect(() => {
-    // dispatch(fetchCategoryList()) //Kategori listesini doldurmak için action'a dispatch et.
+    dispatch(fetchCategoryList()) //Kategori listesini doldurmak için action'a dispatch et.
   }, [])
 
   return (

@@ -11,6 +11,7 @@ import '../src/assets/scss/layout/categories.scss'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../src/assets/scss/slider.scss'
+import '../src/assets/scss/butik-slider.scss'
 
 const myApp = ({ Component, pageProps }) => {
   return (

@@ -3,14 +3,15 @@ import SliderSlick from "react-slick";
 
 const Slider = ({ banners }) => {
   const settings = {
-    dots:true,
+    dots: true,
     infinite: true,
-    autoplay:true,
+    autoplay: true,
     speed: 500,
+    touchThreshold: 100,
     slidesToShow: 1,
     slidesToScroll: 1
   };
-
+  
   return (
     <div className="slider">
       <div className="row">
@@ -18,9 +19,7 @@ const Slider = ({ banners }) => {
           <div className="slider-left">
             <SliderSlick {...settings}>
               {banners.map((banner, index) =>
-
-                  <img src={banner.image} />
-               
+                <img src={banner.image} />
               )}
             </SliderSlick>
           </div>

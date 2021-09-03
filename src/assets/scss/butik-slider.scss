@@ -1,0 +1,17 @@
+.butik-slider {
+	margin: 22px 0;
+	.slick-slide {
+		width: 79px;
+		margin: 0 10px;
+	}
+	&__item {
+		border: 1px solid #ececec;
+		border-radius: 50px;
+		transition: all 0.3s;
+		cursor: pointer;
+		overflow: hidden;
+		&:hover {
+			border-color: #f99348;
+		}
+	}
+}

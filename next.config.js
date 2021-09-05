@@ -1,7 +1,6 @@
 module.exports = {
-	images: {
-	  domains: ['http://www.webizade.com/'],
-	},
-  }
-  
-  
+  images: {
+    domains: ["http://www.webizade.com/"],
+  },
+};
+

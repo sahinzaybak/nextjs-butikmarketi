@@ -1,0 +1,160 @@
+.product {
+  &-item {
+    background-color: #f9f9f9;
+    padding: 40px;
+    &:nth-child(2n) {
+      // background-color: #f3f3f3;
+      background-color: #fdfdfd;
+      
+    }
+    &__title {
+      font-size: 23px;
+      border-bottom: 1px solid #f1f1f1;
+      padding: 6px 0;
+      margin-bottom: 40px;
+      font-family: "Comfortaa", cursive;
+      color: #404040;
+    }
+    .more-button {
+      width: max-content;
+      margin: 0 auto;
+      display: block;
+      margin-top: 4px;
+      padding: 12px 34px;
+      color: #2d2d2d;
+      font-size: 16px;
+      text-align: center;
+      text-transform: uppercase;
+      border: 1px solid #e8e8e8;
+      border-radius: 7px;
+      transition: all .3s;
+      &:hover {
+        border-color: #f99348;
+      }
+      &__text {
+        margin-right: 12px;
+        letter-spacing: 1px;
+      }
+      img {
+        width: 16px;
+      }
+    }
+  }
+  &-card {
+    &__cell {
+      width: 20%;
+      padding: 0 10px 50px;
+      // &:hover{
+      //   .button,.product-card__butic{
+      //     border-color: #f99348;
+      //   }
+      // }
+      @media (max-width: 600px) {
+        width: 50%;
+      }
+      .button {
+        width: 100%;
+        background-color: #eff2ed;
+        display: block;
+        padding: 7px;
+        color: #5d5d5d;
+        font-size: 11px;
+        text-align: center;
+        font-weight: 500;
+        text-transform: uppercase;
+        border: 1px solid #e7e8e6;
+        border-radius: 50px;
+        transition: all 0.4s;
+        letter-spacing: 1px;
+        &-text {
+          margin-right: 6px;
+        }
+        img {
+          position: relative;
+          width: 8px;
+          left: 0;
+          transition: all 0.4s;
+        }
+        &:hover {
+          border-color: #f99348;
+          // img {
+          //   left: 3px !important;
+          // }
+        }
+      }
+    }
+    &__item {
+      position: relative;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+    &__butic {
+      position: absolute;
+      border: 1px solid #ececec;
+      border-radius: 50px;
+      transition: all 0.3s;
+      cursor: pointer;
+      overflow: hidden;
+      width: max-content;
+      top: -12px;
+      left: -7px;
+      z-index: 9;
+      img {
+        width: 42px;
+      }
+    }
+    &__image {
+      box-shadow: 0 0 7px #d3d3d3;
+      border-radius: 10px;
+      transition: all 0.4s;
+      width: 100%;
+      height: 325px;
+      overflow: hidden;
+      // border: 4px solid transparent;
+      img {
+        border-radius: 6px;
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+    }
+    &__info {
+      margin: 12px;
+    }
+    &__name {
+      font-family: "Comfortaa", cursive;
+      font-size: 12px;
+      text-align: center;
+      margin-top: 12px;
+      color: #717171;
+      margin-bottom: 10px;
+    }
+    &__price {
+      font-family: "Comfortaa", cursive;
+      position: relative;
+      color: #464645;
+      font-size: 18px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.1px;
+    }
+    &__whatsapp {
+      img {
+        width: 18px;
+        position: relative;
+        top: -2px !important;
+      }
+      span {
+        font-size: 11.4px;
+        color: #62985f;
+        margin-left: 5px;
+        font-family: "Comfortaa", cursive;
+        
+        @media (max-width: 600px) {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}

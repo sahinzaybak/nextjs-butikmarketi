@@ -7,7 +7,7 @@ const ButikSlider = ({ butikLogos }) => {
     autoplay: true,
     speed: 500,
     touchThreshold: 100,
-    slidesToShow: 8,
+    slidesToShow: 10,
     // slidesToScroll: 9,
     variableWidth: true
   };

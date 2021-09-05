@@ -2,6 +2,21 @@
   &-item {
     background-color: #f9f9f9;
     padding: 40px;
+    &__wrp{
+      padding: 0 0px 50px;
+    }
+    &:first-child{
+      // &:after{
+      //   position: absolute;
+      //   content: "";
+      //   background-image: url(https://media.istockphoto.com/vectors/ecommerce-shop-seamless-pattern-vector-background-vector-id652638946);
+      //   width: 100%;
+      //   height: 100%;
+      //   top: 0;
+      //   z-index: 9999999;
+      //   left: 0;
+      // }
+    }
     &:nth-child(2n) {
       // background-color: #f3f3f3;
       background-color: #fdfdfd;
@@ -43,7 +58,6 @@
   &-card {
     &__cell {
       width: 20%;
-      padding: 0 10px 50px;
       // &:hover{
       //   .button,.product-card__butic{
       //     border-color: #f99348;
@@ -77,9 +91,14 @@
         }
         &:hover {
           border-color: #f99348;
-          // img {
-          //   left: 3px !important;
-          // }
+          .product-card__price{
+            color:red;
+          }
+        }
+      }
+      &:hover {
+        .product-card__price{
+          color: #f7923a;
         }
       }
     }
@@ -118,6 +137,9 @@
         object-fit: cover;
         width: 100%;
       }
+      &:hover{
+        box-shadow: 0px 4px 32px -11px #bd6314;
+      }
     }
     &__info {
       margin: 12px;
@@ -126,9 +148,9 @@
       font-family: "Comfortaa", cursive;
       font-size: 12px;
       text-align: center;
-      margin-top: 12px;
+      margin: 18px 0 6px;
       color: #717171;
-      margin-bottom: 10px;
+
     }
     &__price {
       font-family: "Comfortaa", cursive;
@@ -138,6 +160,7 @@
       text-align: center;
       font-weight: 600;
       letter-spacing: 0.1px;
+      transition: all .3s;
     }
     &__whatsapp {
       img {

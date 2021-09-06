@@ -1,15 +1,21 @@
 const initialState = {
-  homeProductList:[]
-}
+  homeProductList: [],
+  categoryProductList: [],
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case "HOME_PRODUCT_LIST":
-      return{
+      return {
         ...state,
-        homeProductList: action.payload
-      }
+        homeProductList: action.payload,
+      };
+    case "CATEGORY_PRODUCT_LIST":
+      return {
+        ...state,
+        categoryProductList: action.payload,
+      };
     default:
       return state;
   }
-}
+};

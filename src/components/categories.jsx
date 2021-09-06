@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import React from 'react'
+import Link from "next/link";
 
 const Categories = ({ categoryList }) => {
   return (
@@ -7,11 +7,12 @@ const Categories = ({ categoryList }) => {
       <div className="custom-container">
         <div className="d-flex">
           {categoryList.map((category, index) =>
-            <div href={category.slug} className="categories-item" key={index}>
-              {/* <Image src={category.image} alt={category.title} /> */}
-              <img src={category.image} alt={category.title} />
-              <a href="" className="categories-name">{category.title}</a>
-            </div>
+            <Link href={category.slug} key={index}>
+              <div className="categories-item">
+                <img src={category.image} alt={category.title} />
+                <span className="categories-name">{category.title}</span>
+              </div>
+            </Link>
           )}
         </div>
       </div>

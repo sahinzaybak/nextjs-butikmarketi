@@ -136,6 +136,65 @@ label {
   }
 }
 
-.cursor-pointer {
-  cursor: pointer;
+.category-title {
+  font-family: "Comfortaa", cursive;
+  font-size: 23px;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 6px 0;
+  margin-bottom: 40px;
+  text-transform: capitalize;
+  color: #404040;
+}
+
+.button {
+  width: 100%;
+  background-color: #eff2ed;
+  display: block;
+  padding: 7px;
+  color: #5d5d5d;
+  font-size: 11px;
+  text-align: center;
+  font-weight: 500;
+  text-transform: uppercase;
+  border: 1px solid #e7e8e6;
+  border-radius: 50px;
+  transition: all 0.4s;
+  letter-spacing: 1px;
+  &-text {
+    margin-right: 6px;
+  }
+  img {
+    position: relative;
+    width: 8px;
+    left: 0;
+    transition: all 0.4s;
+  }
+  &:hover {
+    border-color: #f99348;
+  }
+}
+
+.more-button {
+  width: max-content;
+  margin: 0 auto;
+  display: block;
+  margin-top: 4px;
+  padding: 12px 34px;
+  color: #2d2d2d;
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #e8e8e8;
+  border-radius: 7px;
+  transition: all 0.3s;
+  &:hover {
+    border-color: #f99348;
+  }
+  &__text {
+    margin-right: 12px;
+    letter-spacing: 1px;
+  }
+  img {
+    width: 16px;
+  }
 }

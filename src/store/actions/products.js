@@ -9,3 +9,13 @@ export const fetchHomeProductList = () => (dispatch) => {
     });
   });
 };
+
+
+export const fetchCategoryProductList = (categorySlug) => (dispatch) => {
+  axios.get(`https://webizade.com/bm/categoryproduct?category=${categorySlug}`).then((response) => {
+    dispatch({
+      type: "CATEGORY_PRODUCT_LIST",
+      payload: response.data[0],
+    });
+  });
+};

@@ -12,7 +12,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../src/assets/scss/slider.scss'
 import '../src/assets/scss/butik-slider.scss'
-import '../src/assets/scss/home-product.scss'
+import '../src/assets/scss/product-card.scss'
 
 const myApp = ({ Component, pageProps }) => {
   return (

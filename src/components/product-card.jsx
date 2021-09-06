@@ -17,17 +17,17 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
       <div className="product-card__info">
-        <h2 className="product-card__name">{product.title}</h2>
+        <a href={product.link} target="_blank">
+          <h2 className="product-card__name">{product.title}</h2>
+        </a>
         <p className="product-card__price">{product.fiyat} ₺</p>
       </div>
-
       <div className="button">
         <a href={product.link} className="d-flex align-items-center justify-content-center" target="_blank">
           <p className="button-text">Detaylı İncele</p>
           <Image src={right} className="button-icon" />
         </a>
       </div>
-
       <a className="product-card__whatsapp d-block mt-2" target="_blank"
         href={"https://wa.me/+905395066951/?text=Merhaba. Ben butikmarketi.com'da gördüğüm bir ürününüz hakkında bilgi almak istiyorum. Ürünün linki şöyle:" + ' ' + product.link}>
         <div className="d-flex align-items-center justify-content-center">

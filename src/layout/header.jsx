@@ -12,7 +12,6 @@ import Categories from '../components/categories'
 const Header = () => {
   const dispatch = useDispatch()
   let categoryList = useSelector(state => state.category.categoryList) //Dolan kategori listesini al.
-
   useEffect(() => {
     dispatch(fetchCategoryList()) //Kategori listesini doldurmak için action'a dispatch et.
   }, [])

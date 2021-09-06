@@ -22,7 +22,6 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "sass": "^1.38.2",
-    "slick-carousel": "^1.8.1",
-    "swiper": "^7.0.2"
+    "slick-carousel": "^1.8.1"
   }
 }

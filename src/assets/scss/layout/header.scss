@@ -1,7 +1,10 @@
 .header {
+  // position: sticky;
+  // top:0;
   background-color: #fff;
   height: 90px;
   border-bottom: 1px solid #f9f8f8;
+  z-index: 999;
   &-logo {
     position: relative;
     top:5px;

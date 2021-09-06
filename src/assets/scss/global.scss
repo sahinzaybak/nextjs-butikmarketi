@@ -147,19 +147,19 @@ label {
 }
 
 .button {
-  font-family: "Comfortaa", cursive;
+ 
   width: 85%;
   margin: 0 auto;
-  // background-color: #eff2ed;
-  background-color: #eff2ed52;
+  background-color: #eff2ed;
+  // background-color: #eff2ed52;
   display: block;
   padding: 7px;
   color: #5d5d5d;
   font-size: 10.4px;
   text-align: center;
   font-weight: 500;
-  // text-transform: uppercase;
-  border: 1px solid #efefef;
+  text-transform: uppercase;
+  border: 1px solid #e7e8e6;
   border-radius: 50px;
   transition: all 0.4s;
   letter-spacing: 1px;

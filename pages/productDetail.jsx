@@ -57,13 +57,17 @@ const ProductDetail = () => {
           <div className="d-flex align-items-center justify-content-between">
             <div className="headers-butic d-flex">
               <div>
-              <img src="https://webizade.com/bm/img/butik-3.jpg" alt="" />
+                <img src="https://webizade.com/bm/img/butik-3.jpg" alt="" />
               </div>
               <div className="d-block p-2">
-              <h5 className="mb-1">Nişantaşı Shoes</h5>
-              <h3>Starfish Dolgu taban terlik</h3>
+                <div className="d-flex align-items-center">
+                  <h5>Nişantaşı Shoes</h5>
+                  <span>9.8</span>
+                </div>
+
+                <h3>Starfish Dolgu taban terlik</h3>
               </div>
-             
+
             </div>
 
             <div className="d-flex align-items-center">
@@ -118,7 +122,7 @@ const ProductDetail = () => {
           </div>
           <div className="col-md-6">
             <div className="product-info">
-          
+
 
 
               <h1 className="product-info__name">Starfish Dolgu taban terlik</h1>
@@ -170,7 +174,7 @@ const ProductDetail = () => {
                 <div className="button orange mx-0">
                   <a href="#" className="d-flex align-items-center justify-content-center" target="_blank">
                     <Image src={whatsapp} alt="Ürün hakkında soru sor" />
-                    <p className="button-text">     Ürün hakkında satıcıya soru sor veya ürünü sipariş et.</p>
+                    <p className="button-text">     Ürün hakkında satıcıya soru sorun veya ürünü sipariş edin.</p>
                   </a>
                 </div>
               </div>

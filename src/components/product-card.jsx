@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import whatsapp from '../assets/images/whatsapp.svg'
+import Link from "next/link";
 
 const ProductCard = ({ product }) => {
   return (
@@ -11,15 +12,15 @@ const ProductCard = ({ product }) => {
             <img className="butiks-slider__logo" src={product.butik_image} alt="" />
           </div>
           <div className="product-card__image">
-            <a href={product.link} target="_blank">
+            <Link href="/productDetail">
               <img src={product.image} />
-            </a>
+            </Link>
           </div>
         </div>
         <div className="product-card__info">
-          <a href={product.link} target="_blank">
+          <Link href="/productDetail">
             <h2 className="product-card__name">{product.title}</h2>
-          </a>
+          </Link>
           <p className="product-card__price">{product.fiyat} ₺</p>
         </div>
         {/* <div className="button">

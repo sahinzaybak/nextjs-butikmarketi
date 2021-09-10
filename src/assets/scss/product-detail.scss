@@ -1,3 +1,4 @@
+
 //Detail Header
 .detail-header {
   background-color: #fff;
@@ -36,6 +37,16 @@
     padding: 0px 4px;
     border-radius: 4px;
     font-weight: 600;
+  }
+  &__info{
+    position: absolute;
+    font-size: 10px;
+    margin-right: 17px;
+    color: #96b791;
+    bottom: -17px;
+    right: 0;
+    cursor: pointer;
+    text-decoration: underline;
   }
   &__action {
     img {

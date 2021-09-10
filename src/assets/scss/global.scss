@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 
 * {
   &,
@@ -147,12 +146,10 @@ label {
 }
 
 .button {
-  // font-family: "Comfortaa", cursive;
+  display: block;
+  background-color: #eff2ed;
   width: 85%;
   margin: 0 auto;
-  background-color: #eff2ed;
-  // background-color: #eff2ed52;
-  display: block;
   padding: 7px;
   color: #5d5d5d;
   font-size: 10.4px;
@@ -175,32 +172,30 @@ label {
   &:hover {
     border-color: #f99348;
   }
-  &.orange{
-    background-color: #52b5481c;
-    color: #52b548;
-    padding: 8px 25px;
-    border: 0;
-    width: -moz-max-content;
-    width: 100%;
-    font-size: 15px;
-    text-transform: none;
-    letter-spacing: 0;
-    transition: all .3s;
-    border: 1px solid #a3ea9c;
-    cursor: pointer;
-    img{
-      width: 30px;
+}
 
-    }
-    p{
-      font-size: 15px;
-      margin-left: 10px;
-      /* text-transform: uppercase; */
-      letter-spacing: 0.2px;
-    }
-    &:hover{
-      background-color: #52b54829;
-    }
+.green-button{
+  width:max-content;
+  background-color: #52b5481c;
+  font-size: 15px;
+  border-radius: 50px;
+  color: #52b548;
+  padding: 8px 25px;
+  border: 1px solid #a3ea9c;
+  text-transform: none;
+  letter-spacing: 0;
+  transition: all .3s;
+  cursor: pointer;
+  img{
+    width: 30px;
+  }
+  p{
+    font-size: 15px;
+    margin-left: 10px;
+    letter-spacing: 0.2px;
+  }
+  &:hover{
+    background-color: #52b54829;
   }
 }
 
@@ -285,10 +280,5 @@ label {
     }
     
   }
- 
-}
 
-
-.spans{
-  margin-left: 8px;
 }

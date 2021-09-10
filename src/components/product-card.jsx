@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
       </div>
       <div className="button">
         <a href={product.link} className="d-flex align-items-center justify-content-center" target="_blank">
-          <p className="button-text">Detaylı İncele</p>
+          <p className="button-text">İnstagramda Gör</p>
           <Image src={right} className="button-icon" />
         </a>
       </div>

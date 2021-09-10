@@ -5,6 +5,7 @@ import store from "../src/store/store";
 import Header from "../src/layout/header";
 
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-responsive-modal/styles.css';
 import '../src/assets/scss/global.scss'
 import '../src/assets/scss/layout/header.scss'
 import '../src/assets/scss/layout/categories.scss'

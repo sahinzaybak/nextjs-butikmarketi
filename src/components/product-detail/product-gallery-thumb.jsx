@@ -1,9 +1,11 @@
-import {forwardRef } from "react";
+import { forwardRef } from "react";
 import Slider from "react-slick";
 
-const ProductGalleryThumb = forwardRef((props,ref) => {
+const ProductGalleryThumb = forwardRef((props, ref) => {
+  let sliderThumbCount
+  if(props.images) sliderThumbCount = props.images.length 
   const settingsThumbs = {
-    slidesToShow: 4,
+    slidesToShow: sliderThumbCount,
     slidesToScroll: 1,
     asNavFor: '.slider-for',
     dots: true,
@@ -16,18 +18,11 @@ const ProductGalleryThumb = forwardRef((props,ref) => {
       <span className="product-info__title">Ürün Resimleri</span>
       <div className="thumbnail-slider-wrap">
         <Slider {...settingsThumbs} asNavFor={props.nav} ref={ref}>
-          <div className="slick-slide">
-            <img className="slick-slide-image" src="https://webizade.com/bm/img/resim-3.jpg" />
-          </div>
-          <div className="slick-slide">
-            <img className="slick-slide-image" src="https://webizade.com/bm/img/resim-11.jpg" />
-          </div>
-          <div className="slick-slide">
-            <img className="slick-slide-image" src="https://webizade.com/bm/img/resim-13.jpg" />
-          </div>
-          <div className="slick-slide">
-            <img className="slick-slide-image" src="https://webizade.com/bm/img/resim-2.jpg" />
-          </div>
+          {props.images && props.images.map((image, index) => (
+            <div className="slick-slide" key={index}>
+              <img className="slick-slide-image" src={image.image} />
+            </div>
+          ))}
         </Slider>
       </div>
     </div>

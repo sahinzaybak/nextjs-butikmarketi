@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import whatsapp from '../../assets/images/whatsapp.svg'
-const ProductInfoBottom = (() => {
+const ProductInfoBottom = ({buticName}) => {
   return (
     <>
       <div className="product-info__item color mt-3">
         <span className="product-info__title">Renk Seçenekleri</span>
-        <div className="d-flex mt-1">
+        <div className="d-flex mt-2">
           <p className="product-info__desc color"></p>
           <p className="product-info__desc color"></p>
           <p className="product-info__desc color"></p>
@@ -14,7 +14,7 @@ const ProductInfoBottom = (() => {
       </div>
       <div className="product-info__item mt-3">
         <span className="product-info__title">Ürün Sahibi</span>
-        <p className="product-info__desc mt-1">Bu ürün <u>Nişantaşı Shoes</u> tarafından gönderilecektir.</p>
+        <p className="product-info__desc mt-1">Bu ürün <u>{buticName}</u> tarafından gönderilecektir.</p>
       </div>
       <div className="product-info__action mt-4">
         <div className="green-button mx-0">
@@ -26,6 +26,6 @@ const ProductInfoBottom = (() => {
       </div>
     </>
   );
-});
+};
 
 export default ProductInfoBottom;

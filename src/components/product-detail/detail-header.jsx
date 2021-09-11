@@ -6,7 +6,7 @@ import info from '../../assets/images/information.svg'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
-const DetailHeader = () => {
+const DetailHeader = ({ buticLogo, buticName, productTitle, price }) => {
   const [open, setOpen] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -20,18 +20,18 @@ const DetailHeader = () => {
           <div className="d-flex align-items-center justify-content-between">
             <div className="detail-header__logo d-flex">
               <div>
-                <img src="https://webizade.com/bm/img/butik-3.jpg" alt="" />
+                <img src={buticLogo} alt="" />
               </div>
               <div className="d-block p-2">
                 <div className="d-flex align-items-center">
-                  <h5 className="detail-header__butic">Nişantaşı Shoes</h5>
+                  <h5 className="detail-header__butic">{buticName}</h5>
                   <span className="detail-header__point">9.8</span>
                 </div>
-                <h3 className="detail-header__title">Starfish Dolgu taban terlik</h3>
+                <h3 className="detail-header__title">{productTitle}</h3>
               </div>
             </div>
             <div className="d-flex align-items-center">
-              <p className="detail-header__price">89.90 ₺</p>
+              <p className="detail-header__price">{price} ₺</p>
               <div className="detail-header__action">
                 <div className="position-relative">
                   <div className="green-button mx-0" onClick={onOpenModal}>

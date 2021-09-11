@@ -1,6 +1,7 @@
 const initialState = {
   homeProductList: [],
   categoryProductList: [],
+  detailProductInfo: [],
 };
 
 export default (state = initialState, action) => {
@@ -14,6 +15,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         categoryProductList: action.payload,
+      };
+    case "PRODUCT_DETAIL_INFO":
+      return {
+        ...state,
+        detailProductInfo: action.payload,
       };
     default:
       return state;

@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
             <img className="butiks-slider__logo" src={product.butik_image} alt="" />
           </div>
           <div className="product-card__image">
-            <Link href="/productDetail">
+            <Link href={`/${product.butik_slug}/${product.id}`} >
               <img src={product.image} />
             </Link>
           </div>

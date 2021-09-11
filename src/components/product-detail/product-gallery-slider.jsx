@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import instagram from '../../assets/images/instagram.svg'
 
 const ProductGallerySlider = forwardRef((props, ref) => {
+  debugger;
   const settingsMain = {
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -19,18 +20,11 @@ const ProductGallerySlider = forwardRef((props, ref) => {
         <Image src={instagram} alt="Ürün hakkında soru sor" />
       </div>
       <Slider {...settingsMain} asNavFor={props.nav} ref={ref}>
-        <div className="slick-slide">
-          <img className="slick-slide-image" src="https://webizade.com/bm/img/resim-3.jpg" />
-        </div>
-        <div className="slick-slide">
-          <img className="slick-slide-image" src="https://webizade.com/bm/img/resim-11.jpg" />
-        </div>
-        <div className="slick-slide">
-          <img className="slick-slide-image" src="https://webizade.com/bm/img/resim-13.jpg" />
-        </div>
-        <div className="slick-slide">
-          <img className="slick-slide-image" src="https://webizade.com/bm/img/resim-2.jpg" />
-        </div>
+        {props.images && props.images.map((image, index) => (
+          <div className="slick-slide" key={index}>
+            <img className="slick-slide-image" src={image.image} />
+          </div>
+        ))}
       </Slider>
     </div>
   );

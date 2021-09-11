@@ -19,3 +19,14 @@ export const fetchCategoryProductList = (categorySlug) => (dispatch) => {
     });
   });
 };
+
+
+export const fetchProductDetail = (productTitle) => (dispatch) => {
+  axios.get(`https://webizade.com/bm/singleproduct?id=${productTitle}`).then((response) => {
+    debugger;
+    dispatch({
+      type: "PRODUCT_DETAIL_INFO",
+      payload: response.data[0],
+    });
+  });
+};

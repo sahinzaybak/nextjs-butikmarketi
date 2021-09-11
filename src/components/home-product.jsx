@@ -17,7 +17,7 @@ const HomeProducts = ({ productList }) => {
           </div>
         </div>
         <div className="more-button">
-          <Link href={productList.slug} className="d-flex align-items-center justify-content-center">
+          <Link href={`kategori/${productList.slug}`} className="d-flex align-items-center justify-content-center">
             <a className="d-flex">
               <p className="more-button__text">TÜM {productList.title} ÜRÜNLERİ </p>
               <Image src={rightArrow} className="button-icon" />

@@ -1,12 +1,19 @@
 import ReactStars from 'react-stars'
-const ProductInfoTop = (() => {
+const ProductInfoTop = ({ productTitle }) => {
   const ratingChanged = (newRating) => {
     console.log(newRating)
   }
   return (
     <>
-      <h1 className="product-info__name">Starfish Dolgu taban terlik</h1>
-      <ReactStars count={5} value={4} onChange={ratingChanged} size={22} half={false} color1={'#e3eaea'} color2={'#ffcc65'} />
+      <h1 className="product-info__name">{productTitle}</h1>
+      <ReactStars
+        count={5}
+        value={4}
+        onChange={ratingChanged}
+        size={22} half={false}
+        color1={'#e3eaea'}
+        color2={'#ffcc65'}
+      />
       <div className="d-flex align-items-center">
         <p>(6) Yorum</p>
         <p className="ml-2"><strong>Yorum Yap</strong></p>
@@ -17,6 +24,6 @@ const ProductInfoTop = (() => {
       </div>
     </>
   );
-});
+};
 
 export default ProductInfoTop;

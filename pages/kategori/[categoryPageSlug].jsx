@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { fetchCategoryProductList } from "../src/store/actions/products";
-import ProductCard from "../src/components/product-card";
+import { fetchCategoryProductList } from "../../src/store/actions/products";
+import ProductCard from "../../src/components/product-card";
 
 //Kategoriye ait ürünler sayfası
 const categoryProducts = () => {
   const router = useRouter();
   const categoryTitle = router.query.categoryPageSlug;
   const dispatch = useDispatch();
-
+  
   let categoryProductList = useSelector((state) => state.products.categoryProductList); //Dolan "kategori ürünlerinin" listesini al.
 
   useEffect(() => {

@@ -4,7 +4,6 @@ import Slider from "react-slick";
 import instagram from '../../assets/images/instagram.svg'
 
 const ProductGallerySlider = forwardRef((props, ref) => {
-  debugger;
   const settingsMain = {
     slidesToShow: 1,
     slidesToScroll: 1,

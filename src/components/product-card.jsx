@@ -8,11 +8,13 @@ const ProductCard = ({ product }) => {
     <div className="product-card__cell">
       <div className="product-card__row">
         <div className="product-card__item">
-          <div className="product-card__butic">
-            <img className="butiks-slider__logo" src={product.butik_image} alt="" />
-          </div>
+          <Link href={`/${product.butik_slug}`}>
+            <div className="product-card__butic">
+              <img className="butiks-slider__logo" src={product.butik_image} alt="" />
+            </div>
+          </Link>
           <div className="product-card__image">
-            <Link href={`/${product.butik_slug}/${product.id}`} >
+            <Link href={`/${product.butik_slug}/${product.slug}`}>
               <img src={product.image} />
             </Link>
           </div>

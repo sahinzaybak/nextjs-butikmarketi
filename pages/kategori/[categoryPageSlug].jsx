@@ -181,20 +181,19 @@ const categoryProducts = () => {
                   </div>
                 </div>
               </div>
-              
+
             </div>
             <div className="col-md-10">
               <h1 className="category-title">{categoryProductList.title}</h1>
               <div className="product-item__wrp d-flex">
                 <div className="row">
                   {categoryProductList.products.map((product, index) => (
-                    <ProductCard product={product} />
+                    <ProductCard product={product} key={index} />
                   ))}
                 </div>
               </div>
             </div>
           </div>
-
         }
       </div>
     </div>

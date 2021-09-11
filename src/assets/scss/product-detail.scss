@@ -10,6 +10,7 @@
       width: 60px;
       border-radius: 50px;
       border: 1px solid #ececec;
+      cursor: pointer;
     }
   }
   &__title {
@@ -26,6 +27,7 @@
     font-size: 14px;
     color: #636363;
     text-decoration: underline;
+    cursor: pointer;
   }
   &__point {
     position: relative;
@@ -145,18 +147,6 @@
         border-radius: 12px;
         border: 1px solid rgba(0, 0, 0, 0.1);
         margin-right: 8px;
-        &:nth-child(1) {
-          background-color: #f2c399;
-        }
-        &:nth-child(2) {
-          background-color: #d0acd0;
-        }
-        &:nth-child(3) {
-          background-color: #495267;
-        }
-        &:nth-child(4) {
-          background-color: #f0f0f1;
-        }
       }
     }
   }

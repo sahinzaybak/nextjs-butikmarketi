@@ -1,7 +1,8 @@
 import React from "react";
+import Link from "next/link";
 import SliderSlick from "react-slick";
 
-const ButikSlider = ({ butikLogos }) => {
+const ButikCarousel = ({ butikLogos }) => {
   const settings = {
     infinite: true,
     autoplay: true,
@@ -16,13 +17,15 @@ const ButikSlider = ({ butikLogos }) => {
     <div className="butik-slider">
       <SliderSlick {...settings}>
         {butikLogos.map((butik, index) =>
-          <div className="butik-slider__item" key={index}>
-            <img src={butik.butik_image} alt={butik.butik} />
-          </div>
+          <Link href={`/${butik.butik_slug}`}>
+            <div className="butik-slider__item" key={index}>
+              <img src={butik.butik_image} alt={butik.butik} />
+            </div>
+          </Link>
         )}
       </SliderSlick>
     </div>
   );
 };
 
-export default ButikSlider;
+export default ButikCarousel;

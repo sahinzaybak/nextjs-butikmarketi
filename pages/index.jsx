@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Slider from "../src/components/slider";
-import ButikSlider from "../src/components/butik-slider";
+import ButikCarousel from "../src/components/butik-carousel";
 import HomeProduct from "../src/components/home-product";
 import { fetchSliderBannerList } from "../src/store/actions/banner";
 import { fetchButikLogo } from "../src/store/actions/butik";
@@ -23,7 +23,7 @@ const Home = () => {
     <>
       <div className="custom-container">
         <Slider banners={sliderBanners} />
-        <ButikSlider butikLogos={butikLogos} />
+        <ButikCarousel butikLogos={butikLogos} />
       </div>
 
       <div className="product-list">

@@ -34,7 +34,7 @@
       }
     }
   }
-  
+
   &-card {
     &__cell {
       width: 20%;
@@ -57,17 +57,22 @@
     }
     &__butic {
       position: absolute;
+      width: max-content;
       border: 1px solid #ececec;
       border-radius: 50px;
       transition: all 0.3s;
       cursor: pointer;
       overflow: hidden;
-      width: max-content;
       top: -12px;
       left: -7px;
+      transition: all .3s;
       z-index: 9;
       img {
         width: 42px;
+      }
+      &:hover {
+        border-color: #ff9800;
+        transform: scale(1.1);
       }
     }
     &__image {

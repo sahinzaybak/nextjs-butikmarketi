@@ -1,15 +1,14 @@
 import Image from 'next/image'
 import whatsapp from '../../assets/images/whatsapp.svg'
-const ProductInfoBottom = ({buticName}) => {
+const ProductInfoBottom = ({ buticName, productColors }) => {
   return (
     <>
       <div className="product-info__item color mt-3">
         <span className="product-info__title">Renk Seçenekleri</span>
         <div className="d-flex mt-2">
-          <p className="product-info__desc color"></p>
-          <p className="product-info__desc color"></p>
-          <p className="product-info__desc color"></p>
-          <p className="product-info__desc color"></p>
+          {productColors.map((color, index) => (
+            <p className="product-info__desc color" key={index} style={{backgroundColor: color.color_code}}></p>
+          ))}
         </div>
       </div>
       <div className="product-info__item mt-3">

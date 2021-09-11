@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Image from 'next/image'
 import ship from '../../assets/images/shipped.svg'
+import Link from "next/link";
 import received from '../../assets/images/order.svg'
 import info from '../../assets/images/information.svg'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
-const DetailHeader = ({ buticLogo, buticName, productTitle, price }) => {
+const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price }) => {
   const [open, setOpen] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -19,12 +20,14 @@ const DetailHeader = ({ buticLogo, buticName, productTitle, price }) => {
         <div className="custom-container">
           <div className="d-flex align-items-center justify-content-between">
             <div className="detail-header__logo d-flex">
-              <div>
+              <Link href={`/${butikSlug}`}>
                 <img src={buticLogo} alt="" />
-              </div>
+              </Link>
               <div className="d-block p-2">
                 <div className="d-flex align-items-center">
-                  <h5 className="detail-header__butic">{buticName}</h5>
+                  <Link href={`/${butikSlug}`}>
+                    <h5 className="detail-header__butic">{buticName}</h5>
+                  </Link>
                   <span className="detail-header__point">9.8</span>
                 </div>
                 <h3 className="detail-header__title">{productTitle}</h3>

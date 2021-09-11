@@ -9,3 +9,13 @@ export const fetchButikLogo = () => (dispatch) => {
     });
   });
 };
+
+export const fetchButikProfileInfo = (butikTitle) => (dispatch) => {
+  axios.get(`https://webizade.com/bm/singlestore?slug=${butikTitle}`).then((response) => {
+    dispatch({
+      type: "BUTIK_PROFILE",
+      payload: response.data[0],
+    });
+  });
+};
+

@@ -123,6 +123,20 @@ label {
   margin-bottom: 0;
 }
 
+input,
+textarea {
+  border: 1px solid #e0e0e0;
+  width: 100%;
+  border-radius: 8px;
+  height: 40px;
+  font-size: 15px;
+  text-indent: 8px;
+  background-color: transparent;
+}
+textarea {
+  height: 100px;
+}
+
 .custom-container {
   position: relative;
   max-width: 1170px;
@@ -197,6 +211,16 @@ label {
   }
   &:hover {
     background-color: #52b54829;
+  }
+  &.danger {
+    background-color: #e44a6d30;
+    color: #d45a70;
+    border-color: #f9adbc;
+  }
+  &.info {
+    background-color: #56c8e129;
+    color: #36bae5;
+    border: 1px solid #7acce6;
   }
 }
 
@@ -278,6 +302,61 @@ label {
   border-radius: 6px;
   padding: 25px;
   background-color: #f7f9f7;
+  &.alert-modal {
+    width: 460px;
+    &.success {
+      width: 600px;
+    }
+    .large-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #353535;
+      text-align: center;
+      padding: 0px 10px;
+      &.green {
+        font-size: 23px;
+        color: #53b547;
+        font-weight: 600;
+      }
+    }
+    .small-title {
+      background-color: #56c8e112;
+      color: #6197a9;
+      padding: 0 0px;
+      font-size: 14px;
+      border: 1px solid #7acce6;
+      padding: 12px;
+      border-radius: 8px;
+      span {
+        text-decoration: underline;
+        margin-bottom: 10px;
+      }
+      &__disc {
+        position: relative;
+        padding: 0 10px;
+        margin: 4px 0;
+        &:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          width: 4px;
+          height: 4px;
+          background-color: #53b547;
+          border-radius: 10px;
+          top: 9px;
+        }
+      }
+    }
+    .medium-title {
+      font-size: 15.6px;
+      color: #53a748;
+      padding: 12px 20px;
+      border: 1px solid #87d480;
+      border-radius: 7px;
+      line-height: 1.5;
+      background-color: #6fc06512;
+    }
+  }
   .green-button {
     img {
       width: 18px;
@@ -319,18 +398,6 @@ label {
 
   .modal-item {
     width: 48%;
-    input,
-    textarea {
-      border: 1px solid #e0e0e0;
-      width: 100%;
-      border-radius: 8px;
-      height: 40px;
-      font-size: 15px;
-      text-indent: 8px;
-      background-color: transparent;
-    }
-    textarea {
-      height: 100px;
-    }
   }
+
 }

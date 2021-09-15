@@ -2,18 +2,28 @@ import { useState } from "react";
 import Image from 'next/image'
 import ship from '../../assets/images/shipped.svg'
 import Link from "next/link";
-import received from '../../assets/images/order.svg'
-import info from '../../assets/images/information.svg'
 import 'react-responsive-modal/styles.css';
-import { Modal } from 'react-responsive-modal';
+
+//Modal Components
+import OrderCreateModal from '../modals/orderCreate'
+import ConfirmModal from '../modals/confirm'
+import InfoModal from '../modals/info'
+import OrderSuccessModal from '../modals/orderSuccess'
 
 const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price }) => {
   const [open, setOpen] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
+
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const onOpenModalInfo = () => setOpenInfo(true);
   const onCloseModalInfo = () => setOpenInfo(false);
+  const onOpenModalAlert = () => setOpenAlert(true);
+  const onCloseModalAlert = () => setOpenAlert(false);
+  const onOpenModalSuccess = () => setOpenSuccess(true);
+  const onCloseModalSuccess = () => setOpenSuccess(false);
   return (
     <>
       <div className="detail-header d-flex align-items-center justify-content-between">
@@ -45,53 +55,25 @@ const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price }) 
                   </div>
                   <span className="detail-header__info" onClick={onOpenModalInfo}>Detaylı bilgi almak için tıklayın</span>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Modal open={open} onClose={onCloseModal} center>
-        <div className="d-flex modal-wrp pb-1">
-          <Image src={ship} alt="Ürün hakkında soru sor" />
-          <h3 className="modal-title ml-3">Sipariş Oluştur</h3>
-        </div>
-        <div className="modal-form mt-4">
-          <div className="d-flex justify-content-between">
-            <div className="modal-item">
-              <input type="text" placeholder="Adınız Soyadınız" />
-            </div>
-            <div className="modal-item">
-              <input type="text" placeholder="Cep Tel Numaranız (Whatsapp)" />
-            </div>
-          </div>
-          <div className="modal-item w-100 mt-3">
-            <textarea placeholder="Ürünün gönderileceği adres" />
-          </div>
-          <div className="modal-item w-100 mt-3">
-            <textarea placeholder="Açıklama (İstediğiniz beden, renk..vs)" />
-          </div>
-          <div className="green-button d-flex align-items-center mt-3 ml-auto">
-            <Image src={received} alt="Ürün hakkında soru sor" />
-            <p>Ürünü sipariş et</p>
-          </div>
-        </div>
-      </Modal>
 
-      <Modal open={openInfo} onClose={onCloseModalInfo} center>
-        <div className="d-flex modal-wrp pb-1">
-          <Image src={info} alt="Ürün hakkında soru sor" />
-          <h3 className="modal-title ml-3">ButikMarketi genel sipariş detayları</h3>
-        </div>
-        <div className="modal-form modal-info mt-4">
-          <p>Siparişleriniz <u>ürün sahibi butik</u> tarafından adresinize gönderilir.</p>
-          <p>Siparişlerinizi <u>kapıda ödeme kolaylığı</u> ile satın alabilirsiniz. </p>
-          <p>Ürün teslimi sonrası gelen ürünü <u>geri iade</u> veya <u>ürün değişimi</u> yapabilirsiniz. </p>
-          <p>Siparişinizi oluşturduktan sonra, ürününüzün takibi<u>(kargo süreci, ürünün size teslimi, sipariş sonrası doğru ürün kontrolü)</u> <u>tamamen bizim kontrolümüzde</u> olup, whatsapp üzerinden bilgilendirileceksiniz. </p>
-          <p>Size teslim edilen ürün ile resimde beğenip, sipariş verdiğiniz ürün birbirinden <u>tamamen</u> farklı ise, ücretiniz <u>bizim tarafımızdan</u> eft ile hemen <u>iade edilip</u>, o butiğin üyeliği <u>anında iptal edilir.</u> </p>
-          <p>Sitemize kayıtlı herhangi bir butiğin, bizim sitemiz dışındaki ürünlerini satın alırsanız, oluşabilecek olumsuzluklardan <u>biz sorumlu değiliz.</u></p>
-        </div>
-      </Modal>
+      <OrderCreateModal open={open} onClose={onCloseModal} onClick={() => setOpenAlert(true)} />
+      <InfoModal open={openInfo} onClose={onCloseModalInfo} />
+      <ConfirmModal open={openAlert} onClose={onCloseModalAlert}
+        showCloseIcon={false}
+        classNames={{ modal: 'alert-modal' }}
+        onClickSuccess={() => {
+          setOpenSuccess(true)
+          setOpenAlert(false)
+          setOpen(false)
+        }}
+        onClickBack={() => setOpenAlert(false)}
+      />
+      <OrderSuccessModal open={openSuccess} onClose={onCloseModalSuccess} classNames={{ modal: 'alert-modal success' }} />
     </>
   );
 };

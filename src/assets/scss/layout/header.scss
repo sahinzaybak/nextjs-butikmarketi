@@ -46,6 +46,8 @@
       }
     }
     &__name {
+      position: relative;
+      top: 2px;
       font-size: 13px;
       color: #333333;
       font-weight: 600;

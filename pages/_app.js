@@ -16,6 +16,7 @@ import '../src/assets/scss/butik-slider.scss'
 import '../src/assets/scss/product-card.scss'
 import '../src/assets/scss/product-detail.scss'
 import '../src/assets/scss/butic-profile.scss'
+import '../src/assets/scss/order-detail.scss'
 import 'react-rater/lib/react-rater.css'
 
 const myApp = ({ Component, pageProps }) => {

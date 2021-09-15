@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+import Link from "next/link";
 import Image from 'next/image'
 import logo from '../assets/images/logo-2.png'
 import search from '../assets/images/search.svg'
-import user from '../assets/images/avatar.svg'
-import heart from '../assets/images/heart.svg'
+import user from '../assets/images/log-in (1).svg'
+import heart from '../assets/images/shopping-bag (2).svg'
 
 import { fetchCategoryList } from '../store/actions/category'
 import Categories from '../components/categories'
@@ -34,10 +35,12 @@ const Header = () => {
             </div>
             <div className="header-action">
               <div className="d-flex">
-                <div className="header-action__item">
-                  <Image src={heart} alt="" />
-                  <p className="header-action__name">Favorilerim</p>
-                </div>
+                <Link href="/siparis-detay">
+                  <a className="header-action__item">
+                    <Image src={heart} alt="" />
+                    <p className="header-action__name">Sipariş Bilgileriniz</p>
+                  </a>
+                </Link>
                 <div className="header-action__item">
                   <Image src={user} alt="" />
                   <p className="header-action__name">Giriş Yap</p>

@@ -1,0 +1,47 @@
+.checkbox {
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-gap: 0.5em;
+  font-size: 1rem;
+  cursor: pointer;
+  .radio__label {
+    font-size: 11.7px;
+    user-select: none;
+    // font-weight: 700;
+    color: #444444;
+  }
+  &__control {
+    display: inline-grid;
+    width: 1em;
+    height: 1em;
+    border-radius: 0.25em;
+    border: 0.1em solid #e0e0e0;
+    color: #f7923a;
+    svg {
+      transition: transform 0.1s ease-in 25ms;
+      transform: scale(0);
+      transform-origin: bottom left;
+    }
+  }
+  &__input {
+    display: grid;
+    grid-template-areas: "checkbox";
+    > * {
+      grid-area: checkbox;
+    }
+    input {
+      opacity: 0;
+      width: 1em;
+      height: 1em;
+      &:checked + .checkbox__control svg {
+        transform: scale(1);
+      }
+      &:checked + .checkbox__control {
+        border-color: #f7923a;
+      }
+      &:disabled + .checkbox__control {
+        color: var(--disabled);
+      }
+    }
+  }
+}

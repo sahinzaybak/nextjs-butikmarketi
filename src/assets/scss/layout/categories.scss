@@ -1,7 +1,8 @@
 .categories {
+	position: relative;
 	font-family: "Comfortaa", cursive;
-	// border-bottom: 1px solid #ececec;
 	background-color: white;
+	z-index: 1;
 	img {
 	  width: 40px;
 	  transition: all 0.3s;

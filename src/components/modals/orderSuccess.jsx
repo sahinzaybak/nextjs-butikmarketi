@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import tick from '../../assets/images/tick.svg'
+import Link from "next/link";
 import addUser from '../../assets/images/add-user.svg'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
@@ -28,10 +29,12 @@ const confirm = ({ ...props }) => {
           <p>gibi ve daha fazla özelliği kullabilmek için, dilerseniz sitemize  <u> <strong>üye olabilirsiniz.</strong></u></p>
         </div>
         <div className="alert-modal__action d-flex align-items-center flex-column">
-          <div className="green-button info d-flex align-items-center mt-3" onClick={() => setOpenAlert(true)}>
-            <Image src={addUser} alt="Ürün hakkında soru sor" />
-            <p>Üye olmak istiyorum.</p>
-          </div>
+          <Link href="/kayit-ol">
+            <div className="green-button info d-flex align-items-center mt-3">
+              <Image src={addUser} alt="Ürün hakkında soru sor" />
+              <p>Üye olmak istiyorum.</p>
+            </div>
+          </Link>
         </div>
       </div>
     </Modal>

@@ -41,11 +41,16 @@ const Header = () => {
                     <p className="header-action__name">Sipariş Bilgileriniz</p>
                   </a>
                 </Link>
-                <div className="header-action__item">
+                <div className="header-action__item dropdown">
                   <Image src={user} alt="" />
                   <p className="header-action__name">Giriş Yap</p>
                 </div>
-
+                <div className="header-action__dropdown">
+                  <div className="header-action__dropdown--item">
+                    <Link href="/giris-yap">Giriş Yap</Link>
+                    <Link href="/kayit-ol">Üye Ol</Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

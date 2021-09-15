@@ -1,0 +1,103 @@
+.react-responsive-modal-modal {
+  width: 560px;
+  border-radius: 6px;
+  padding: 25px;
+  background-color: #f7f9f7;
+  img {
+    width: 28px;
+  }
+  &.alert-modal {
+    width: 460px;
+    &.success {
+      width: 600px;
+    }
+    .large-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #353535;
+      text-align: center;
+      padding: 0px 10px;
+      &.green {
+        font-size: 23px;
+        color: #53b547;
+        font-weight: 600;
+      }
+    }
+    .small-title {
+      background-color: #56c8e112;
+      color: #6197a9;
+      padding: 0 0px;
+      font-size: 14px;
+      border: 1px solid #7acce6;
+      padding: 12px;
+      border-radius: 8px;
+      span {
+        text-decoration: underline;
+        margin-bottom: 10px;
+      }
+      &__disc {
+        position: relative;
+        padding: 0 10px;
+        margin: 4px 0;
+        &:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          width: 4px;
+          height: 4px;
+          background-color: #53b547;
+          border-radius: 10px;
+          top: 9px;
+        }
+      }
+    }
+    .medium-title {
+      font-size: 15.6px;
+      color: #53a748;
+      padding: 12px 20px;
+      border: 1px solid #87d480;
+      border-radius: 7px;
+      line-height: 1.5;
+      background-color: #6fc06512;
+    }
+  }
+  .green-button {
+    img {
+      width: 18px;
+    }
+  }
+  .modal-wrp {
+    border-bottom: 1px solid #81c776;
+  }
+  .modal-title {
+    font-size: 21px;
+    font-weight: 600;
+    color: #52b548;
+    margin-left: 10px;
+  }
+
+  .modal-info {
+    p {
+      position: relative;
+      font-size: 14px;
+      color: #616960;
+      border-bottom: 1px solid #e6e6e6;
+      margin: 10px 0;
+      padding: 0px 0 10px 12px;
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 4px;
+        height: 4px;
+        background-color: #53b547;
+        border-radius: 10px;
+        top: 9px;
+      }
+    }
+  }
+
+  .modal-item {
+    width: 48%;
+  }
+}

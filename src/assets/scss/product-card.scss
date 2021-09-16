@@ -119,9 +119,13 @@
     }
     &__whatsapp {
       width: max-content;
+      background-color: transparent;
       margin: 0 auto;
-      border-bottom: 1px solid #64b1612e;
+      border: 1px solid #41af3d54;
       padding-bottom: 2px;
+      padding: 6px 12px;
+      border-radius: 30px;
+      transition: all .3s;
       img {
         position: relative;
         width: 18px;
@@ -135,6 +139,9 @@
         @media (max-width: 600px) {
           font-size: 13px;
         }
+      }
+      &:hover{
+        background-color: #f2fdf1;
       }
     }
   }

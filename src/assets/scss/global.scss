@@ -125,7 +125,7 @@ label {
 
 input,
 textarea {
-  border: 1px solid #e0e0e0;
+  border: 1px solid #d9d9d9;
   width: 100%;
   border-radius: 8px;
   height: 40px;
@@ -137,10 +137,14 @@ textarea {
   height: 100px;
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
+
 .custom-container {
   position: relative;
-  max-width: 1170px;
-  width: 95%;
+  max-width: 1480px;
+  width: 82%;
   margin: 0 auto;
   z-index: 99;
   &.product {

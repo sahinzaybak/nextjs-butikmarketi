@@ -12,7 +12,7 @@ const HomeProducts = ({ productList }) => {
         <div className="product-item__wrp d-flex">
           <div className="row">
             {productList.products.map((product, index) => (
-              <ProductCard product={product} />
+              <ProductCard product={product} key={index} />
             ))}
           </div>
         </div>

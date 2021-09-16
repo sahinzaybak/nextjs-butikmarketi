@@ -17,8 +17,8 @@ const ButikCarousel = ({ butikLogos }) => {
     <div className="butik-slider">
       <SliderSlick {...settings}>
         {butikLogos.map((butik, index) =>
-          <Link href={`/${butik.butik_slug}`}>
-            <div className="butik-slider__item" key={index}>
+          <Link href={`/${butik.butik_slug}`} key={index}>
+            <div className="butik-slider__item">
               <img src={butik.butik_image} alt={butik.butik} />
             </div>
           </Link>

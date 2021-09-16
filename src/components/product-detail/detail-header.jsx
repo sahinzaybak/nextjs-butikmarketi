@@ -10,6 +10,7 @@ import ConfirmModal from '../modals/confirm'
 import InfoModal from '../modals/info'
 import OrderSuccessModal from '../modals/orderSuccess'
 
+
 const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price }) => {
   const [open, setOpen] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
@@ -20,9 +21,7 @@ const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price }) 
   const onCloseModal = () => setOpen(false);
   const onOpenModalInfo = () => setOpenInfo(true);
   const onCloseModalInfo = () => setOpenInfo(false);
-  const onOpenModalAlert = () => setOpenAlert(true);
   const onCloseModalAlert = () => setOpenAlert(false);
-  const onOpenModalSuccess = () => setOpenSuccess(true);
   const onCloseModalSuccess = () => setOpenSuccess(false);
   return (
     <>
@@ -65,7 +64,7 @@ const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price }) 
       <InfoModal open={openInfo} onClose={onCloseModalInfo} />
       <ConfirmModal open={openAlert} onClose={onCloseModalAlert}
         showCloseIcon={false}
-        classNames={{ modal: 'alert-modal' }}
+        classNames={{ modal: 'modal-steps' }}
         onClickSuccess={() => {
           setOpenSuccess(true)
           setOpenAlert(false)
@@ -73,7 +72,7 @@ const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price }) 
         }}
         onClickBack={() => setOpenAlert(false)}
       />
-      <OrderSuccessModal open={openSuccess} onClose={onCloseModalSuccess} classNames={{ modal: 'alert-modal success' }} />
+      <OrderSuccessModal open={openSuccess} onClose={onCloseModalSuccess} classNames={{ modal: 'modal-steps' }} />
     </>
   );
 };

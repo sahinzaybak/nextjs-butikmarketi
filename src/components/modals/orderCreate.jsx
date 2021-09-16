@@ -7,11 +7,11 @@ import { Modal } from 'react-responsive-modal';
 const orderCreate = ({...props}) => {
   return (
     <Modal {...props} center>
-      <div className="d-flex modal-wrp pb-1">
+      <div className="d-flex modal-top">
         <Image src={ship} alt="Ürün hakkında soru sor" />
         <h3 className="modal-title ml-3">Sipariş Oluştur</h3>
       </div>
-      <div className="modal-form mt-4">
+      <div className="modal-form">
         <div className="d-flex justify-content-between">
           <div className="modal-item">
             <input type="text" placeholder="Adınız Soyadınız" />

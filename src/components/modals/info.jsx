@@ -6,7 +6,7 @@ import { Modal } from 'react-responsive-modal';
 const infoModal = ({ ...props }) => {
   return (
     <Modal {...props} center>
-    <div className="d-flex modal-wrp pb-1">
+    <div className="d-flex modal-top">
       <Image src={info} alt="Ürün hakkında soru sor" />
       <h3 className="modal-title ml-3">ButikMarketi genel sipariş detayları</h3>
     </div>

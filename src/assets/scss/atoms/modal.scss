@@ -1,15 +1,15 @@
 .react-responsive-modal-modal {
   width: 560px;
-  border-radius: 6px;
-  padding: 25px;
+  border-radius: 12px;
+  padding: 0;
   background-color: #f7f9f7;
   img {
     width: 28px;
   }
-  &.alert-modal {
-    width: 460px;
-    &.success {
-      width: 600px;
+  &.modal-steps {
+    width: 600px;
+    &.medium {
+      width: 460px;
     }
     .large-title {
       font-size: 18px;
@@ -66,8 +66,18 @@
       width: 18px;
     }
   }
-  .modal-wrp {
+  .modal-top {
+    font-weight: 700;
     border-bottom: 1px solid #81c776;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 12px 24px;
+    color: rgba(0,0,0,.85);
+    background: #fff;
+   
+  }
+  .modal-form{
+    background-color: white;
+    padding: 25px;
   }
   .modal-title {
     font-size: 21px;
@@ -75,7 +85,6 @@
     color: #52b548;
     margin-left: 10px;
   }
-
   .modal-info {
     p {
       position: relative;
@@ -96,8 +105,13 @@
       }
     }
   }
-
   .modal-item {
     width: 48%;
+  }
+  &.modal-comment{
+    width: 520px;
+    textarea{
+      height: 140px;
+    }
   }
 }

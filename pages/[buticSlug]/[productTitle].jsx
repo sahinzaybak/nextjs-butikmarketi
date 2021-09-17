@@ -3,9 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
+import SliderSlick from "react-slick";
 //Components
 import DetailHeader from '../../src/components/product-detail/detail-header'
 import ProductGallerySlider from '../../src/components/product-detail/product-gallery-slider'
@@ -19,6 +17,18 @@ import ProductCard from "../../src/components/product-card";
 import { fetchProductDetail, fetchCategoryProductList } from '../../src/store/actions/products'
 
 const ProductDetail = () => {
+  const settings = {
+    lazyLoad: 'ondemand',
+    infinite: true,
+    arrows:true,
+    autoplay: true,
+    centerMode: true,
+    centerPadding: '60px',
+    speed: 500,
+    touchThreshold: 100,
+    slidesToShow: 6,
+    slidesToScroll: 2,
+  };
   const router = useRouter();
   const productTitle = router.query.productTitle;
   const dispatch = useDispatch();
@@ -26,6 +36,7 @@ const ProductDetail = () => {
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
   const [slider2, setSlider2] = useState(null);
+
   useEffect(() => {
     setNav1(slider1);
     setNav2(slider2);
@@ -35,8 +46,8 @@ const ProductDetail = () => {
   let similarProduct = useSelector((state) => state.products.categoryProductList); //Dolan "ürün bilgisini" al.
   useEffect(() => {
     if (productTitle && similarProduct != null)
-      dispatch(fetchProductDetail(productTitle));
-    dispatch(fetchCategoryProductList("pantolon")); //"Girilen ürüne ait ürün detay bilgisi" doldurmak için action'a dispatch et.
+      dispatch(fetchProductDetail(productTitle)); //"Girilen ürüne ait ürün detay bilgisi" doldurmak için action'a dispatch et. -> yesiltshirt
+    dispatch(fetchCategoryProductList("ayakkabi")); 
   }, [productTitle]);
 
   return (
@@ -76,16 +87,16 @@ const ProductDetail = () => {
                 </div>
               </div>
               <ProductComments comments={productDetail.comments} />
-              <div className="product-detail__similar pt-4 mt-4">
-                <h3 className="text-center">İlginizi çekebilecek ürünler</h3>
-                <div className="mt-4 pt-3">
-                  <div className="row">
-                    {similarProduct.products && similarProduct.products.map((product, index) => (
-                      <ProductCard product={product} key={index} />
-                    ))}
-                  </div>
-                </div>
-              </div>
+            </div>
+          </div>
+          <div className="product-detail__similar pt-4 mt-4">
+            <h3 className="text-center">İlginizi çekebilecek ürünler</h3>
+            <div className="mt-4">
+              <SliderSlick {...settings}>
+                {similarProduct.products && similarProduct.products.map((product, index) =>
+                  <ProductCard product={product} slide key={index} />
+                )}
+              </SliderSlick>
             </div>
           </div>
         </>

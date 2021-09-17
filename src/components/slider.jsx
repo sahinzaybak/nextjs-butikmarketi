@@ -9,7 +9,7 @@ const Slider = ({ banners }) => {
     speed: 500,
     touchThreshold: 100,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
   };
   
   return (

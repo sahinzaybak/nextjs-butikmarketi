@@ -10,7 +10,7 @@ const infoModal = ({ ...props }) => {
       <Image src={info} alt="Ürün hakkında soru sor" />
       <h3 className="modal-title ml-3">ButikMarketi genel sipariş detayları</h3>
     </div>
-    <div className="modal-form modal-info mt-4">
+    <div className="modal-form modal-info">
       <p>Siparişleriniz <u>ürün sahibi butik</u> tarafından adresinize gönderilir.</p>
       <p>Siparişlerinizi <u>kapıda ödeme kolaylığı</u> ile satın alabilirsiniz. </p>
       <p>Ürün teslimi sonrası gelen ürünü <u>geri iade</u> veya <u>ürün değişimi</u> yapabilirsiniz. </p>

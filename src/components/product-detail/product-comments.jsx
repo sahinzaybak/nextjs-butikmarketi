@@ -4,7 +4,7 @@ import Avatar from 'react-avatar';
 const ProductComments = ({ comments }) => {
   return (
     <div id="comments" className="product-detail__comments mt-4 pt-3">
-      <h2 className="text-center mb-4">Yorumlar ({comments.length})</h2>
+      <h3 className="text-center mb-4">Ürün Değerlendirmeleri ({comments.length})</h3>
       <div className="product-detail__comments-wrp">
         {comments.map((comment, index) => (
           <div className="product-detail__comments-item" key={index}>

@@ -193,4 +193,9 @@
       color: #676767;
     }
   }
+  &__similar{
+    .slick-slide{
+      padding: 12px 0;
+    }
+  }
 }

@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import React from 'react'
 import whatsapp from '../assets/images/whatsapp.svg'
+import heart from '../assets/images/heart.svg'
 import Link from "next/link";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, slide }) => {
   return (
-    <div className="product-card__cell">
+    <div className={`product-card__cell ${slide ? "w-100 slide" : ""}`}>
       <div className="product-card__row">
         <div className="product-card__item">
           <Link href={`/${product.butik_slug}`}>
@@ -14,9 +15,16 @@ const ProductCard = ({ product }) => {
             </div>
           </Link>
           <div className="product-card__image">
-            <Link href={`/${product.butik_slug}/${product.slug}`}>
-              <img src={product.image} />
+            <Link href="/kayit-ol">
+              <div className="product-card__favorite">
+                <Image src={heart} alt="Favorilere Ekle" />
+              </div>
             </Link>
+            <a href={`/${product.butik_slug}/${product.slug}`} className="product-card__image--link">
+              <Link href={`/${product.butik_slug}/${product.slug}`}>
+                <img src={product.image} />
+              </Link>
+            </a>
           </div>
         </div>
         <div className="product-card__info">

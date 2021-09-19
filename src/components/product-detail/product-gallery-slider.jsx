@@ -10,7 +10,7 @@ const ProductGallerySlider = forwardRef((props, ref) => {
     dots: true,
     arrows: true,
     touchThreshold: 100,
-    fade: true,
+    // fade: true,
     asNavFor: '.slider-nav'
   };
   return (

@@ -7,11 +7,12 @@ import Header from "../src/layout/header";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-responsive-modal/styles.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "../src/assets/scss/global.scss";
 import "../src/assets/scss/layout/header.scss";
 import "../src/assets/scss/layout/categories.scss";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import "../src/assets/scss/slider.scss";
 import "../src/assets/scss/butik-slider.scss";
 import "../src/assets/scss/product-card.scss";

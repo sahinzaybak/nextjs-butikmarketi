@@ -175,11 +175,11 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="product-list">
+      {/* <div className="product-list">
         {productList.map((product, index) => (
           <HomeProduct productList={product} key={index} />
         ))}
-      </div>
+      </div> */}
     </>
   );
 };

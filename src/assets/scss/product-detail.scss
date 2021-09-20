@@ -240,7 +240,7 @@
         transition: all 0.4s;
         left: 0;
         top: 0;
-        background-color: #00000063;
+        background-color: #00000091;
       }
     }
     &-title {
@@ -251,7 +251,7 @@
       font-size: 22px;
       font-weight: 300;
       color: White;
-      background-color: #000000;
+      background-color: #000000c2;
       padding: 4px 20px;
       z-index: 9;
       left: 0;
@@ -265,10 +265,11 @@
       &.gender {
         top: auto;
         bottom: 16px;
-        font-size: 16px;
-        background-color: white;
+        background-color: #ffffffc7;
         color: black;
-        font-size: 15px;
+        font-size: 13px;
+        font-weight: 500;
+    
       }
     }
   }

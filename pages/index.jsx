@@ -119,13 +119,13 @@ const Home = () => {
               <div className="row">
                 <div className="col-md-6 pr-0">
                   <div className="product-detail__more-item">
-                    <img src="https://cdn.shopify.com/s/files/1/0437/1913/1293/files/banner-19_1512x.jpg?v=1599187394" alt="" />
+                    <img src="https://cdn.shopify.com/s/files/1/0441/4010/1782/products/FlanacomSeptember_01-9_1024x1024.jpg?v=1602238343" alt="" />
                     <h2 className="product-detail__more-title gender">KADIN</h2>
                   </div>
                 </div>
                 <div className="col-md-6 p-0">
                   <div className="product-detail__more-item">
-                    <img src="https://cdn.shopify.com/s/files/1/0437/1913/1293/files/banner-21_2048x.jpg?v=1599187421" alt="" />
+                    <img src="https://www.thecoolector.com/wp-content/uploads/2020/12/huckberry-2.jpg" alt="" />
                     <h2 className="product-detail__more-title gender">ERKEK</h2>
                   </div>
                 </div>

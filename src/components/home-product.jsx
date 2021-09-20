@@ -8,7 +8,17 @@ const HomeProducts = ({ productList }) => {
   return (
     <div className="product-item">
       <div className="custom-container">
-        <h1 className="category-title">{productList.title}</h1>
+        <div className="category-title__wrp">
+          <h1 className="category-title">{productList.title}</h1>
+          <Link href={`kategori/${productList.slug}`} className="d-flex align-items-center justify-content-center">
+            <a className="d-flex">
+              <p className="more-button__text">TÜM {productList.title} ÜRÜNLERİ </p>
+              <Image src={rightArrow} className="button-icon" />
+            </a>
+          </Link>
+        </div>
+
+        
         <div className="product-item__wrp d-flex">
           <div className="row">
             {productList.products.map((product, index) => (

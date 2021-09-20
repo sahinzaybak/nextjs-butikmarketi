@@ -9,7 +9,7 @@ const categoryProducts = () => {
   const router = useRouter();
   const categoryTitle = router.query.categoryPageSlug;
   const dispatch = useDispatch();
-  
+
   let categoryProductList = useSelector((state) => state.products.categoryProductList); //Dolan "kategori ürünlerinin" listesini al.
   useEffect(() => {
     if (categoryTitle != null)
@@ -183,7 +183,10 @@ const categoryProducts = () => {
 
             </div>
             <div className="col-md-10">
-              <h1 className="category-title">{categoryProductList.title}</h1>
+              <div className="category-title__wrp">
+                <h1 className="category-title">{categoryProductList.title}</h1>
+
+              </div>
               <div className="product-item__wrp d-flex">
                 <div className="row">
                   {categoryProductList.products.map((product, index) => (

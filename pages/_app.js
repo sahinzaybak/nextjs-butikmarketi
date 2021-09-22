@@ -6,6 +6,7 @@ import store from "../src/store/store";
 import Header from "../src/layout/header";
 
 import "bootstrap/dist/css/bootstrap.css";
+
 import "react-responsive-modal/styles.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

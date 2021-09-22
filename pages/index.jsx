@@ -29,7 +29,7 @@ const Home = () => {
       </div>
 
 
-      <div className="custom-container">
+      <div>
         <h2 className="big-title">MODA</h2>
         <Tabs className="tab">
           <TabList className="tab-list mb-4">
@@ -496,7 +496,7 @@ const Home = () => {
         </Tabs>
       </div>
 
-      <div className="custom-container">
+      <div>
         <h2 className="big-title">EV & YAŞAM</h2>
         <Tabs className="tab">
           <TabList className="tab-list mb-4">

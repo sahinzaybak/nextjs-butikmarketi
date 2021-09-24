@@ -27,39 +27,20 @@ const Home = () => {
         <Slider banners={sliderBanners} />
         <ButikCarousel butikLogos={butikLogos} />
       </div>
-
-
-      <div>
+      <div className="product-list">
         <h2 className="big-title mb-4">KADIN</h2>
         <Tabs className="tab">
           <TabList className="tab-list">
-            <Tab className="tab-list__title">Ayakkabı</Tab>
-            <Tab className="tab-list__title">Pantalon</Tab>
-            <Tab className="tab-list__title">Elbise</Tab>
-            <Tab className="tab-list__title">Bluz</Tab>
-            <Tab className="tab-list__title">Çanta</Tab>
-            <Tab className="tab-list__title">Aksesuar</Tab>
-            <Tab className="tab-list__title">T-Shirt</Tab>
-            <Tab className="tab-list__title">Gömlek</Tab>
-            <Tab className="tab-list__title">Ceket</Tab>
-            <Tab className="tab-list__title">İç Giyim</Tab>
+            {productList.map((product, index) => (
+              <Tab className="tab-list__title" key={index}>{product.title}</Tab> //Tab başlıkları
+            ))}
           </TabList>
-
-          <TabPanel className="tab-panel">
-           
-          </TabPanel>
-         
-     
+          {productList.map((product, index) => (
+            <TabPanel className="tab-panel">
+              <HomeProduct productList={product} key={index} />  {/* Tab içindeki ürünler */}
+            </TabPanel>
+          ))}
         </Tabs>
-      </div>
-
-
-
-
-      <div className="product-list">
-        {productList.map((product, index) => (
-          <HomeProduct productList={product} key={index} />
-        ))}
       </div>
     </>
   );

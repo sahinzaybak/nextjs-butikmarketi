@@ -5,9 +5,9 @@ const Categories = ({ categoryList }) => {
   return (
     <div className="categories">
       <div className="custom-container">
-        <div className="d-flex">
+        <div className="categories-main d-flex justify-content-between">
           {categoryList.map((category, index) =>
-            <div className="categories-wrp w-100">
+            <div className="categories-wrp">
               <Link href={`../kategori/${category.slug}`} key={index}>
                 <div className="categories-item">
                   <span className="categories-name">{category.title}</span>

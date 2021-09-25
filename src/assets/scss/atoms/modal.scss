@@ -1,8 +1,12 @@
+
+
 .react-responsive-modal-modal {
   width: 560px;
   border-radius: 12px;
   padding: 0;
   background-color: #f7f9f7;
+
+  
   img {
     width: 28px;
   }
@@ -114,4 +118,7 @@
       height: 140px;
     }
   }
+}
+.react-responsive-modal-root{
+  z-index: 99999;
 }

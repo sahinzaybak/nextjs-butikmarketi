@@ -1,6 +1,6 @@
 //*** Butik Profil Sayfası
 
-import { useState, useEffect } from "react";
+import {useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Image from 'next/image'

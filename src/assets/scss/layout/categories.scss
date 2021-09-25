@@ -1,7 +1,7 @@
 .categories {
   position: relative;
   background-color: white;
-  z-index: 999;
+  z-index: 99999;
   img {
     width: 40px;
     transition: all 0.3s;
@@ -28,7 +28,7 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    padding: 12px 23.7px;
+    padding: 12px 22.4px;
     transition: all 0.3s;
     cursor: pointer;
     &:hover {

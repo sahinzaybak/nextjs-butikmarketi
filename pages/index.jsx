@@ -17,8 +17,8 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchSliderBannerList()); //"Kategori" listesini doldurmak için action'a dispatch et.
-    dispatch(fetchButikLogo()); //"Butik" listesini doldurmak için action'a dispatch et.
-    dispatch(fetchHomeProductList()); //"Ürün" listesini doldurmak için action'a dispatch et.
+    dispatch(fetchButikLogo());       //"Butik" listesini doldurmak için action'a dispatch et.
+    dispatch(fetchHomeProductList()); //"Anasayfa Ürün" listesini doldurmak için action'a dispatch et.
   }, []);
 
   return (
@@ -27,21 +27,23 @@ const Home = () => {
         <Slider banners={sliderBanners} />
         <ButikCarousel butikLogos={butikLogos} />
       </div>
-      <div className="product-list">
-        <h2 className="big-title mb-4">KADIN</h2>
-        <Tabs className="tab">
-          <TabList className="tab-list">
-            {productList.map((product, index) => (
-              <Tab className="tab-list__title" key={index}>{product.title}</Tab> //Tab başlıkları
+      {productList.map((category, index) => (
+        <div className="product-list" key={index}>
+          <h2 className="big-title mb-4">{category.title}</h2>
+          <Tabs className="tab">
+            <TabList className="tab-list">
+              {category.subcategory.map((subcategory, index) => (
+                <Tab className="tab-list__title" key={index}>{subcategory.title}</Tab> //Tab başlıkları
+              ))}
+            </TabList>
+            {category.subcategory.map((subcategory, index) => (
+              <TabPanel className="tab-panel" key={index}>
+                <HomeProduct productList={subcategory}/>  {/* Tab içindeki ürünler */}
+              </TabPanel>
             ))}
-          </TabList>
-          {productList.map((product, index) => (
-            <TabPanel className="tab-panel">
-              <HomeProduct productList={product} key={index} />  {/* Tab içindeki ürünler */}
-            </TabPanel>
-          ))}
-        </Tabs>
-      </div>
+          </Tabs>
+        </div>
+      ))}
     </>
   );
 };

@@ -6,7 +6,7 @@ import rightArrow from '../assets/images/right-arrow-big.svg'
 
 const HomeProducts = ({ productList }) => {
   return (
-    <div className="product-item">
+    <div className="product-card">
       <div className="custom-container">
         <div className="category-title__wrp">
           <h1 className="category-title">{productList.title}</h1>
@@ -17,7 +17,7 @@ const HomeProducts = ({ productList }) => {
             </a>
           </Link>
         </div>
-        <div className="product-item__wrp d-flex">
+        <div className="product-card__wrp">
           <div className="row">
             {productList.products.map((product, index) => (
               <ProductCard product={product} key={index} />

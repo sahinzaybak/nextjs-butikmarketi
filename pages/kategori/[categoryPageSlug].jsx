@@ -17,10 +17,9 @@ const categoryProducts = () => {
   }, [categoryTitle]);
 
   return (
-    <div className="product-item category">
+    <div className="product-card category">
       <div className="custom-container">
         <div className="row"></div>
-
         {categoryProductList && categoryProductList.products &&
           <div className="row">
             <div className="col-md-2">
@@ -185,9 +184,8 @@ const categoryProducts = () => {
             <div className="col-md-10">
               <div className="category-title__wrp">
                 <h1 className="category-title">{categoryProductList.title}</h1>
-
               </div>
-              <div className="product-item__wrp d-flex">
+              <div className="product-card__wrp">
                 <div className="row">
                   {categoryProductList.products.map((product, index) => (
                     <ProductCard product={product} key={index} />

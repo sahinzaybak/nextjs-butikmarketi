@@ -12,7 +12,7 @@ const ProductCard = ({ product, slide }) => {
           <Link href={`/${product.butik_slug}`}>
             <div className="product-card__butic">
               <a href={`/${product.butik_slug}`} className="d-flex h-100">
-                <img className="butiks-slider__logo" src={product.butik_image} alt={product.butik_name} />
+                <img className="product-card__butic-logo" src={product.butik_image} alt={product.butik_name} />
               </a>
             </div>
           </Link>

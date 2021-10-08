@@ -1,7 +1,7 @@
 import axios from "axios";
 // const BASE_URL = process.env.REACT_APP_API_URL
 
-export const fetchCategoryList = () => (dispatch) => {
+export const fetchCategoryList = () => (dispatch) => { //Header Kategori Listesi
   axios.get("https://webizade.com/bm/categories").then((response) => {
     dispatch({
       type: "CATEGORY_LIST",

@@ -18,7 +18,7 @@ const Slider = ({ banners }) => {
         <div className="col-md-7">
           <div className="slider-left">
             <SliderSlick {...settings}>
-              {banners.map((banner, index) =>
+              {banners && banners.map((banner, index) =>
                 <img src={banner.image} key={index} />
               )}
             </SliderSlick>

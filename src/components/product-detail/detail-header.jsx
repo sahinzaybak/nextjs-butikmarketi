@@ -9,8 +9,7 @@ import OrderCreateModal from '../modals/orderCreate'
 import ConfirmModal from '../modals/confirm'
 import InfoModal from '../modals/info'
 import OrderSuccessModal from '../modals/orderSuccess'
-
-
+ 
 const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price }) => {
   const [open, setOpen] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);

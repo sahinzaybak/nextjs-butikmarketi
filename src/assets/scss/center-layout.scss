@@ -33,8 +33,8 @@
     color: #585858;
   }
   &__input {
-    height: 52px;
     font-size: 17px;
+    height: 52px;
     color: #3c3b3b;
     border: 1px solid rgb(220 217 217);
   }
@@ -42,10 +42,9 @@
     padding: 14px 27px;
     font-weight: 600;
     border-radius: 8px;
-    p {
+    .button-text {
       font-size: 17px;
     }
-
   }
   &__form {
     &--desc {

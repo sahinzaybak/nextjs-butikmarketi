@@ -43,11 +43,12 @@ const ProductDetail = () => {
   });
 
   let productDetail = useSelector((state) => state.products.detailProductInfo); //Dolan "ürün bilgisini" al.
-  let similarProduct = useSelector((state) => state.products.categoryProductList); //Dolan "ürün bilgisini" al.
+  let similarProduct = useSelector((state) => state.products.categoryProductList); //Dolan "benzer ürün bilgisini" al.
   useEffect(() => {
-    if (productTitle && similarProduct != null)
+    if (productTitle && similarProduct != null) {
       dispatch(fetchProductDetail(productTitle)); //"Girilen ürüne ait ürün detay bilgisi" doldurmak için action'a dispatch et. -> yesiltshirt
-    dispatch(fetchCategoryProductList("ayakkabi"));
+      dispatch(fetchCategoryProductList("ayakkabi"));
+    }
   }, [productTitle]);
 
   return (
@@ -128,7 +129,6 @@ const ProductDetail = () => {
               </div>
             </div>
           </div>
-          
         </>
       }
     </div>

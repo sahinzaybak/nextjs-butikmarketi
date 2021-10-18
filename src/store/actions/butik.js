@@ -11,7 +11,7 @@ export const fetchButikLogo = () => (dispatch) => { //Butik Logoları - Anasayfa
 };
 
 export const fetchButikProfileInfo = (butikTitle) => (dispatch) => { //Butik Profil Sayfası Bilgileri
-  axios.get(`https://webizade.com/bm/singlestore?slug=${butikTitle}`).then((response) => {
+  axios.get(`https://webizade.com/bm/singlestore/${butikTitle}`).then((response) => {
     dispatch({
       type: "BUTIK_PROFILE",
       payload: response.data[0],

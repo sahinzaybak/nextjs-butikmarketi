@@ -17,10 +17,10 @@ const ButicProfile = () => {
   const router = useRouter();
   const buticSlug = router.query.buticSlug;
 
-  let butikProfileInfo = useSelector((state) => state.butik.butikProfileInfo); //Dolan "butik profil bilgisini"  al.
+  let butikProfileInfo = useSelector((state) => state.butik.butikProfileInfo); //Dolan "butik profil bilgisini" al.
   useEffect(() => {
     if (buticSlug != null)
-      dispatch(fetchButikProfileInfo(buticSlug)); //"Girilen butiğe ait butik profil bilgisi" doldurmak için action'a dispatch et.
+      dispatch(fetchButikProfileInfo(buticSlug)); //"Girilen butiğe ait butik profil bilgisini" doldurmak için action'a dispatch et.
   }, [buticSlug]);
 
   return (

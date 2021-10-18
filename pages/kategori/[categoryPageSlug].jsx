@@ -1,10 +1,11 @@
+//** Kategoriye Ait Ürünler Sayfası
+
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { fetchCategoryProductList } from "../../src/store/actions/products";
 import ProductCard from "../../src/components/product-card";
 
-//Kategoriye ait ürünler sayfası
 const categoryProducts = () => {
   const router = useRouter();
   const categoryTitle = router.query.categoryPageSlug;
@@ -17,186 +18,189 @@ const categoryProducts = () => {
   }, [categoryTitle]);
 
   return (
-    <div className="product-card category">
-      <div className="custom-container">
-        <div className="row"></div>
-        {categoryProductList && categoryProductList.products &&
-          <div className="row">
-            <div className="col-md-2">
-              <div className="filter">
-                {/* <h6>Filtrele</h6> */}
-                <div className="filter-item">
-                  <h6 className="filter-title">Kullanım Alanı</h6>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+    <div className="categories-product">
+      <div className="product-card category">
+        <div className="custom-container">
+          <div className="row"></div>
+          {categoryProductList && categoryProductList.products &&
+            <div className="row">
+              <div className="col-md-2">
+                <div className="filter">
+                  {/* <h6>Filtrele</h6> */}
+                  <div className="filter-item">
+                    <h6 className="filter-title">Kullanım Alanı</h6>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
                         </span>
-                      </span>
-                      <span className="radio__label">Spor</span>
-                    </label>
+                        <span className="radio__label">Spor</span>
+                      </label>
+                    </div>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
+                        </span>
+                        <span className="radio__label">Günlük</span>
+                      </label>
+                    </div>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
+                        </span>
+                        <span className="radio__label">Futbol</span>
+                      </label>
+                    </div>
                   </div>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                  <div className="filter-item">
+                    <h6 className="filter-title">Marka</h6>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
                         </span>
-                      </span>
-                      <span className="radio__label">Günlük</span>
-                    </label>
+                        <span className="radio__label">Adidas</span>
+                      </label>
+                    </div>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
+                        </span>
+                        <span className="radio__label">Puma</span>
+                      </label>
+                    </div>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
+                        </span>
+                        <span className="radio__label">Reebok</span>
+                      </label>
+                    </div>
                   </div>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                  <div className="filter-item">
+                    <h6 className="filter-title">Renk</h6>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
                         </span>
-                      </span>
-                      <span className="radio__label">Futbol</span>
-                    </label>
+                        <span className="radio__label">Sarı</span>
+                      </label>
+                    </div>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
+                        </span>
+                        <span className="radio__label">Lacivert</span>
+                      </label>
+                    </div>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
+                        </span>
+                        <span className="radio__label">Kırmızı</span>
+                      </label>
+                    </div>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
+                        </span>
+                        <span className="radio__label">Siyah</span>
+                      </label>
+                    </div>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
+                        </span>
+                        <span className="radio__label">Beyaz</span>
+                      </label>
+                    </div>
+                    <div className="filter-choose">
+                      <label className="checkbox">
+                        <span className="checkbox__input">
+                          <input type="checkbox" name="checkbox" />
+                          <span className="checkbox__control">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                              <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                          </span>
+                        </span>
+                        <span className="radio__label">Siyah</span>
+                      </label>
+                    </div>
                   </div>
                 </div>
-                <div className="filter-item">
-                  <h6 className="filter-title">Marka</h6>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                        </span>
-                      </span>
-                      <span className="radio__label">Adidas</span>
-                    </label>
-                  </div>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                        </span>
-                      </span>
-                      <span className="radio__label">Puma</span>
-                    </label>
-                  </div>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                        </span>
-                      </span>
-                      <span className="radio__label">Reebok</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="filter-item">
-                  <h6 className="filter-title">Renk</h6>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                        </span>
-                      </span>
-                      <span className="radio__label">Sarı</span>
-                    </label>
-                  </div>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                        </span>
-                      </span>
-                      <span className="radio__label">Lacivert</span>
-                    </label>
-                  </div>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                        </span>
-                      </span>
-                      <span className="radio__label">Kırmızı</span>
-                    </label>
-                  </div>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                        </span>
-                      </span>
-                      <span className="radio__label">Siyah</span>
-                    </label>
-                  </div>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                        </span>
-                      </span>
-                      <span className="radio__label">Beyaz</span>
-                    </label>
-                  </div>
-                  <div className="filter-choose">
-                    <label className="checkbox">
-                      <span className="checkbox__input">
-                        <input type="checkbox" name="checkbox" />
-                        <span className="checkbox__control">
-                          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                            <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
-                        </span>
-                      </span>
-                      <span className="radio__label">Siyah</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
 
-            </div>
-            <div className="col-md-10">
-              <div className="category-title__wrp">
-                <h1 className="category-title">{categoryProductList.title}</h1>
               </div>
-              <div className="product-card__wrp">
-                <div className="row">
-                  {categoryProductList.products.map((product, index) => (
-                    <ProductCard product={product} key={index} />
-                  ))}
+              <div className="col-md-10">
+                <div className="category-title__wrp">
+                  <h1 className="category-title">{categoryProductList.title}</h1>
+                </div>
+                <div className="product-card__wrp">
+                  <div className="row">
+                    {categoryProductList.products.map((product, index) => (
+                      <ProductCard product={product} key={index} />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        }
+          }
+        </div>
       </div>
     </div>
+
   );
 };
 

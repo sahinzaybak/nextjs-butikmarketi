@@ -60,7 +60,7 @@ const ProductDetail = () => {
             butikSlug={productDetail.butik_slug}
             buticLogo={productDetail.butik_image}
             productTitle={productDetail.title}
-            price={productDetail.fiyat} />
+            price={productDetail.price} />
           <div className="custom-container">
             <div className="product-detail__main">
               <div className="row">

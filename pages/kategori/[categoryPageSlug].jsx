@@ -12,6 +12,7 @@ const categoryProducts = () => {
   const dispatch = useDispatch();
 
   let categoryProductList = useSelector((state) => state.products.categoryProductList); //Dolan "kategori ürünlerinin" listesini al.
+  console.log(categoryProductList)
   useEffect(() => {
     if (categoryTitle != null)
       dispatch(fetchCategoryProductList(categoryTitle)); //"Girilen Kategoriye ait ürün listesini" doldurmak için action'a dispatch et.

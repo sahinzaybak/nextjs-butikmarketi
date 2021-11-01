@@ -33,7 +33,7 @@ const ProductCard = ({ product, slide }) => {
           <Link href="/productDetail">
             <h2 className="product-card__name">{product.title}</h2>
           </Link>
-          <p className="product-card__price">{product.fiyat} ₺</p>
+          <p className="product-card__price">{product.price} ₺</p>
         </div>
         {/* <div className="button">
         <a href={product.link} className="d-flex align-items-center justify-content-center" target="_blank">

@@ -47,7 +47,7 @@ const ProductDetail = () => {
   useEffect(() => {
     if (productTitle && similarProduct != null) {
       dispatch(fetchProductDetail(productTitle)); //"Girilen ürüne ait ürün detay bilgisi" doldurmak için action'a dispatch et. -> yesiltshirt
-      dispatch(fetchCategoryProductList("ayakkabi"));
+      // dispatch(fetchCategoryProductList("ayakkabi"));
     }
   }, [productTitle]);
 
@@ -89,7 +89,7 @@ const ProductDetail = () => {
               </div>
               <ProductComments comments={productDetail.comments} />
             </div>
-            <div className="product-detail__similar pt-4 mt-4">
+            {/* <div className="product-detail__similar pt-4 mt-4">
               <h3 className="text-center">İlginizi çekebilecek diğer ürünler</h3>
               <div className="mt-4">
                 <SliderSlick {...settings}>
@@ -98,7 +98,7 @@ const ProductDetail = () => {
                   )}
                 </SliderSlick>
               </div>
-            </div>
+            </div> */}
 
           </div>
           <div className="product-detail__more pb-5">

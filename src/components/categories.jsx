@@ -16,10 +16,10 @@ const Categories = ({ categoryList }) => {
               <div className="categories-sub d-flex justify-content-between">
                 {category.categories.map((categories, index) =>
                   <div className="categories-sub__item" key={index}>
-                    <Link href={`../kategori/${categories.slug}`}>{categories.title}</Link>
+                    <Link href={`/kategori/list/${categories.filter_title}/${categories.slug}`}>{categories.title}</Link>
                     <div className="categories-sub__inner">
                       {categories.categories.map((categories_sub, index) =>
-                        <Link href={`../kategori/${categories_sub.slug}`} key={index}>{categories_sub.title}</Link>
+                        <Link href={`/kategori/list/${categories_sub.filter_title}/${categories_sub.slug}`} key={index}>{categories_sub.title}</Link>
                       )}
                     </div>
                   </div>

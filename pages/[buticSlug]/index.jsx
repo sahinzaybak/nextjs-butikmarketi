@@ -28,7 +28,6 @@ const ButicProfile = () => {
     <div className="butic">
       {butikProfileInfo &&
         <div className="custom-container">
-
           <div className="butic-header d-flex justify-content-between">
             <div className="d-flex align-items-center">
               <div className="butic-header__image">
@@ -62,7 +61,6 @@ const ButicProfile = () => {
               </div>
             </div>
           </div>
-
         <div className="butic-products">
             <h1 className="category-title">Tüm ürünler</h1>
             <div className="row">

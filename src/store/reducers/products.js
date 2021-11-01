@@ -2,6 +2,7 @@ const initialState = {
   homeProductList: [],
   categoryProductList: [],
   detailProductInfo: [],
+  productCategoryFilterList: [],
 };
 
 export default (state = initialState, action) => {
@@ -20,6 +21,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         detailProductInfo: action.payload,
+      };
+    case "PRODUCT_CATEGORY_FILTER_LIST":
+      return {
+        ...state,
+        productCategoryFilterList: action.payload,
+      };
+      case "PRODUCT_FILTER_APPLY":
+      return {
+        ...state,
+        categoryProductList: action.payload,
       };
     default:
       return state;

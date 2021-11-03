@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
 import ship from '../../assets/images/shipped.svg'
 import Link from "next/link";
@@ -9,19 +10,30 @@ import OrderCreateModal from '../modals/orderCreate'
 import ConfirmModal from '../modals/confirm'
 import InfoModal from '../modals/info'
 import OrderSuccessModal from '../modals/orderSuccess'
- 
-const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price }) => {
+
+const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price, productColors, productSize }) => {
+  let selecteFilterSizeTitle = useSelector((state) => state.products.productDetailSelectedSizeTitle); //Seçilen Beden Adı
+  let selecteFilterColorTitle = useSelector((state) => state.products.productDetailSelectedColorTitle); //Seçilen Renk Adı
+
   const [open, setOpen] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
+  const [formValue, formValuesChild] = useState({}); //child için state.(formValuesChild)
 
+  // setOpenAlert(true)
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const onOpenModalInfo = () => setOpenInfo(true);
   const onCloseModalInfo = () => setOpenInfo(false);
   const onCloseModalAlert = () => setOpenAlert(false);
   const onCloseModalSuccess = () => setOpenSuccess(false);
+
+  function orderProductSubmitConfirm() { //Evet, bilgilerim doğru, siparişimi oluşturabiliriz.
+    if (formValue.isValidationAllForm)
+      console.log(formValue, selecteFilterSizeTitle, selecteFilterColorTitle)
+  }
+
   return (
     <>
       <div className="detail-header d-flex align-items-center justify-content-between">
@@ -59,19 +71,36 @@ const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price }) 
         </div>
       </div>
 
-      <OrderCreateModal open={open} onClose={onCloseModal} onClick={() => setOpenAlert(true)} />
-      <InfoModal open={openInfo} onClose={onCloseModalInfo} />
-      <ConfirmModal open={openAlert} onClose={onCloseModalAlert}
+      {/* Modallar */}
+      <OrderCreateModal
+        open={open}
+        onClose={onCloseModal}
+        formValuesChild={formValuesChild}
+        productColors={productColors}
+        productSize={productSize}
+        onClick={() => setOpenAlert(true)}
+      />
+      <InfoModal
+        open={openInfo}
+        onClose={onCloseModalInfo}
+      />
+      <ConfirmModal
+        open={openAlert}
+        onClose={onCloseModalAlert}
         showCloseIcon={false}
         classNames={{ modal: 'modal-steps' }}
         onClickSuccess={() => {
-          setOpenSuccess(true)
+          // setOpenSuccess(true)
+          orderProductSubmitConfirm()
           setOpenAlert(false)
           setOpen(false)
         }}
         onClickBack={() => setOpenAlert(false)}
       />
-      <OrderSuccessModal open={openSuccess} onClose={onCloseModalSuccess} classNames={{ modal: 'modal-steps' }} />
+      <OrderSuccessModal
+        open={openSuccess}
+        onClose={onCloseModalSuccess}
+        classNames={{ modal: 'modal-steps' }} />
     </>
   );
 };

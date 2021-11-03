@@ -60,7 +60,10 @@ const ProductDetail = () => {
             butikSlug={productDetail.butik_slug}
             buticLogo={productDetail.butik_image}
             productTitle={productDetail.title}
-            price={productDetail.price} />
+            price={productDetail.price}
+            productColors={productDetail.colors}
+            productSize={productDetail.size}
+          />
           <div className="custom-container">
             <div className="product-detail__main">
               <div className="row">
@@ -83,7 +86,10 @@ const ProductDetail = () => {
                       ref={slider => (setSlider2(slider))} />
                     <ProductInfoBottom
                       buticName={productDetail.butik}
-                      productColors={productDetail.colors} />
+                      productColors={productDetail.colors}
+                      productSize={productDetail.size}
+                    />
+
                   </div>
                 </div>
               </div>

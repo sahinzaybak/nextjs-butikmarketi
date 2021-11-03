@@ -30,7 +30,7 @@ export const fetchProductDetail = (productTitle) => (dispatch) => { //Ürün Det
   });
 };
 
-export const fetchProductFilterList = (productMainCategory) => (dispatch) => { //Filtre Seçenekleri
+export const fetchProductFilterList = (productMainCategory) => (dispatch) => { //Kategoriye göre Filtre Seçeneklerini getir. (Giyim, Ayakkabı.vs)
   axios.get(`http://localhost:3001/filter/${productMainCategory}`).then((response) => {
     dispatch({
       type: "PRODUCT_CATEGORY_FILTER_LIST",

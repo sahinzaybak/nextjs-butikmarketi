@@ -150,11 +150,27 @@
       color: #6d6d6d;
       font-size: 15px;
       &.color {
+        position: relative;
         width: 20px;
         height: 20px;
         border-radius: 12px;
         border: 1px solid rgba(0, 0, 0, 0.1);
         margin-right: 8px;
+        cursor: pointer;
+        &.selected{
+          border-color: #1a6011;
+        }
+      }
+      &.size {
+        border: 1px solid #e5e5e5;
+        margin: 0px 5px 0 0;
+        padding: 2px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        &.selected{
+          background-color: #f3f3f3;
+          border-color: #59b54687;
+        }
       }
     }
   }
@@ -267,6 +283,18 @@
         color: black;
         top: auto;
         bottom: 16px;
+      }
+    }
+  }
+  &.filter {
+    &.modal-type {
+      display: flex;
+      justify-content: space-evenly;
+      .product-info__title {
+        font-size: 15px;
+        color: #828282;
+        font-weight: inherit;
+        border-bottom: 1px solid #d3d3d3;
       }
     }
   }

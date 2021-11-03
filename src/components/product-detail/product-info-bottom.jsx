@@ -1,16 +1,16 @@
+import React, { useState } from "react";
 import Image from 'next/image'
 import whatsapp from '../../assets/images/whatsapp.svg'
-const ProductInfoBottom = ({ buticName, productColors }) => {
+//Component
+import DetailFilter from './detail-filter'
+
+const ProductInfoBottom = ({ buticName, productColors, productSize }) => {
   return (
     <>
-      <div className="product-info__item color mt-3">
-        <span className="product-info__title">Renk Seçenekleri</span>
-        <div className="d-flex mt-2">
-          {productColors.map((color, index) => (
-            <p className="product-info__desc color" key={index} style={{backgroundColor: color.color_code}}></p>
-          ))}
-        </div>
-      </div>
+      <DetailFilter
+        productSize={productSize}
+        productColors={productColors}
+      />
       <div className="product-info__item mt-3">
         <span className="product-info__title">Ürün Sahibi</span>
         <p className="product-info__desc mt-1">Bu ürün <u>{buticName}</u> tarafından gönderilecektir.</p>

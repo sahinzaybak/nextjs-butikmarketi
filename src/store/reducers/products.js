@@ -3,6 +3,10 @@ const initialState = {
   categoryProductList: [],
   detailProductInfo: [],
   productCategoryFilterList: [],
+  productDetailSelectedFilterSize: "",
+  productDetailSelectedSizeTitle: "",
+  productDetailSelectedFilterColor: "",
+  productDetailSelectedColorTitle: "",
 };
 
 export default (state = initialState, action) => {
@@ -27,10 +31,22 @@ export default (state = initialState, action) => {
         ...state,
         productCategoryFilterList: action.payload,
       };
-      case "PRODUCT_FILTER_APPLY":
+    case "PRODUCT_FILTER_APPLY":
       return {
         ...state,
         categoryProductList: action.payload,
+      };
+    case "SELECTED_FILTER_SIZE":
+      return {
+        ...state,
+        productDetailSelectedFilterSize: action.payload.index,
+        productDetailSelectedSizeTitle: action.payload.selectedTitle,
+      };
+    case "SELECTED_FILTER_COLOR":
+      return {
+        ...state,
+        productDetailSelectedFilterColor: action.payload.index,
+        productDetailSelectedColorTitle: action.payload.selectedTitle,
       };
     default:
       return state;

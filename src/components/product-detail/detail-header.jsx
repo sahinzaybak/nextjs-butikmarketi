@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Image from 'next/image'
 import ship from '../../assets/images/shipped.svg'
 import Link from "next/link";
@@ -30,8 +30,7 @@ const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price, pr
   const onCloseModalSuccess = () => setOpenSuccess(false);
 
   function orderProductSubmitConfirm() { //Evet, bilgilerim doğru, siparişimi oluşturabiliriz.
-    if (formValue.isValidationAllForm)
-      console.log(formValue, selecteFilterSizeTitle, selecteFilterColorTitle)
+      console.log(formValue.values,selecteFilterSizeTitle,selecteFilterColorTitle)
   }
 
   return (
@@ -78,7 +77,7 @@ const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price, pr
         formValuesChild={formValuesChild}
         productColors={productColors}
         productSize={productSize}
-        onClick={() => setOpenAlert(true)}
+        onClickOpenConfirmModal={(isValidationAllForm) => { if (isValidationAllForm) setOpenAlert(true) }} //confirmModal'ı aç.
       />
       <InfoModal
         open={openInfo}
@@ -90,7 +89,7 @@ const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price, pr
         showCloseIcon={false}
         classNames={{ modal: 'modal-steps' }}
         onClickSuccess={() => {
-          // setOpenSuccess(true)
+          setOpenSuccess(true)
           orderProductSubmitConfirm()
           setOpenAlert(false)
           setOpen(false)

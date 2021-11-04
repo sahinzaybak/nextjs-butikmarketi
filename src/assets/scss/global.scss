@@ -133,8 +133,8 @@ textarea {
   text-indent: 8px;
   background-color: transparent;
 }
-textarea {
-  height: 100px;
+textarea{
+  height: 100px !important;
 }
 
 .cursor-pointer {
@@ -238,7 +238,7 @@ textarea {
     &__title {
       text-transform: uppercase;
       color: #4e4e4e;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       margin: 0px 14px;
       border-bottom: 2px solid transparent;
@@ -253,4 +253,13 @@ textarea {
       }
     }
   }
+}
+
+
+.ant-form-item{
+  margin-bottom:  0 !important;
+}
+
+.ant-form-item-explain, .ant-form-item-extra{
+  display: none;
 }

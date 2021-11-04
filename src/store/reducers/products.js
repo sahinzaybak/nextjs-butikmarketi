@@ -48,6 +48,11 @@ export default (state = initialState, action) => {
         productDetailSelectedFilterColor: action.payload.index,
         productDetailSelectedColorTitle: action.payload.selectedTitle,
       };
+    case "PRODUCT_DETAIL_CLEAR":
+      return {
+        ...state,
+        detailProductInfo: action.payload,
+      };
     default:
       return state;
   }

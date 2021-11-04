@@ -16,7 +16,7 @@ const DetailFilter = ({ productSize, productColors, componentType }) => {
             <div className="d-flex mt-2">
               {productSize.map((size, index) => (
                 <p className={`product-info__desc size ${selecteFilterIndexSize === index ? "selected" : ""}`} key={index}
-                  onClick={() => {dispatch({ type: 'SELECTED_FILTER_SIZE', payload: { index: index, selectedTitle: size.size_title }})}}>
+                  onClick={() => { dispatch({ type: 'SELECTED_FILTER_SIZE', payload: { index: index, selectedTitle: size.size_title } }) }}>
                   {size.size_title}
                 </p>
               ))}
@@ -29,7 +29,7 @@ const DetailFilter = ({ productSize, productColors, componentType }) => {
             <div className="d-flex mt-2">
               {productColors.map((color, index) => (
                 <p className={`product-info__desc color ${selecteFilterIndexColor === index ? "selected" : ""}`} key={index}
-                  onClick={() => {dispatch({ type: 'SELECTED_FILTER_COLOR', payload: { index: index, selectedTitle: color.color_title }})}}
+                  onClick={() => { dispatch({ type: 'SELECTED_FILTER_COLOR', payload: { index: index, selectedTitle: color.color_title } }) }}
                   style={{ backgroundColor: color.color_code }}>
                 </p>
               ))}

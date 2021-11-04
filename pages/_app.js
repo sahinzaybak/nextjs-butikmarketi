@@ -22,8 +22,6 @@ import "../src/assets/scss/butic-profile.scss";
 import "../src/assets/scss/atoms/buttons.scss";
 import "../src/assets/scss/atoms/modal.scss";
 import "../src/assets/scss/center-layout.scss";
-
-
 import "../src/assets/scss/atoms/checkbox.scss";
 import "react-rater/lib/react-rater.css";
 

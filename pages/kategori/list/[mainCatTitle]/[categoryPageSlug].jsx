@@ -38,7 +38,6 @@ const categoryProducts = () => {
             <div className="row">
               <div className="col-md-2">
                 <div className="filter">
-                  {/* <h6>Filtreler</h6> */}
                   {filterList.filter && filterList.filter.map((filterSub, index) => (
                     <div className="filter-item" key={index}>
                       <h6 className="filter-title">{filterSub.main_title_text}</h6>

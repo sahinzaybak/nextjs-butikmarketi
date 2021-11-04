@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from 'next/image'
+import { Form } from 'antd';
 import whatsapp from '../../assets/images/whatsapp.svg'
 //Component
 import DetailFilter from './detail-filter'
@@ -7,10 +8,12 @@ import DetailFilter from './detail-filter'
 const ProductInfoBottom = ({ buticName, productColors, productSize }) => {
   return (
     <>
-      <DetailFilter
-        productSize={productSize}
-        productColors={productColors}
-      />
+      <Form autoComplete="off">
+        <DetailFilter
+          productSize={productSize}
+          productColors={productColors}
+        />
+      </Form>
       <div className="product-info__item mt-3">
         <span className="product-info__title">Ürün Sahibi</span>
         <p className="product-info__desc mt-1">Bu ürün <u>{buticName}</u> tarafından gönderilecektir.</p>

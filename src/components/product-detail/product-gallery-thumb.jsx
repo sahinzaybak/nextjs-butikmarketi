@@ -15,7 +15,6 @@ const ProductGalleryThumb = forwardRef((props, ref) => {
   };
   return (
     <div className="product-detail__thumbs product-info__item color mt-3">
-      <span className="product-info__title">Ürün Resimleri</span>
       <div className="thumbnail-slider-wrap">
         <Slider {...settingsThumbs} asNavFor={props.nav} ref={ref}>
           {props.images && props.images.map((image, index) => (

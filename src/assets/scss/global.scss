@@ -133,7 +133,7 @@ textarea {
   text-indent: 8px;
   background-color: transparent;
 }
-textarea{
+textarea {
   height: 100px !important;
 }
 
@@ -199,15 +199,15 @@ textarea{
   left: -20px;
 }
 
-.big-title{
+.big-title {
   position: relative;
   text-align: center;
   font-weight: 100;
   letter-spacing: 8px;
   width: max-content;
-  margin: 60px auto 20px;
+  margin: 60px auto 0px;
   font-size: 36px;
-  &:after{  
+  &:after {
     content: "";
     position: absolute;
     right: -36px;
@@ -215,9 +215,9 @@ textarea{
     height: 1px;
     background-color: #535659;
     top: 50%;
-    transform: translateY(-50%)
+    transform: translateY(-50%);
   }
-  &:before{  
+  &:before {
     content: "";
     position: absolute;
     left: -46px;
@@ -225,8 +225,17 @@ textarea{
     height: 1px;
     background-color: #535659;
     top: 50%;
-    transform: translateY(-50%)
+    transform: translateY(-50%);
+  }
+}
 
+.home-product {
+  &__wrp {
+    &:nth-child(5) {
+      .tab-list__title {
+        font-size: 13px;
+      }
+    }
   }
 }
 .tab {
@@ -244,22 +253,29 @@ textarea{
       border-bottom: 2px solid transparent;
       letter-spacing: 0.6px;
       cursor: pointer;
-      transition: all .3s;
+      transition: all 0.3s;
       padding: 6px 0px;
-  
-      &.react-tabs__tab--selected{
-        border-color:#ef9b51;
+      &.react-tabs__tab--selected {
+        border-color: #ef9b51;
         color: #f09b51;
       }
     }
   }
 }
 
-
-.ant-form-item{
-  margin-bottom:  0 !important;
+.ant-form-item {
+  margin-bottom: 0 !important;
 }
 
-.ant-form-item-explain, .ant-form-item-extra{
+.ant-form-item-explain,
+.ant-form-item-extra {
   display: none;
+}
+
+.sahin {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #d7d7d7;
+  letter-spacing: 5px;
+  font-size: 13px;
 }

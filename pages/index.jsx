@@ -32,8 +32,10 @@ const Home = () => {
       <div className="home-product">
         {productList.map((category, index) => (
           <div className="home-product__wrp" key={index}>
-            <h2 className="big-title mb-4">{category.title}</h2>
+            <h2 className="big-title">{category.title}</h2>
+            <p className="sahin">populer kategoriler</p>
             <Tabs className="tab">
+       
               <TabList className="tab-list">
                 {category.subcategory.map((subcategory, index) => (
                   <Tab className="tab-list__title" key={index}>{subcategory.title}</Tab> //Tab başlıkları

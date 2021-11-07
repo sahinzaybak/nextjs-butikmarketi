@@ -86,10 +86,7 @@ const ProductDetail = () => {
                         images={productDetail.images}
                         nav={nav2}
                         ref={slider => (setSlider1(slider))} />
-                        <ProductGalleryThumb
-                          images={productDetail.images}
-                          nav={nav1}
-                          ref={slider => (setSlider2(slider))} />
+                        
                     </div>
                     <div className="col-md-6">
                       <div className="product-info">
@@ -98,7 +95,10 @@ const ProductDetail = () => {
                           productStar={productDetail.star}
                           commentsCount={productDetail.comments.length}
                           productDescription={productDetail.description} />
-                        
+                        <ProductGalleryThumb
+                          images={productDetail.images}
+                          nav={nav1}
+                          ref={slider => (setSlider2(slider))} />
                         <ProductInfoBottom
                           buticName={productDetail.butik}
                           productColors={productDetail.colors}

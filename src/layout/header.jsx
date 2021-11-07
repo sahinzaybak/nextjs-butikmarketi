@@ -4,13 +4,12 @@ import Link from "next/link";
 import Image from 'next/image'
 import logo from '../assets/images/logo-2.png'
 import search from '../assets/images/search.svg'
-import user from '../assets/images/log-in (1).svg'
 import heart from '../assets/images/shopping-bag (2).svg'
-
 import { fetchCategoryList } from '../store/actions/category'
 import Categories from '../components/categories'
 
 const Header = () => {
+  
   const dispatch = useDispatch()
   let categoryList = useSelector(state => state.category.categoryList) //Dolan kategori listesini al.
   useEffect(() => {
@@ -42,7 +41,7 @@ const Header = () => {
                   </a>
                 </Link>
                 <div className="header-action__item dropdown">
-                  <Image src={user} alt="" />
+                  <img src="https://instagram.fist6-1.fna.fbcdn.net/v/t51.2885-15/e35/s1080x1080/250796617_652129065964642_5488018670421531944_n.jpg?_nc_ht=instagram.fist6-1.fna.fbcdn.net&_nc_cat=110&_nc_ohc=ZMFs5IhBCZ8AX8IOt6Q&edm=APU89FABAAAA&ccb=7-4&oh=e0da536f2fa5f8d3d108dac4152dd55c&oe=618D60D0&_nc_sid=86f79a" alt="" />
                   <p className="header-action__name">Giriş Yap</p>
                 </div>
                 <div className="header-action__dropdown">

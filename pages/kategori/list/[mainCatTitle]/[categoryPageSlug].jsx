@@ -8,7 +8,7 @@ import ProductCard from "../../../../src/components/product-card";
 
 const categoryProducts = () => {
   const router = useRouter();
-  const categoryMainTitle = router.query.mainCatTitle; //Filtre için ana kategori (giyim, ayakkabı..vs)
+  const categoryMainTitle = router.query.mainCatTitle; //Filtre için ana kategori (giyim, ayakkabı..vs) filter_title  => (backend)
   const categoryTitle = router.query.categoryPageSlug;
   const dispatch = useDispatch();
 

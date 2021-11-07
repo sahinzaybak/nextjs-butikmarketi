@@ -128,7 +128,7 @@
         }
         &.slick-current {
           img {
-            border-color: #52b548;
+            border-color: #edc489;
           }
         }
       }
@@ -151,25 +151,25 @@
       font-size: 15px;
       &.color {
         position: relative;
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
         border-radius: 12px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        border: 2px solid rgba(0, 0, 0, 0.1);
         margin-right: 8px;
         cursor: pointer;
         &.selected{
-          border-color: #1a6011;
+          border-color: #edc489;
         }
       }
       &.size {
-        border: 1px solid #e5e5e5;
+        border: 2px solid #e5e5e5;
         margin: 0px 5px 0 0;
-        padding: 2px 16px;
+        padding: 6px 18px;
         border-radius: 4px;
         cursor: pointer;
         &.selected{
-          background-color: #f3f3f3;
-          border-color: #59b54687;
+          background-color: #efc89445;
+          border-color: #df9c2e87;
         }
       }
     }

@@ -9,10 +9,10 @@ const ProductCard = ({ product, slide }) => {
     <div className={`product-card__cell ${slide ? "w-100 slide" : ""}`}>
       <div className="product-card__row">
         <div className="product-card__item">
-          <Link href={`/${product.butik_slug}`}>
+          <Link href={`/${product.butiks?.data[0]?.attributes.butik_slug}`}>
             <div className="product-card__butic">
-              <a href={`/${product.butik_slug}`} className="d-flex h-100">
-                <img className="product-card__butic-logo" src={product.butik_image} alt={product.butik_name} />
+              <a href={`/${product.butiks?.data[0]?.attributes.butik_slug}`} className="d-flex h-100">
+                <img className="product-card__butic-logo" src={product.butiks?.data[0]?.attributes.butik_image} alt={product.butiks?.data[0]?.attributes.butik_name} />
               </a>
             </div>
           </Link>
@@ -22,8 +22,8 @@ const ProductCard = ({ product, slide }) => {
                 <Image src={heart} alt="Favorilere Ekle" />
               </div>
             </Link>
-            <Link href={`/${product.butik_slug}/${product.slug}`}>
-              <a href={`/${product.butik_slug}/${product.slug}`} className="product-card__image--link d-flex h-100">
+            <Link href={`/${product.butiks?.data[0]?.attributes.butik_slug}/${product.slug}`}>
+              <a href={`/${product.butiks?.data[0]?.attributes.butik_slug}/${product.slug}`} className="product-card__image--link d-flex h-100">
                 <img src={product.image} alt={product.title} />
               </a>
             </Link>

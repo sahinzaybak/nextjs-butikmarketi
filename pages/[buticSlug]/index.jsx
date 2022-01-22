@@ -18,6 +18,7 @@ const ButicProfile = () => {
   const buticSlug = router.query.buticSlug;
 
   let butikProfileInfo = useSelector((state) => state.butik.butikProfileInfo); //Dolan "butik profil bilgisini" al.
+  console.log(butikProfileInfo)
   useEffect(() => {
     if (buticSlug != null)
       dispatch(fetchButikProfileInfo(buticSlug)); //"Girilen butiğe ait butik profil bilgisini" doldurmak için action'a dispatch et.
@@ -64,8 +65,8 @@ const ButicProfile = () => {
         <div className="butic-products">
             <h1 className="category-title">Tüm ürünler</h1>
             <div className="row">
-              {butikProfileInfo.products && butikProfileInfo.products.map((product, index) => (
-                <ProductCard product={product} key={index} />
+              {butikProfileInfo.products?.data && butikProfileInfo.products?.data.map((product, index) => (
+                <ProductCard product={product.attributes} key={index} />
               ))}
             </div>
           </div>

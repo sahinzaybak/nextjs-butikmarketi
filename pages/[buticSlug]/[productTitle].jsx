@@ -43,40 +43,36 @@ const ProductDetail = () => {
   });
 
   let productDetail = useSelector((state) => state.products.detailProductInfo); //Dolan "ürün bilgisini" al.
-  let similarProduct = useSelector((state) => state.products.categoryProductList); //Dolan "benzer ürün bilgisini" al.
-
+  // let similarProduct = useSelector((state) => state.products.categoryProductList); //Dolan "benzer ürün bilgisini" al.
   //"Girilen ürüne ait ürün detay bilgisi" doldurmak için action'a dispatch et. -> yesiltshirt
+  console.log(productDetail)
   useEffect(() => {
-    console.log("1")
-    if (productTitle && similarProduct != null) {
       dispatch({ type: 'PRODUCT_DETAIL_CLEAR', payload: [] })
       dispatch(fetchProductDetail(productTitle));
-    }
   }, [productTitle]);
 
   //Sayfa yüklendiğinde filtreleme seçeneklerinin ilki seçili gelsin.
   useEffect(() => {
-    console.log(2)
     if (productDetail != "") {
-      dispatch({ type: 'SELECTED_FILTER_SIZE', payload: { index: 0, selectedTitle: productDetail?.size[0]?.size_title } })
+      dispatch({ type: 'SELECTED_FILTER_SIZE', payload: { index: 0, selectedTitle: productDetail?.sizes[0]?.size_title } })
       dispatch({ type: 'SELECTED_FILTER_COLOR', payload: { index: 0, selectedTitle: productDetail?.colors[0]?.color_title } })
     }
   }, [productDetail]);
 
   return (
     <>
-      {productDetail.length == 0 ? <ProductDetailContentLoader /> :
+      {productDetail == "" ? <ProductDetailContentLoader /> :
         <div className="product-detail">
-          {productDetail && productDetail.comments &&
+          {productDetail && productDetail.comments && productDetail.butiks.data[0] &&
             <>
               <DetailHeader
-                buticName={productDetail.butik}
-                butikSlug={productDetail.butik_slug}
-                buticLogo={productDetail.butik_image}
+                buticName={productDetail.butiks.data[0].attributes.butik_name}
+                butikSlug={productDetail.butiks.data[0].attributes.butik_slug}
+                buticLogo={productDetail.butiks.data[0].attributes.butik_image}
                 productTitle={productDetail.title}
                 price={productDetail.price}
                 productColors={productDetail.colors}
-                productSize={productDetail.size}
+                productSize={productDetail.sizes}
               />
               <div className="custom-container">
                 <div className="product-detail__main">
@@ -102,7 +98,7 @@ const ProductDetail = () => {
                         <ProductInfoBottom
                           buticName={productDetail.butik}
                           productColors={productDetail.colors}
-                          productSize={productDetail.size}
+                          productSize={productDetail.sizes}
                         />
                       </div>
                     </div>

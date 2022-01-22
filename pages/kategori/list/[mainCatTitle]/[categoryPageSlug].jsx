@@ -34,11 +34,11 @@ const categoryProducts = () => {
       <div className="product-card category">
         <div className="custom-container">
           <div className="row"></div>
-          {categoryProductList && filterList && categoryProductList.products &&
+          {categoryProductList && filterList &&
             <div className="row">
               <div className="col-md-2">
                 <div className="filter">
-                  {filterList.filter && filterList.filter.map((filterSub, index) => (
+                  {filterList && filterList.map((filterSub, index) => (
                     <div className="filter-item" key={index}>
                       <h6 className="filter-title">{filterSub.main_title_text}</h6>
                       {filterSub && filterSub.filter_sub.map((filter, index) =>
@@ -67,8 +67,8 @@ const categoryProducts = () => {
                 </div>
                 <div className="product-card__wrp">
                   <div className="row">
-                    {categoryProductList.products.map((product, index) => (
-                      <ProductCard product={product} key={index} />
+                    {categoryProductList.map((product, index) => (
+                      <ProductCard product={product.attributes} key={index} />
                     ))}
                   </div>
                 </div>

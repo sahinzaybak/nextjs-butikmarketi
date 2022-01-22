@@ -19,8 +19,8 @@ const HomeProducts = ({ productList }) => {
         </div>
         <div className="product-card__wrp">
           <div className="row">
-            {productList.products.map((product, index) => (
-              <ProductCard product={product} key={index} />
+            {productList.products.data.map((product, index) => (
+              <ProductCard product={product.attributes} key={index} />
             ))}
           </div>
         </div>

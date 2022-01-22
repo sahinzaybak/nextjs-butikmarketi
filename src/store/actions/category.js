@@ -1,12 +1,8 @@
-import axios from "axios";
-// const BASE_URL = process.env.REACT_APP_API_URL
-
+import categories from '../../api/categories.json'
 export const fetchCategoryList = () => (dispatch) => { //Header Kategori Listesi
-  axios.get("http://localhost:3001/categories").then((response) => {
-    dispatch({
-      type: "CATEGORY_LIST",
-      payload: response.data.categories,
-    });
+  dispatch({
+    type: "CATEGORY_LIST",
+    payload: categories,
   });
 };
 

@@ -14,7 +14,6 @@ const Home = () => {
   let sliderBanners = useSelector((state) => state.banner.sliderBanners); //Dolan "banner" listesini al.
   let butikLogos = useSelector((state) => state.butik.butikLogos); //Dolan "butik logo" listesini al.
   let productList = useSelector((state) => state.products.homeProductList); //Dolan "5 li ürün" listesini al.
-
   useEffect(() => {
     dispatch(fetchSliderBannerList()); //"Banner" listesini doldurmak için action'a dispatch et.
     dispatch(fetchButikLogo());       //"Butik Logo" listesini doldurmak için action'a dispatch et.
@@ -32,16 +31,15 @@ const Home = () => {
       <div className="home-product">
         {productList.map((category, index) => (
           <div className="home-product__wrp" key={index}>
-            <h2 className="big-title">{category.title}</h2>
+            <h2 className="big-title">{category.attributes.title}</h2>
             <p className="sahin">populer kategoriler</p>
             <Tabs className="tab">
-       
               <TabList className="tab-list">
-                {category.subcategory.map((subcategory, index) => (
+                {category.attributes.subCategory.map((subcategory, index) => (
                   <Tab className="tab-list__title" key={index}>{subcategory.title}</Tab> //Tab başlıkları
                 ))}
               </TabList>
-              {category.subcategory.map((subcategory, index) => (
+              {category.attributes.subCategory.map((subcategory, index) => (
                 <TabPanel className="tab-panel" key={index}>
                   <HomeProduct productList={subcategory} />  {/* Tab içindeki ürünler */}
                 </TabPanel>

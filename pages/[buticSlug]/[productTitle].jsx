@@ -14,10 +14,12 @@ import ProductInfoBottom from '../../src/components/product-detail/product-info-
 import ProductComments from '../../src/components/product-detail/product-comments'
 import ProductDetailContentLoader from '../../src/components/content-loader/product-detail-loader'
 import ProductCard from "../../src/components/product-card";
+import { pageIncreaseCount } from '../../src/helpers/pageIncreaseCounts'
 
 //Action
 import { fetchProductDetail } from '../../src/store/actions/products'
 
+let productDetail;
 const ProductDetail = () => {
   const router = useRouter();
   const productTitle = router.query.productTitle;
@@ -26,6 +28,8 @@ const ProductDetail = () => {
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
   const [slider2, setSlider2] = useState(null);
+  const [load, setLoad] = useState(false);
+
   const settings = {
     lazyLoad: 'ondemand',
     infinite: true,
@@ -42,68 +46,76 @@ const ProductDetail = () => {
     setNav2(slider2);
   });
 
-  let productDetail = useSelector((state) => state.products.detailProductInfo); //Dolan "ürün bilgisini" al.
+  productDetail = useSelector((state) => state.products.detailProductInfo); //Dolan "ürün bilgisini" al.
   // let similarProduct = useSelector((state) => state.products.categoryProductList); //Dolan "benzer ürün bilgisini" al.
   //"Girilen ürüne ait ürün detay bilgisi" doldurmak için action'a dispatch et. -> yesiltshirt
   console.log(productDetail)
   useEffect(() => {
-      dispatch({ type: 'PRODUCT_DETAIL_CLEAR', payload: [] })
-      dispatch(fetchProductDetail(productTitle));
+    dispatch({ type: 'PRODUCT_DETAIL_CLEAR', payload: [] })
+    dispatch(fetchProductDetail(productTitle));
   }, [productTitle]);
 
   //Sayfa yüklendiğinde filtreleme seçeneklerinin ilki seçili gelsin.
   useEffect(() => {
     if (productDetail != "") {
-      dispatch({ type: 'SELECTED_FILTER_SIZE', payload: { index: 0, selectedTitle: productDetail?.sizes[0]?.size_title } })
-      dispatch({ type: 'SELECTED_FILTER_COLOR', payload: { index: 0, selectedTitle: productDetail?.colors[0]?.color_title } })
+      dispatch({ type: 'SELECTED_FILTER_SIZE', payload: { index: 0, selectedTitle: productDetail?.attributes?.sizes[0]?.size_title } })
+      dispatch({ type: 'SELECTED_FILTER_COLOR', payload: { index: 0, selectedTitle: productDetail?.attributes?.colors[0]?.color_title } })
+      if (load && productDetail) pageIncreaseCount(productDetail.id, productDetail.attributes.clicks, "products", "clicks"); //Görüntülenme sayısı arttırma (Helpers)
     }
   }, [productDetail]);
+
+  useEffect(() => { //productDetail 2 kere servise gitmesi problem çözümü.
+    setLoad(true)
+  }, []);
 
   return (
     <>
       {productDetail == "" ? <ProductDetailContentLoader /> :
         <div className="product-detail">
-          {productDetail && productDetail.comments && productDetail.butiks.data[0] &&
+          {productDetail && productDetail?.attributes?.comments && productDetail?.attributes?.butiks.data[0] &&
             <>
               <DetailHeader
-                buticName={productDetail.butiks.data[0].attributes.butik_name}
-                butikSlug={productDetail.butiks.data[0].attributes.butik_slug}
-                buticLogo={productDetail.butiks.data[0].attributes.butik_image}
-                productTitle={productDetail.title}
-                price={productDetail.price}
-                productColors={productDetail.colors}
-                productSize={productDetail.sizes}
+                buticName={productDetail.attributes.butiks.data[0].attributes.butik_name}
+                butikSlug={productDetail.attributes.butiks.data[0].attributes.butik_slug}
+                buticLogo={productDetail.attributes.butiks.data[0].attributes.butik_image}
+                productTitle={productDetail.attributes.title}
+                price={productDetail.attributes.price}
+                productColors={productDetail.attributes.colors}
+                productSize={productDetail.attributes.sizes}
               />
               <div className="custom-container">
                 <div className="product-detail__main">
                   <div className="row">
                     <div className="col-md-6">
                       <ProductGallerySlider
-                        images={productDetail.images}
+                        images={productDetail.attributes.images}
                         nav={nav2}
                         ref={slider => (setSlider1(slider))} />
-                        
+
                     </div>
                     <div className="col-md-6">
                       <div className="product-info">
                         <ProductInfoTop
-                          productTitle={productDetail.title}
-                          productStar={productDetail.star}
-                          commentsCount={productDetail.comments.length}
-                          productDescription={productDetail.description} />
+                          productTitle={productDetail.attributes.title}
+                          productStar={productDetail.attributes.star}
+                          commentsCount={productDetail.attributes.comments.length}
+                          productDescription={productDetail.attributes.description} />
                         <ProductGalleryThumb
-                          images={productDetail.images}
+                          images={productDetail.attributes.images}
                           nav={nav1}
                           ref={slider => (setSlider2(slider))} />
                         <ProductInfoBottom
-                          buticName={productDetail.butik}
-                          productColors={productDetail.colors}
-                          productSize={productDetail.sizes}
+                          buticName={productDetail.attributes.butik}
+                          productColors={productDetail.attributes.colors}
+                          productSize={productDetail.attributes.sizes}
+                          productLink= {productDetail.attributes.link}
+                          productId={productDetail.id}
+                          productWhatsappClicksValues={productDetail.attributes.whatsappClicks}
                         />
                       </div>
                     </div>
                   </div>
-                  <ProductComments comments={productDetail.comments} />
+                  <ProductComments comments={productDetail.attributes.comments} />
                 </div>
                 {/* <div className="product-detail__similar pt-4 mt-4">
               <h3 className="text-center">İlginizi çekebilecek diğer ürünler</h3>

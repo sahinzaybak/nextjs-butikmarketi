@@ -68,7 +68,7 @@ const categoryProducts = () => {
                 <div className="product-card__wrp">
                   <div className="row">
                     {categoryProductList.map((product, index) => (
-                      <ProductCard product={product.attributes} key={index} />
+                      <ProductCard product={product.attributes} productId={product.id} key={index} />
                     ))}
                   </div>
                 </div>

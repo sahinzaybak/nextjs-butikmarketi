@@ -1,33 +1,37 @@
 //*** Butik Profil Sayfası
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Image from 'next/image'
 import whatsapp from '../../src/assets/images/whatsapp.svg'
 import instagram from '../../src/assets/images/instagram.svg'
-
+import { pageIncreaseCount } from '../../src/helpers/pageIncreaseCounts'
 //Component
 import ProductCard from "../../src/components/product-card";
-
 //Action
-import { fetchButikProfileInfo, fetchButikProfileIncreaseCount } from '../../src/store/actions/butik'
+import { fetchButikProfileInfo } from '../../src/store/actions/butik'
 
+let butikProfileInfo;
 const ButicProfile = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const buticSlug = router.query.buticSlug;
+  const [load, setLoad] = useState(false);
 
-  let butikProfileInfo = useSelector((state) => state.butik.butikProfileInfo); //Dolan "butik profil bilgisini" al.
+  butikProfileInfo = useSelector((state) => state.butik.butikProfileInfo); //Dolan "butik profil bilgisini" al.
   useEffect(() => {
     if (buticSlug != null)
       dispatch(fetchButikProfileInfo(buticSlug)); //"Girilen butiğe ait butik profil bilgisini" doldurmak için action'a dispatch et.
   }, [buticSlug]);
 
-  if(butikProfileInfo.attributes != null) {
-    dispatch(fetchButikProfileIncreaseCount(butikProfileInfo.id, butikProfileInfo.attributes.clicks)); // Butik görünt. sayısı arttır.
-  }
-  
+  useEffect(() => {
+    if (load) pageIncreaseCount(butikProfileInfo.id, butikProfileInfo.attributes.clicks, "butiks", "clicks"); // Görüntülenme sayısı arttırma (Helpers)
+  }, [butikProfileInfo]);
+
+  useEffect(() => { //butikProfileInfo 2 kere servise gitmesi problem çözümü.
+    setLoad(true)
+  }, []);
 
   return (
     <div className="butic">
@@ -70,7 +74,7 @@ const ButicProfile = () => {
             <h1 className="category-title">Tüm ürünler</h1>
             <div className="row">
               {butikProfileInfo?.attributes.products?.data && butikProfileInfo?.attributes.products?.data.map((product, index) => (
-                <ProductCard product={product.attributes} key={index} />
+                <ProductCard product={product.attributes} productId={product.id} key={index} />
               ))}
             </div>
           </div>

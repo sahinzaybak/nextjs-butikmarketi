@@ -2,10 +2,12 @@ import React from "react";
 import Image from 'next/image'
 import { Form } from 'antd';
 import whatsapp from '../../assets/images/whatsapp.svg'
+import { pageIncreaseCount } from '../../helpers/pageIncreaseCounts'
+
 //Component
 import DetailFilter from './detail-filter'
 
-const ProductInfoBottom = ({ buticName, productColors, productSize }) => {
+const ProductInfoBottom = ({ buticName, productColors, productSize, productLink, productId, productWhatsappClicksValues }) => {
   return (
     <>
       <Form autoComplete="off">
@@ -20,9 +22,13 @@ const ProductInfoBottom = ({ buticName, productColors, productSize }) => {
       </div>
       <div className="product-info__action mt-4">
         <div className="green-button mx-0">
-          <a href="#" className="d-flex align-items-center justify-content-center" target="_blank">
-            <Image src={whatsapp} alt="Ürün hakkında soru sor" />
-            <p className="button-text"> Ürün hakkında satıcıya soru sorun.</p>
+          <a className="d-flex align-items-center justify-content-center" target="_blank"
+            href={"https://wa.me/+905395066951/?text=Merhaba. Ben butikmarketi.com'da gördüğüm bir ürününüz hakkında bilgi almak istiyorum. Ürünün linki şöyle:" + ' ' + productLink}
+            onClick={() => pageIncreaseCount(productId, productWhatsappClicksValues, "products", "whatsappClicks")}>
+            <div className="d-flex align-items-center justify-content-center">
+              <Image src={whatsapp} alt="Ürün hakkında soru sor" />
+              <span>Ürün için satıcıya soru sorun</span>
+            </div>
           </a>
         </div>
       </div>

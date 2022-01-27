@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
     case "PRODUCT_DETAIL_INFO":
       return {
         ...state,
-        detailProductInfo: action.payload?.attributes,
+        detailProductInfo: action.payload,
       };
     case "PRODUCT_CATEGORY_FILTER_LIST":
       return {

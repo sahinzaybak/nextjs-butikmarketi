@@ -11,10 +11,7 @@ export const fetchButikLogo = () => (dispatch) => { //Butik Logoları - Anasayfa
 };
 
 export const fetchButikProfileInfo = (butikSlug) => (dispatch) => { //Butik Profil Sayfası Bilgileri
-  axios.get(
-      `http://localhost:1337/api/butiks?filters[butik_slug]=${butikSlug}&populate=products.butiks,clicks`
-    )
-    .then((response) => {
+  axios.get(`http://localhost:1337/api/butiks?filters[butik_slug]=${butikSlug}&populate=products.butiks,clicks,products.whatsappClicks`).then((response) => {
       dispatch({
         type: "BUTIK_PROFILE",
         payload: response.data.data[0], //id, attributes
@@ -61,5 +58,4 @@ export const fetchButikProfileIncreaseCount = (butikId, butikDefaultClicks) => (
       },
     });
   }
- 
 };

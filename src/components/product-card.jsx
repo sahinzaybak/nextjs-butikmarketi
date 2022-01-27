@@ -1,10 +1,12 @@
+import { useState, useEffect } from "react";
 import Image from 'next/image'
 import React from 'react'
 import whatsapp from '../assets/images/whatsapp.svg'
 import heart from '../assets/images/heart.svg'
 import Link from "next/link";
+import { pageIncreaseCount } from '../helpers/pageIncreaseCounts'
 
-const ProductCard = ({ product, slide }) => {
+const ProductCard = ({ product, productId, slide }) => {
   return (
     <div className={`product-card__cell ${slide ? "w-100 slide" : ""}`}>
       <div className="product-card__row">
@@ -42,7 +44,8 @@ const ProductCard = ({ product, slide }) => {
         </a>
       </div> */}
         <a className="product-card__whatsapp d-block mt-2" target="_blank"
-          href={"https://wa.me/+905395066951/?text=Merhaba. Ben butikmarketi.com'da gördüğüm bir ürününüz hakkında bilgi almak istiyorum. Ürünün linki şöyle:" + ' ' + product.link}>
+         href={"https://wa.me/+905395066951/?text=Merhaba. Ben butikmarketi.com'da gördüğüm bir ürününüz hakkında bilgi almak istiyorum. Ürünün linki şöyle:" + ' ' + product.link}
+         onClick={() =>  pageIncreaseCount(productId, product.whatsappClicks, "products", "whatsappClicks")}>
           <div className="d-flex align-items-center justify-content-center">
             <Image src={whatsapp} alt="Ürün hakkında soru sor" />
             <span>Ürün için satıcıya soru sorun</span>

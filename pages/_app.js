@@ -23,6 +23,7 @@ import "../src/assets/scss/atoms/buttons.scss";
 import "../src/assets/scss/atoms/modal.scss";
 import "../src/assets/scss/center-layout.scss";
 import "../src/assets/scss/atoms/checkbox.scss";
+import "../src/assets/scss/order-detail.scss";
 import "react-rater/lib/react-rater.css";
 
 const myApp = ({ Component, pageProps }) => {

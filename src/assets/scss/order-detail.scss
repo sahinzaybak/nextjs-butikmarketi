@@ -1,0 +1,109 @@
+.order-detail {
+  &__left {
+    border: 1px solid #efefef;
+    padding: 16px;
+    border-radius: 6px;
+    background-color: #f79d4d05;
+  }
+  &__butic {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 0;
+    img {
+      width: 60px;
+      border-radius: 50px;
+    }
+  }
+  &__user {
+    &-item {
+      border-bottom: 1px solid #efefef;
+      padding: 10px 0;
+      p {
+        font-size: 14px;
+        color: #f7923b;
+        font-weight: 600;
+      }
+      span {
+        color: #8b6e6e;
+        font-size: 15px;
+      }
+    }
+  }
+  &__status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px;
+    height: 60px;
+    color: white;
+    // border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    a {
+      padding: 7px 25px;
+      border-radius: 6px;
+      border: 1px solid white;
+    }
+
+    &.prepare {
+      background-color: #f39f57;
+      // border: 1px solid #df9c62;
+    }
+    &.cargo {
+      background-color: #85bb6b;
+      // border: 1px solid #7bb55f;
+    }
+  }
+  &__product {
+    border: 1px solid #efefef;
+    padding: 10px;
+    border-radius: 6px;
+    &-info {
+      background-color: #d0e1c61a;
+      width: 100%;
+      padding: 20px;
+    }
+    &-image {
+      border-radius: 6px;
+      width: max-content;
+      border: 1px solid #e5e5e5;
+      overflow: hidden;
+      img {
+        width: 195px;
+      }
+    }
+    &-name {
+      font-size: 24px;
+      padding: 0 10px 0 0;
+      color: #5e5e5e;
+      font-weight: 600;
+    }
+    &-price {
+      font-size: 25px;
+      font-weight: 600;
+      color: #f7923a;
+    }
+  }
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #efefef;
+    padding: 14px 0;
+    &-item {
+      width: 245px;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      color: #87ab4f;
+      p {
+        width: 130px;
+      }
+      span {
+        margin-left: 5px;
+        font-weight: 600;
+        border: 1px solid #ebebeb;
+        padding: 2px 10px 4px;
+        border-radius: 6px;
+      }
+    }
+  }
+}

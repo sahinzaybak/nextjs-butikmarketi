@@ -20,7 +20,7 @@ export const fetchButikProfileInfo = (butikSlug) => (dispatch) => { //Butik Prof
 };
 
 export const fetchButikProfileIncreaseCount = (butikId, butikDefaultClicks) => () => { // Butik Profil Sayfası Görünt. sayısı arttırma.
-  var currentDay = function (sp) {
+  let currentDay = function (sp) {
     let today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;

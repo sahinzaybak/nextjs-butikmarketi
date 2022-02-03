@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
 import ship from '../../assets/images/shipped.svg'
 import Link from "next/link";
+import randomInteger from 'random-int';
 import 'react-responsive-modal/styles.css';
 
 //Modal Components
@@ -11,15 +12,21 @@ import ConfirmModal from '../modals/confirm'
 import InfoModal from '../modals/info'
 import OrderSuccessModal from '../modals/orderSuccess'
 
-const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price, productColors, productSize }) => {
+//Actions
+import { fetchCreateOrder } from '../../store/actions/orders'
+
+const DetailHeader = ({ butikId, buticLogo, buticName, butikSlug, productId, productTitle, price, productColors, productPrice, productSize }) => {
   let selecteFilterSizeTitle = useSelector((state) => state.products.productDetailSelectedSizeTitle); //Seçilen Beden Adı
   let selecteFilterColorTitle = useSelector((state) => state.products.productDetailSelectedColorTitle); //Seçilen Renk Adı
 
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
   const [formValue, formValuesChild] = useState({}); //child için state.(formValuesChild)
+  const [totalPrice, setTotalPrice] = useState(price); //child için state.(formValuesChild)
+  const [orderCount, setOrderCount] = useState(price); //child için state.(formValuesChild)
 
   // setOpenAlert(true)
   const onOpenModal = () => setOpen(true);
@@ -30,7 +37,24 @@ const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price, pr
   const onCloseModalSuccess = () => setOpenSuccess(false);
 
   function orderProductSubmitConfirm() { //Evet, bilgilerim doğru, siparişimi oluşturabiliriz.
-      console.log(formValue.values,selecteFilterSizeTitle,selecteFilterColorTitle)
+    dispatch(fetchCreateOrder({
+      ...formValue.values,
+      "size": selecteFilterSizeTitle,
+      "color": selecteFilterColorTitle,
+      "price": totalPrice,
+      "count": orderCount,
+      "butikId": butikId,
+      "productId": productId,
+      "orderNo": randomInteger(1000000000000, 9999999999999)
+    }));
+  }
+
+  function getTotalPrice(getTotalPriceValue) { //Child'dan veriyi aldık.
+    setTotalPrice(getTotalPriceValue)
+  }
+
+  function getOrderCount(getOrderCountValue) { //Child'dan veriyi aldık.
+    setOrderCount(getOrderCountValue)
   }
 
   return (
@@ -76,6 +100,9 @@ const DetailHeader = ({ buticLogo, buticName, butikSlug, productTitle, price, pr
         onClose={onCloseModal}
         formValuesChild={formValuesChild}
         productColors={productColors}
+        productPrice={productPrice}
+        totalPrice={getTotalPrice} //child'dan gelen veri. getTotalPrice(val)
+        orderCount={getOrderCount} //child'dan gelen veri. getTotalPrice(val)
         productSize={productSize}
         onClickOpenConfirmModal={(isValidationAllForm) => { if (isValidationAllForm) setOpenAlert(true) }} //confirmModal'ı aç.
       />

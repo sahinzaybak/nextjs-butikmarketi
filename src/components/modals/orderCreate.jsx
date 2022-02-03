@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Form, Input, Button } from 'antd';
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
@@ -6,18 +6,28 @@ import 'antd/lib/form/style/index.css'
 import Image from 'next/image'
 import ship from '../../assets/images/shipped.svg'
 import received from '../../assets/images/order.svg'
+import { FiPlus, FiMinus } from "react-icons/fi";
 
 //Component
 import DetailFilter from '../product-detail/detail-filter'
 
 const orderCreateModal = (props) => {
   let isValidationAllForm = false;
-  
+  const [orderCount, setOrderCount] = useState(1);
+  const [price, setPrice] = useState(props.productPrice);
+
   function onFinish(values) {
     isValidationAllForm = true //Tüm inputlar okeyse true yap
     props.formValuesChild({ values }) //Child'a veri göndermek (detail-header/OrderCreateModal)
-    props.onClickOpenConfirmModal(isValidationAllForm) //Child'a true gönderdik ki tüm inputlar okeyse confirm modal'ı açsın.
+    props.onClickOpenConfirmModal(isValidationAllForm) //Child'a true gönderdik ki tüm inputlar okeyse confirm modal'ı açsın.)
   };
+
+  function sendParentTotalPrice(productCount) {
+    let totalPrice = productCount * props.productPrice
+    setPrice(totalPrice)
+    props.totalPrice(totalPrice);  //Parent'a veri gönderiyoruz. detail-header/OrderCreateModal => totalPrice={getTotalPrice}
+    props.orderCount(orderCount);
+  }
 
   return (
     <Modal open={props.open} onClose={props.onClose} center>
@@ -49,17 +59,44 @@ const orderCreateModal = (props) => {
               <Input.TextArea placeholder="Açıklama" className="textarea" />
             </Form.Item>
           </div>
-          <DetailFilter
-            productSize={props.productSize}
-            productColors={props.productColors}
-            componentType="Modal"
-          />
-          <Button type="primary" htmlType="submit" className="w-100">
-            <div className="green-button d-flex align-items-center mt-3 ml-auto" >
-              <Image src={received} alt="Ürün hakkında soru sor" />
-              <p>Ürünü sipariş et</p>
+
+          <div className="modal-item__bottom">
+            <DetailFilter
+              productSize={props.productSize}
+              productColors={props.productColors}
+              componentType="Modal"
+            />
+            <div className="d-flex align-items-center justify-content-between mt-4">
+              <div className="product-count">
+                <div className="d-flex align-items-center">
+                  <p className="product-count__item" onClick={async () => {
+                    if (orderCount != 1) {
+                      setOrderCount(orderCount - 1);
+                      sendParentTotalPrice((orderCount - 1))
+                    }
+                  }
+                  }><FiMinus />
+                  </p>
+                  <span>{orderCount}</span>
+                  <p className="product-count__item" onClick={() => {
+                    if (orderCount != 6) {
+                      setOrderCount(orderCount + 1);
+                      sendParentTotalPrice((orderCount + 1))
+                    }
+                  }
+                  }><FiPlus />
+                  </p>
+                </div>
+              </div>
+              <h4>{price} ₺</h4>
+              <Button type="primary" htmlType="submit">
+                <div className="green-button d-flex align-items-center ml-auto" >
+                  <Image src={received} alt="Ürün hakkında soru sor" />
+                  <p>Ürünü sipariş et</p>
+                </div>
+              </Button>
             </div>
-          </Button>
+          </div>
         </div>
       </Form>
     </Modal>

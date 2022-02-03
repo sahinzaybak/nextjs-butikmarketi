@@ -10,7 +10,7 @@ const confirm = (props) => {
     <Modal open={props.open} onClose={props.onClose} showCloseIcon={props.showCloseIcon} classNames={{ modal: 'modal-steps medium' }} center>
       <div className="d-flex modal-top">
         <Image src={received} alt="Ürün hakkında soru sor" />
-        <h3 className="modal-title ml-3">Sipariş onayı</h3>
+        <h3 className="modal-title ml-3">Form onayı</h3>
       </div>
       <div className="modal-form">
         <h3 className="large-title">Tüm bilgileriniz doğru ise, siparişinizi oluşturmak <br /> istiyor musunuz?</h3>

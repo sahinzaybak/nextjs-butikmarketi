@@ -75,10 +75,13 @@ const ProductDetail = () => {
           {productDetail && productDetail?.attributes?.comments && productDetail?.attributes?.butiks.data[0] &&
             <>
               <DetailHeader
+                butikId={productDetail.attributes.butiks.data[0].id}
                 buticName={productDetail.attributes.butiks.data[0].attributes.butik_name}
                 butikSlug={productDetail.attributes.butiks.data[0].attributes.butik_slug}
                 buticLogo={productDetail.attributes.butiks.data[0].attributes.butik_image}
+                productId={productDetail.id}
                 productTitle={productDetail.attributes.title}
+                productPrice={productDetail.attributes.price}
                 price={productDetail.attributes.price}
                 productColors={productDetail.attributes.colors}
                 productSize={productDetail.attributes.sizes}

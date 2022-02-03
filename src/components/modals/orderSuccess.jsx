@@ -10,14 +10,14 @@ const confirm = ({ ...props }) => {
     <Modal {...props} center>
       <div className="d-flex modal-top">
         <Image src={tick} alt="Ürün hakkında soru sor" />
-        <h3 className="modal-title ml-3">Siparişiniz onaylandı</h3>
+        <h3 className="modal-title ml-3">Siparişiniz onay bekliyor</h3>
       </div>
       <div className="modal-form">
         <div className="modal-form__top">
-          <h3 className="large-title green">Tebrikler, siparişiniz başarıyla oluşturuldu.</h3>
           <h3 className="large-title green mb-0"><u>Sipariş Numaranız:</u></h3>
           <h3 className="large-title green">21310435935</h3>
-          <h4 className="medium-title green mt-3 ">Sipariş teslim süresince <u><strong>kargo takibi,</strong></u> <u><strong>ürünün teslim süresi,</strong></u>  <u><strong>ürün doğruluğu</strong> </u> vs gibi konularda sürecin takibinde olacağımızı belirtmek isteriz. <br /> <br />Kargo sürecinde sizi sms olarak bilgilendirip, ürün elinize ulaştığı gün <strong>memnuniyet için </strong>sizle iletişime geçiyor olacağız.</h4>
+          <h3 className="large-title green info mb-4 mt-3"><u>Üyeliksiz siparişlerde  </u>oluşabilecek <u>sahte siparişlere karşı</u>, siparişinizi onaylamanız için <strong> 0539 506 69 51 </strong> numarasına whatsapp üzerinden <strong> <u> onay mesajı gönderdik. </u> </strong> </h3>
+          <h4 className="medium-title green mt-3 ">Sipariş teslim süresince <u><strong>kargo takibi,</strong></u> <u><strong>ürünün teslim süresi,</strong></u>  <u><strong>ürün doğruluğu</strong> </u> vs gibi konularda sürecin takibinde olacağımızı belirtmek isteriz.</h4>
         </div>
         <div className="small-title mt-4">
           <span>Bundan sonraki siparişlerinizde,</span>

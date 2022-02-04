@@ -32,16 +32,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px;
+    padding: 25px;
     height: 60px;
     color: white;
-    // border-radius: 6px;
-    margin-bottom: 10px;
-    font-size: 16px;
+    margin-bottom: 26px;
     a {
       padding: 7px 25px;
       border-radius: 6px;
       border: 1px solid white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    p {
+      font-size: 16px;
+      font-weight: 600;
     }
 
     &.prepare {
@@ -52,13 +57,21 @@
       background-color: #85bb6b;
       // border: 1px solid #7bb55f;
     }
+    &.success {
+      background-color: #7cbb5d;
+      // border: 1px solid #7bb55f;
+    }
+    &.cancel {
+      background-color: #d95656;
+      // border: 1px solid #7bb55f;
+    }
   }
   &__product {
     border: 1px solid #efefef;
     padding: 10px;
     border-radius: 6px;
     &-info {
-      background-color: #d0e1c61a;
+      background-color: #f7fdf6;
       width: 100%;
       padding: 20px;
     }
@@ -74,7 +87,7 @@
     &-name {
       font-size: 24px;
       padding: 0 10px 0 0;
-      color: #5e5e5e;
+      color: #545454;
       font-weight: 600;
     }
     &-price {
@@ -105,5 +118,70 @@
         border-radius: 6px;
       }
     }
+  }
+  &__error {
+  }
+}
+
+.cargo-tracking {
+  &__item {
+    position: relative;
+    padding: 15px 40px;
+    &-desc {
+      color: #ef8f3b;
+      margin-top: -4px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    &-date {
+      color: #8b6e6e;
+      font-size: 15px;
+    }
+    &-location {
+      color: #8b6e6e;
+      font-size: 15px;
+    }
+    &:before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border: 1px solid #f7923b;
+      background: #fff;
+      border-radius: 50%;
+      left: 6px;
+      top: calc(50% - 18 px);
+      position: absolute;
+      z-index: 1;
+    }
+    &:after {
+      content: "";
+      width: 0.5px;
+      height: 100%;
+      background: #f7923b;
+      left: 15px;
+      top: 0;
+      position: absolute;
+      z-index: 0;
+    }
+    &:first-child {
+      &:after {
+        height: 70%;
+        top: 30%;
+      }
+    }
+    &:last-child {
+      &:after {
+        height: 30%;
+      }
+    }
+    &.checked {
+      &:before {
+        border: none;
+        content: url(https://kargomnerede.co/icons/check-green.svg);
+      }
+    }
+  }
+  &__logo{
+    width: 100px !important;
   }
 }

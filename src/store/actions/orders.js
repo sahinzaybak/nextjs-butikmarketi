@@ -1,5 +1,6 @@
 import axios from "axios";
-export const fetchCreateOrder = (getOrdersValue) => (dispatch) => {//Sipariş oluştur.
+import cargoInfo from '../../api/cargo.json'
+export const fetchCreateOrder = (getOrdersValue) => (dispatch) => { //Sipariş oluştur.
   let currentDay = function (sp) {
     let today = new Date();
     var dd = today.getDate();
@@ -21,12 +22,15 @@ export const fetchCreateOrder = (getOrdersValue) => (dispatch) => {//Sipariş ol
         size: getOrdersValue.size,
         color: getOrdersValue.color,
         count: getOrdersValue.count,
+        cargoNo:"",
+        isOrderCancel:false,
         status: false, //üyeliksiz siparişlerde onay olmadan status false.
         totalPrice: getOrdersValue.price,
         orderDate: currentDay("-"),
       },
     }).then((value) => {
-      axios.post("http://localhost:8080/sendMsg", { //Whatsapp mesaj gönder
+      axios.post("http://localhost:8080/sendMsg", {
+        //Whatsapp mesaj gönder
         name: getOrdersValue.username,
         phone: parseInt(9 + getOrdersValue.phone),
         order_id: " ",
@@ -35,8 +39,8 @@ export const fetchCreateOrder = (getOrdersValue) => (dispatch) => {//Sipariş ol
     });
 };
 
-export const fetchOrderConfirm =  (orderNumber) => async (dispatch) => { //Siparişi onayla
-  const orderInfo = await axios.get(`http://localhost:1337/api/orders?filters[orderNo]=${orderNumber}`) //Önce siparişi bul.
+export const fetchOrderConfirm = (orderNumber) => async (dispatch) => { //Siparişi onayla
+  const orderInfo = await axios.get(`http://localhost:1337/api/orders?filters[orderNo]=${orderNumber}`); //Önce siparişi bul.
   axios.put(`http://localhost:1337/api/orders/${orderInfo.data.data[0].id}`, { //Sipariş ID'ye göre status'u güncelle.
     data: {
       status: true,
@@ -44,11 +48,26 @@ export const fetchOrderConfirm =  (orderNumber) => async (dispatch) => { //Sipar
   });
 };
 
-export const fetchOrderDetailInfo = (orderNumber) => (dispatch) => { //Sipariş bilgilerini getir.
+export const fetchOrderDetailInfo = (orderNumber) => (dispatch) => {//Sipariş bilgilerini getir.
   axios.get(`http://localhost:1337/api/orders?filters[orderNo]=${orderNumber}&populate=products.butiks`).then((response) => {
-    dispatch({
-      type: "ORDER_DETAIL_INFO",
-      payload: response.data.data[0].attributes
+      dispatch({
+        type: "ORDER_DETAIL_INFO",
+        payload: response.data.data[0],
+      });
     });
+};
+
+export const fetchOrderCancel = (orderId) => (dispatch) =>{ //Siparişi iptal et
+  axios.put(`http://localhost:1337/api/orders/${orderId}`, {
+    data: {
+      isOrderCancel: true,
+    },
+  });
+};
+
+export const fetchCargoInfo = () => (dispatch) => { //Kargo Takibi
+  dispatch({
+    type: "CARGO_INFO",
+    payload: cargoInfo.value,
   });
 };

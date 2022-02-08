@@ -25,6 +25,8 @@ import "../src/assets/scss/center-layout.scss";
 import "../src/assets/scss/atoms/checkbox.scss";
 import "../src/assets/scss/order-detail.scss";
 import "react-rater/lib/react-rater.css";
+import "react-notifications-component/dist/theme.css";
+import "animate.css/animate.min.css";
 
 const myApp = ({ Component, pageProps }) => {
   const router = useRouter();

@@ -49,7 +49,7 @@ export const fetchOrderConfirm = (orderNumber) => async (dispatch) => { //Sipari
 };
 
 export const fetchOrderDetailInfo = (orderNumber) => (dispatch) => {//Sipariş bilgilerini getir.
-  axios.get(`http://localhost:1337/api/orders?filters[orderNo]=${orderNumber}&populate=products.butiks`).then((response) => {
+  axios.get(`http://localhost:1337/api/orders?filters[orderNo]=${orderNumber}&populate=products.butiks,products.comments`).then((response) => {
       dispatch({
         type: "ORDER_DETAIL_INFO",
         payload: response.data.data[0],
@@ -69,5 +69,25 @@ export const fetchCargoInfo = () => (dispatch) => { //Kargo Takibi
   dispatch({
     type: "CARGO_INFO",
     payload: cargoInfo.value,
+  });
+};
+
+
+export const fetchProductComments = (productId,defaultComments,comment,rating, imageList) => (dispatch) =>{ //Ürüne yorum yap
+  debugger;
+  axios.put(`http://localhost:1337/api/products/${productId}`, {
+    data: {
+      comments:[
+        ...defaultComments,
+        {
+        comment_name:"maho",
+        star: rating,
+        comment:comment,
+        commentImages:[
+          {
+            image:imageList[0].image_slider
+          }
+        ]}]
+    },
   });
 };

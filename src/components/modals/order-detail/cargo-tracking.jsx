@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
 import received from '../../../assets/images/order.svg'
 import 'react-responsive-modal/styles.css';

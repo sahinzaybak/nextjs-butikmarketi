@@ -10,6 +10,7 @@ import { fetchOrderDetailInfo, fetchOrderCancel, fetchCargoInfo } from '../../sr
 
 //Modal Components
 import OrderCancel from '../../src/components/modals/order-detail/order-cancel'
+import ProductComment from '../../src/components/modals/comment'
 import CargoTracking from '../../src/components/modals/order-detail/cargo-tracking'
 
 let orderDetailInfo;
@@ -22,7 +23,7 @@ const orderConfirm = () => {
 
   orderDetailInfo = useSelector((state) => state.orders.orderDetailInfo); //Dolan "sipariş detay bilgilerini" al.
   cargoInfo = useSelector((state) => state.orders.cargoInfo); //Dolan "kargo bilgilerini al"
-
+  console.log(orderDetailInfo)
   useEffect(() => {
     if (orderNumber) dispatch(fetchOrderDetailInfo(orderNumber)) //sipariş detaylarını getir.
   }, [orderNumber])
@@ -34,6 +35,7 @@ const orderConfirm = () => {
   //Modal işlemleri
   const [openOrderCancel, setOpenOrderCancel] = useState(false);
   const [openCargoTracking, setOpenCargoTracking] = useState(false);
+  const [openComment, setOpenComment] = useState(false);
 
   function orderDoingCancel() { //Evet, sipraişimi iptal etmek istiyorum
     dispatch(fetchOrderCancel(orderDetailInfo.id)) //Sipariş iptal => isOrderCancel = false
@@ -92,8 +94,14 @@ const orderConfirm = () => {
                         </div>
                         <div className="d-flex">
                           <a>Değişim Talebi</a>
-                          <a className="mr-2 ml-2">Ürünü Değerlendir</a>
+                          <a className="mr-2 ml-2" onClick={() => setOpenComment(true)}>Ürüne Yorum Yap</a>
                           <a>Satıcıyı Değerlendir</a>
+                          <ProductComment
+                            open={openComment}
+                            productId={orderDetailInfo.attributes.products.data[0].id}
+                            comments={orderDetailInfo.attributes.products.data[0].attributes.comments}
+                            onClose={() => setOpenComment(false)}
+                            classNames={{ modal: 'modal-comment' }} />
                         </div>
                       </div>
                       :

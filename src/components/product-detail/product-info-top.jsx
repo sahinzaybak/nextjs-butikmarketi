@@ -2,30 +2,45 @@ import { useState } from "react";
 import ReactStars from 'react-stars'
 import { Link } from 'react-scroll'
 import CommnetModal from '../modals/comment'
+import StarRatings from 'react-star-ratings';
 
-const ProductInfoTop = ({ productTitle, productStar, commentsCount, productDescription }) => {
+const ProductInfoTop = ({ productTitle, comments, commentsCount, productDescription }) => {
   const [openComment, setOpenComment] = useState(false);
-  const onCloseComment = () => setOpenComment(false);
 
-  const ratingChanged = (newRating) => {
-    console.log(newRating)
+  let totalStar = 0;
+  comments.forEach(comment => {
+    totalStar += comment.star
+  });
+
+
+  function onCloseComment() {
+    setOpenComment(false)
+  };
+
+  function ratingChanged(newRating) {
+    setRating(newRating)
   }
   return (
     <>
       <h1 className="product-info__name">{productTitle}</h1>
-      <ReactStars
-        count={5}
-        value={productStar}
-        onChange={ratingChanged}
-        size={22} half={false}
-        color1={'#e3eaea'}
-        color2={'#ffcc65'}
-      />
       <div className="d-flex align-items-center">
+        <StarRatings
+          rating={totalStar / commentsCount}
+          starEmptyColor="#e3eaea"
+          starRatedColor="#ffcc65"
+          starDimension="22px"
+          starSpacing="0px"
+          changeRating={ratingChanged}
+          numberOfStars={5}
+          name='rating'
+        />
+        <p className="product-info__star-count">{(totalStar / commentsCount).toFixed(1)}</p>
+      </div>
+
+      <div className="d-flex align-items-center mt-1">
         <Link to="comments" spy={true} smooth={true}>
           <p className="cursor-pointer">({commentsCount}) Yorumu Gör</p>
         </Link>
-        <p className="ml-2 cursor-pointer" onClick={() => setOpenComment(true)}><strong>Yorum Yap</strong></p>
       </div>
       <div className="product-info__item mt-3">
         <span className="product-info__title">Ürün Açıklaması</span>

@@ -100,7 +100,7 @@ const ProductDetail = () => {
                       <div className="product-info">
                         <ProductInfoTop
                           productTitle={productDetail.attributes.title}
-                          productStar={productDetail.attributes.star}
+                          comments={productDetail.attributes.comments}
                           commentsCount={productDetail.attributes.comments.length}
                           productDescription={productDetail.attributes.description} />
                         <ProductGalleryThumb

@@ -1,12 +1,9 @@
-
-
 .react-responsive-modal-modal {
   width: 560px;
   border-radius: 12px;
   padding: 0;
   background-color: #f7f9f7;
 
-  
   img {
     width: 28px;
   }
@@ -26,7 +23,7 @@
         color: #53b547;
         font-weight: 600;
       }
-      &.info{
+      &.info {
         font-size: 20px;
         color: #6197a9;
         font-weight: 500;
@@ -34,7 +31,7 @@
       }
     }
     .small-title {
-      background-color: #56c8e112; 
+      background-color: #56c8e112;
       color: #6197a9;
       padding: 0 0px;
       font-size: 14px;
@@ -81,13 +78,21 @@
     border-bottom: 1px solid #81c776;
     border-bottom: 1px solid #f0f0f0;
     padding: 12px 24px;
-    color: rgba(0,0,0,.85);
+    color: rgba(0, 0, 0, 0.85);
     background: #fff;
-   
   }
-  .modal-form{
+  .modal-form {
     background-color: white;
     padding: 25px;
+    &__address {
+      background-color: #f1f9f0;
+      margin: 5px 0 20px 0;
+      padding: 20px;
+      border-radius: 6px;
+      border: 1px solid #6cbd63;
+      color: #489541;
+      font-size: 16px;
+    }
   }
   .modal-title {
     font-size: 21px;
@@ -118,13 +123,13 @@
   .modal-item {
     width: 48%;
   }
-  &.modal-comment{
+  &.modal-comment {
     width: 540px;
-    textarea{
+    textarea {
       height: 140px;
     }
   }
 }
-.react-responsive-modal-root{
+.react-responsive-modal-root {
   z-index: 99999;
 }

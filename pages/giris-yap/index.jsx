@@ -43,8 +43,6 @@ const Login = () => {
           dismiss: { duration: 2000, onScreen: false },
         })
         setTimeout(() => {
-          localStorage.setItem("userToken", authInfo.data.jwt)
-          localStorage.setItem("userInfo", JSON.stringify(authInfo.data.user))
           router.push("/")
         }, 2500);
       }

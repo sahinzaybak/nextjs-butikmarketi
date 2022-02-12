@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from 'react-redux'
 import { Form, Input, Button } from 'antd';
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
@@ -16,6 +17,8 @@ const orderCreateModal = (props) => {
   const [orderCount, setOrderCount] = useState(1);
   const [price, setPrice] = useState(props.productPrice);
 
+  let userInfo = useSelector(state => state.auth.authInfo)
+  console.log(userInfo)
   function onFinish(values) {
     isValidationAllForm = true //Tüm inputlar okeyse true yap
     props.formValuesChild({ values }) //Child'a veri göndermek (detail-header/OrderCreateModal)
@@ -35,25 +38,33 @@ const orderCreateModal = (props) => {
         <Image src={ship} alt="Ürün hakkında soru sor" />
         <h3 className="modal-title ml-3">Sipariş Oluştur</h3>
       </div>
-      <Form onFinish={onFinish} autoComplete="off">
+      <Form onFinish={onFinish} autoComplete="on">
         <div className="modal-form">
-          <div className="d-flex justify-content-between">
-            <div className="modal-item">
-              <Form.Item name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
-                <Input placeholder="Adınız Soyadınız" />
+          {!userInfo.status &&
+            <div className="d-flex justify-content-between">
+              <div className="modal-item">
+                <Form.Item name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
+                  <Input placeholder="Adınız Soyadınız" />
+                </Form.Item>
+              </div>
+              <div className="modal-item">
+                <Form.Item name="phone" rules={[{ required: true, message: 'Please input your password!' }]}>
+                  <Input placeholder="Cep Tel Numaranız (Whatsapp)" />
+                </Form.Item>
+              </div>
+            </div>
+          }
+          {!userInfo.status ? 
+            <div className="modal-item w-100 mt-3">
+              <Form.Item name="address" rules={[{ required: true, message: 'Please input your password!' }]}>
+                <Input.TextArea placeholder="Ürünün gönderileceği adres" className="textarea" />
               </Form.Item>
             </div>
-            <div className="modal-item">
-              <Form.Item name="phone" rules={[{ required: true, message: 'Please input your password!' }]}>
-                <Input placeholder="Cep Tel Numaranız (Whatsapp)" />
-              </Form.Item>
+            :
+            <div className="modal-form__address">
+              <p>{userInfo.address}</p>
             </div>
-          </div>
-          <div className="modal-item w-100 mt-3">
-            <Form.Item name="address" rules={[{ required: true, message: 'Please input your password!' }]}>
-              <Input.TextArea placeholder="Ürünün gönderileceği adres" className="textarea" />
-            </Form.Item>
-          </div>
+          }
           <div className="modal-item w-100 mt-3">
             <Form.Item name="desc" rules={[{ required: true, message: 'Please input your password!' }]}>
               <Input.TextArea placeholder="Açıklama" className="textarea" />

@@ -13,7 +13,10 @@ import InfoModal from '../modals/info'
 import OrderSuccessModal from '../modals/orderSuccess'
 
 //Actions
-import { fetchCreateOrder } from '../../store/actions/orders'
+import { fetchCreateOrder, fetchCreateOrderMember} from '../../store/actions/orders'
+
+//Helpers
+import { IsLoginIn } from '../../helpers/auth'
 
 const DetailHeader = ({ butikId, buticLogo, buticName, butikSlug, productId, productTitle, price, productColors, productPrice, productSize }) => {
   let selecteFilterSizeTitle = useSelector((state) => state.products.productDetailSelectedSizeTitle); //Seçilen Beden Adı
@@ -25,8 +28,8 @@ const DetailHeader = ({ butikId, buticLogo, buticName, butikSlug, productId, pro
   const [openAlert, setOpenAlert] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
   const [formValue, formValuesChild] = useState({}); //child için state.(formValuesChild)
-  const [totalPrice, setTotalPrice] = useState(price); //child için state.(formValuesChild)
-  const [orderCount, setOrderCount] = useState(price); //child için state.(formValuesChild)
+  const [totalPrice, setTotalPrice] = useState(price);
+  const [orderCount, setOrderCount] = useState(price);
 
   // setOpenAlert(true)
   const onOpenModal = () => setOpen(true);
@@ -36,17 +39,46 @@ const DetailHeader = ({ butikId, buticLogo, buticName, butikSlug, productId, pro
   const onCloseModalAlert = () => setOpenAlert(false);
   const onCloseModalSuccess = () => setOpenSuccess(false);
 
+  let isLoginIn = IsLoginIn()
+  let userInfo = useSelector(state => state.auth.authInfo)
   function orderProductSubmitConfirm() { //Evet, bilgilerim doğru, siparişimi oluşturabiliriz.
-    dispatch(fetchCreateOrder({
-      ...formValue.values,
-      "size": selecteFilterSizeTitle,
-      "color": selecteFilterColorTitle,
-      "price": totalPrice,
-      "count": orderCount,
-      "butikId": butikId,
-      "productId": productId,
-      "orderNo": randomInteger(1000000000000, 9999999999999)
-    }));
+    {
+      !isLoginIn ? //üyesiz sipariş
+      dispatch(fetchCreateOrder({
+        ...formValue.values,
+        "size": selecteFilterSizeTitle,
+        "color": selecteFilterColorTitle,
+        "price": totalPrice,
+        "count": orderCount,
+        "butikId": butikId,
+        "productId": productId,
+        "userId": userInfo.id,
+      }))
+      :
+      <>
+        {userInfo.status ? //üye sipariş => üyelik onaylı ise
+          dispatch(fetchCreateOrderMember({
+            ...formValue.values,
+            "namesurname": userInfo.namesurname,
+            "phone": userInfo.phone,
+            "address": userInfo.address,
+            "namesurname": userInfo.nameSurname,
+            "size": selecteFilterSizeTitle,
+            "color": selecteFilterColorTitle,
+            "price": totalPrice,
+            "count": orderCount,
+            "butikId": butikId,
+            "productId": productId,
+            "userId": userInfo.id,
+          }))
+          :
+          <p>
+            as
+          </p>
+        }
+      </>
+
+    }
   }
 
   function getTotalPrice(getTotalPriceValue) { //Child'dan veriyi aldık.

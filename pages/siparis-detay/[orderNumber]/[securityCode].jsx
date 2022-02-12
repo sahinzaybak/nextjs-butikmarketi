@@ -6,12 +6,12 @@ import { useRouter } from "next/router";
 import { LoadingOutlined, DoubleRightOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 //actions
-import { fetchOrderDetailInfo, fetchOrderCancel, fetchCargoInfo } from '../../src/store/actions/orders'
+import { fetchOrderDetailInfo, fetchOrderCancel, fetchCargoInfo } from '../../../src/store/actions/orders'
 
 //Modal Components
-import OrderCancel from '../../src/components/modals/order-detail/order-cancel'
-import ProductComment from '../../src/components/modals/comment'
-import CargoTracking from '../../src/components/modals/order-detail/cargo-tracking'
+import OrderCancel from '../../../src/components/modals/order-detail/order-cancel'
+import ProductComment from '../../../src/components/modals/comment'
+import CargoTracking from '../../../src/components/modals/order-detail/cargo-tracking'
 
 let orderDetailInfo;
 let cargoInfo;
@@ -19,13 +19,14 @@ const orderConfirm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const orderNumber = router.query.orderNumber;
+  const securityCode = router.query.securityCode;
   const [orderCancelInfoText, setOrderCancelInfoText] = useState(false); //Sipariş iptal ettiğinde sipariş iptal yazısını görelim.
 
   orderDetailInfo = useSelector((state) => state.orders.orderDetailInfo); //Dolan "sipariş detay bilgilerini" al.
   cargoInfo = useSelector((state) => state.orders.cargoInfo); //Dolan "kargo bilgilerini al"
   console.log(orderDetailInfo)
   useEffect(() => {
-    if (orderNumber) dispatch(fetchOrderDetailInfo(orderNumber)) //sipariş detaylarını getir.
+    if (orderNumber) dispatch(fetchOrderDetailInfo(orderNumber,securityCode)) //sipariş detaylarını getir.
   }, [orderNumber])
 
   useEffect(() => {
@@ -47,14 +48,14 @@ const orderConfirm = () => {
       {orderDetailInfo.attributes &&
         <div className="order-detail mt-4">
           <div className="custom-container">
-            {orderDetailInfo.attributes.status ?
+            {orderDetailInfo.attributes.attributes.status ?
               <>
                 <div className="category-title__wrp mb-4">
                   <h1 className="category-title">{orderNumber} numaralı SİPARİŞ BİLGİLERİ</h1>
                 </div>
-                {orderDetailInfo.attributes.cargoNo == "" ?
+                {orderDetailInfo.attributes.attributes.cargoNo == "" ?
                   <>
-                    {orderCancelInfoText || orderDetailInfo.attributes.isOrderCancel ?
+                    {orderCancelInfoText || orderDetailInfo.attributes.attributes.isOrderCancel ?
                       <div className="order-detail__status cancel">
                         <div className="d-flex align-items-center">
                           <CloseOutlined style={{ fontSize: '20px' }} />
@@ -98,8 +99,8 @@ const orderConfirm = () => {
                           <a>Satıcıyı Değerlendir</a>
                           <ProductComment
                             open={openComment}
-                            productId={orderDetailInfo.attributes.products.data[0].id}
-                            comments={orderDetailInfo.attributes.products.data[0].attributes.comments}
+                            productId={orderDetailInfo.attributes.attributes.products.data[0].id}
+                            comments={orderDetailInfo.attributes.attributes.products.data[0].attributes.comments}
                             onClose={() => setOpenComment(false)}
                             classNames={{ modal: 'modal-comment' }} />
                         </div>
@@ -117,7 +118,7 @@ const orderConfirm = () => {
                             onClose={() => setOpenCargoTracking(false)}
                             showCloseIcon={true}
                             cargoInfo={cargoInfo}
-                            cargoNo={orderDetailInfo.attributes.cargoNo}
+                            cargoNo={orderDetailInfo.attributes.attributes.cargoNo}
                             classNames={{ modal: 'modal-steps' }}
                           />
                         }
@@ -131,34 +132,34 @@ const orderConfirm = () => {
                       <div className="order-detail__butic">
                         <div className="d-flex">
                           <div className="order-detail__butic-logo mr-2">
-                            <img src={orderDetailInfo.attributes.products.data[0].attributes.butiks.data[0].attributes.butik_image} alt="" />
+                            <img src={orderDetailInfo.attributes.attributes.products.data[0].attributes.butiks.data[0].attributes.butik_image} alt="" />
                           </div>
                           <div className="order-detail__butic-info mt-1">
-                            <h6>{orderDetailInfo.attributes.products.data[0].attributes.butiks.data[0].attributes.butik_name}</h6>
-                            <a href="">{orderDetailInfo.attributes.products.data[0].attributes.butiks.data[0].attributes.butik_whatsapp}</a>
+                            <h6>{orderDetailInfo.attributes.attributes.products.data[0].attributes.butiks.data[0].attributes.butik_name}</h6>
+                            <a href="">{orderDetailInfo.attributes.attributes.products.data[0].attributes.butiks.data[0].attributes.butik_whatsapp}</a>
                           </div>
                         </div>
                       </div>
                       <div className="order-detail__user">
                         <div className="order-detail__user-item">
                           <p>Siparişi Veren</p>
-                          <span>{orderDetailInfo.attributes.nameSurname}</span>
+                          <span>{orderDetailInfo.attributes.attributes.nameSurname}</span>
                         </div>
                         <div className="order-detail__user-item">
                           <p>Sipariş Tarihi</p>
-                          <span>{orderDetailInfo.attributes.orderDate}</span>
+                          <span>{orderDetailInfo.attributes.attributes.orderDate}</span>
                         </div>
                         <div className="order-detail__user-item">
                           <p>İletişim Numarası</p>
-                          <span>{orderDetailInfo.attributes.phone}</span>
+                          <span>{orderDetailInfo.attributes.attributes.phone}</span>
                         </div>
                         <div className="order-detail__user-item">
                           <p>Teslimat Adresi</p>
-                          <span>{orderDetailInfo.attributes.address}</span>
+                          <span>{orderDetailInfo.attributes.attributes.address}</span>
                         </div>
                         <div className="order-detail__user-item">
                           <p>Sipariş Açıklaması</p>
-                          <span>{orderDetailInfo.attributes.description}</span>
+                          <span>{orderDetailInfo.attributes.attributes.description}</span>
                         </div>
                       </div>
                     </div>
@@ -167,29 +168,29 @@ const orderConfirm = () => {
                     <div className="order-detail__product">
                       <div className="d-flex">
                         <div className="order-detail__product-image mr-3">
-                          <img src={orderDetailInfo.attributes.products.data[0].attributes.image} alt="" />
+                          <img src={orderDetailInfo.attributes.attributes.products.data[0].attributes.image} alt="" />
                         </div>
                         <div className="order-detail__product-info">
-                          <h2 className="order-detail__product-name">{orderDetailInfo.attributes.products.data[0].attributes.title}</h2>
-                          <p className="order-detail__product-price">{orderDetailInfo.attributes.products.data[0].attributes.price} ₺</p>
+                          <h2 className="order-detail__product-name">{orderDetailInfo.attributes.attributes.products.data[0].attributes.title}</h2>
+                          <p className="order-detail__product-price">{orderDetailInfo.attributes.attributes.products.data[0].attributes.price} ₺</p>
                           <div className="order-detail__list">
                             <div className="order-detail__list-item">
                               <p>Seçtiğiniz Beden:</p>
-                              <span>{orderDetailInfo.attributes.size} </span>
+                              <span>{orderDetailInfo.attributes.attributes.size} </span>
                             </div>
                             <div className="order-detail__list-item">
                               <p>Seçtiğiniz Renk:</p>
-                              <span>{orderDetailInfo.attributes.color} </span>
+                              <span>{orderDetailInfo.attributes.attributes.color} </span>
                             </div>
                           </div>
                           <div className="order-detail__list">
                             <div className="order-detail__list-item">
                               <p>Seçtiğiniz Adedi:</p>
-                              <span>{orderDetailInfo.attributes.count} </span>
+                              <span>{orderDetailInfo.attributes.attributes.count} </span>
                             </div>
                             <div className="order-detail__list-item">
                               <p> Toplam Fiyat:</p>
-                              <span>{orderDetailInfo.attributes.totalPrice} ₺ </span>
+                              <span>{orderDetailInfo.attributes.attributes.totalPrice} ₺ </span>
                             </div>
                           </div>
                         </div>

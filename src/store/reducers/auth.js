@@ -1,5 +1,5 @@
 const initialState = {
-  authInfo:[]
+  authInfo:""
 }
 
 export default (state = initialState, action) => {

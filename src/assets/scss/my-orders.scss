@@ -1,0 +1,116 @@
+.my-orders {
+  &__header {
+    position: relative;
+    background-image: url("../images//my-orders.jpeg");
+    height: 150px;
+    background-size: auto;
+    background-position: center;
+    border-bottom: 1px solid #fdf1ea;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      background-color: #fffffff0;
+    }
+    p {
+      width: max-content;
+      color: #eb9f71;
+      font-size: 40px;
+      font-weight: 800;
+    }
+    span {
+      color: #a15d33;
+      font-size: 17px;
+    }
+    &-text {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 99;
+    }
+  }
+  &__cargo {
+    background-color: #f39f57;
+    color: white;
+    font-size: 15px;
+    padding: 10px 20px;
+    position: relative;
+    top: 20px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+  }
+  &__item {
+    margin: 20px 0;
+    border: 1px solid #f39f57;
+    padding: 22px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    &-image {
+      width: 70px;
+      height: 70px;
+      flex-shrink: 0;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50px;
+        object-fit: contain;
+        border: 1px solid #c5c5c5;
+      }
+    }
+    &-title {
+      width: 200px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 19px;
+      color: #5a5a5a;
+      font-weight: 600;
+    }
+    &-price {
+      width: max-content;
+      color: #57b11f;
+      font-weight: 600;
+      font-size: 20px;
+    }
+    &-date {
+      font-size: 15px;
+      color: #6e6e6e;
+    }
+    &-butic {
+      font-size: 15px;
+      color: #f49f57;
+    }
+    &-actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: initial;
+      align-items: end;
+    }
+    &-button {
+      display: flex;
+      align-items: center;
+      border: 1px solid #7cc250;
+      padding: 4px 17px;
+      border-radius: 50px;
+      font-size: 15.9px;
+      color: #57b11f;
+      cursor: pointer;
+      background-color: #7ac14e0a;
+      transition: all 0.3s;
+      .icon {
+        position: relative;
+        left: 0;
+        transition: all 0.3s;
+      }
+      &:hover {
+        background-color: #7ac14e14;
+        padding-right: 25px;
+        .icon {
+          left: 15px;
+        }
+      }
+    }
+  }
+}

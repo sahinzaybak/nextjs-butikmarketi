@@ -12,6 +12,10 @@
     &.medium {
       width: 460px;
     }
+    &.large{
+      width: 1200px;
+      max-width: initial;
+    }
     .large-title {
       font-size: 18px;
       margin-bottom: 10px;

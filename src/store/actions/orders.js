@@ -1,7 +1,6 @@
 import axios from "axios";
 import cargoInfo from '../../api/cargo.json'
 
-
 let currentDay = function (sp) {
   let today = new Date();
   var dd = today.getDate();
@@ -42,7 +41,6 @@ export const fetchCreateOrder = (getOrdersValue) => (dispatch) => { //Sipariş o
 };
 
 export const fetchCreateOrderMember = (getOrdersValue) => (dispatch) => { //Sipariş oluştur.
-  debugger;
   const config = {headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}`}};
   axios.post("http://localhost:1337/api/orders", { //Sipariş oluştur
       data: {
@@ -65,9 +63,9 @@ export const fetchCreateOrderMember = (getOrdersValue) => (dispatch) => { //Sipa
     },config)
 };
 
-export const fetchOrderConfirm = (orderNumber) => async (dispatch) => { //Siparişi onayla
-  const orderInfo = await axios.get(`http://localhost:1337/api/orders?filters[orderNo]=${orderNumber}`); //Önce siparişi bul.
-  axios.put(`http://localhost:1337/api/orders/${orderInfo.data.data[0].id}`, { //Sipariş ID'ye göre status'u güncelle.
+export const fetchOrderConfirm = (orderNumber,securityCode) => async (dispatch) => { //Siparişi onayla
+  const orderInfo = await axios.get(`http://localhost:1337/api/order-inactives/${orderNumber}/${securityCode}`); //Önce siparişi bul.
+  axios.put(`http://localhost:1337/api/order-inactives/${orderInfo.data.data.id}`, { //Sipariş ID'ye göre status'u güncelle.
     data: {
       status: true,
     },
@@ -99,9 +97,7 @@ export const fetchCargoInfo = () => (dispatch) => { //Kargo Takibi
   });
 };
 
-
 export const fetchProductComments = (productId,defaultComments,comment,rating, imageList) => (dispatch) =>{ //Ürüne yorum yap
-  debugger;
   axios.put(`http://localhost:1337/api/products/${productId}`, {
     data: {
       comments:[
@@ -117,4 +113,16 @@ export const fetchProductComments = (productId,defaultComments,comment,rating, i
         ]}]
     },
   });
+};
+
+//Siparişlerim
+export const fetchMyOrders = () => (dispatch) => { //Sipariş bilgilerini getir.
+  const config = {headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}`}};
+  axios.get(`http://localhost:1337/api/orders?populate=products.butiks`, config)
+  .then((response) => {
+      dispatch({
+        type: "MY_ORDER_LIST",
+        payload: response.data.data
+      });
+    });
 };

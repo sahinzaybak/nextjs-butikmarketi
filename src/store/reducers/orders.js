@@ -1,6 +1,7 @@
 const initialState = {
   orderDetailInfo: [],
-  cargoInfo:[]
+  cargoInfo: [],
+  myOrderList: [],
 };
 
 export default (state = initialState, action) => {
@@ -14,6 +15,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         cargoInfo: action.payload,
+      };
+    case "MY_ORDER_LIST":
+      return {
+        ...state,
+        myOrderList: action.payload,
       };
 
     default:

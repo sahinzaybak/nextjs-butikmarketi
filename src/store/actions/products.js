@@ -32,7 +32,6 @@ export const fetchProductDetail = (productSlug) => (dispatch) => { //Ürün Deta
 
 export const fetchProductFilterList = (productMainCategory) => (dispatch) => { //Kategoriye göre Filtre Seçeneklerini getir. (Giyim, Ayakkabı.vs)
   const selectedFilterOptions = filterOptions.filter (x => x.main_category == productMainCategory)
-  console.log(selectedFilterOptions[0]?.filter)
     dispatch({
       type: "PRODUCT_CATEGORY_FILTER_LIST",
       payload: selectedFilterOptions[0]?.filter
@@ -45,6 +44,26 @@ export const fetchProductFilterApply = (categoryTitle, filterMainTitle, filterTe
     dispatch({
       type: "PRODUCT_FILTER_APPLY",
       payload: response.data,
+    });
+  });
+};
+
+export const fetchAddFavorite = (productId, userId) => (dispatch) => { //Sipariş oluştur.
+  const config = {headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}`}};
+  axios.post("http://localhost:1337/api/favorites", { //Sipariş oluştur
+      data: {
+        userId: userId,
+        products: productId
+      },
+    },config)
+};
+
+export const fetchFavoriteList = () => (dispatch) => { //Sipariş oluştur.
+  const config = {headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}`}};
+  axios.get(`http://localhost:1337/api/favorites?populate=products`, config).then((response) => {
+    dispatch({
+      type: "FAVORITE_LIST",
+      payload: response.data.data[0].attributes.attributes.products.data
     });
   });
 };

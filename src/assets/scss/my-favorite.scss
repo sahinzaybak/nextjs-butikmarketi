@@ -1,0 +1,34 @@
+.my-favorite {
+  &__header {
+    position: relative;
+    background-image: url("https://cdn.dribbble.com/users/1314513/screenshots/3973164/heart.gif");
+    height: 150px;
+    background-size: auto;
+    background-position: center;
+    border-bottom: 1px solid #f1587c2e;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      background-color: #e717480f;
+    }
+    p {
+      width: max-content;
+      color: #f1587c;
+      font-size: 40px;
+      font-weight: 800;
+    }
+    span {
+      color: #c73457;
+      font-size: 17px;
+    }
+    &-text {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 99;
+    }
+  }
+}

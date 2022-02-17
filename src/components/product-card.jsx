@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
 import React from 'react'
 import whatsapp from '../assets/images/whatsapp.svg'
@@ -6,7 +7,22 @@ import heart from '../assets/images/heart.svg'
 import Link from "next/link";
 import { pageIncreaseCount } from '../helpers/pageIncreaseCounts'
 
+//Actions
+import { fetchAddFavorite } from '../store/actions/products'
+
+//helpers
+import { loginUserInfo } from '../helpers/auth'
+
+let userInfo;
 const ProductCard = ({ product, productId, slide }) => {
+  console.log(product)
+  const dispatch = useDispatch();
+
+  //Favorilere Ekle
+  function addFavorite() {
+    userInfo = loginUserInfo()
+    dispatch(fetchAddFavorite(productId, userInfo.id))
+  }
   return (
     <div className={`product-card__cell ${slide ? "w-100 slide" : ""}`}>
       <div className="product-card__row">
@@ -19,11 +35,9 @@ const ProductCard = ({ product, productId, slide }) => {
             </div>
           </Link>
           <div className="product-card__image">
-            <Link href="/kayit-ol">
-              <div className="product-card__favorite">
-                <Image src={heart} alt="Favorilere Ekle" />
-              </div>
-            </Link>
+            <div className="product-card__favorite" onClick={() => addFavorite()}>
+              <Image src={heart} alt="Favorilere Ekle" />
+            </div>
             <Link href={`/${product.butiks?.data[0]?.attributes.butik_slug}/${product.slug}`}>
               <a href={`/${product.butiks?.data[0]?.attributes.butik_slug}/${product.slug}`} className="product-card__image--link d-flex h-100">
                 <img src={product.image} alt={product.title} />
@@ -44,8 +58,8 @@ const ProductCard = ({ product, productId, slide }) => {
         </a>
       </div> */}
         <a className="product-card__whatsapp d-block mt-2" target="_blank"
-         href={"https://wa.me/+905395066951/?text=Merhaba. Ben butikmarketi.com'da gördüğüm bir ürününüz hakkında bilgi almak istiyorum. Ürünün linki şöyle:" + ' ' + product.link}
-         onClick={() =>  pageIncreaseCount(productId, product.whatsappClicks, "products", "whatsappClicks")}>
+          href={"https://wa.me/+905395066951/?text=Merhaba. Ben butikmarketi.com'da gördüğüm bir ürününüz hakkında bilgi almak istiyorum. Ürünün linki şöyle:" + ' ' + product.link}
+          onClick={() => pageIncreaseCount(productId, product.whatsappClicks, "products", "whatsappClicks")}>
           <div className="d-flex align-items-center justify-content-center">
             <Image src={whatsapp} alt="Ürün hakkında soru sor" />
             <span>Ürün için satıcıya soru sorun</span>

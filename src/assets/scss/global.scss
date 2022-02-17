@@ -364,3 +364,20 @@ textarea {
     }
   }
 }
+
+
+.order-status{
+  &.prepare {
+    background-color: #f39f57;
+  }
+  &.cargo {
+    // background-color: #85bb6b;
+    background-color: #8bd169;
+  }
+  &.success {
+    background-color: #7cbb5d;
+  }
+  &.cancel {
+    background-color: #d95656;
+  }
+}

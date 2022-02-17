@@ -43,7 +43,7 @@ const Comment = (props) => {
   };
 
   function sendComment() {
-    dispatch(fetchProductComments(props.productId, props.comments, comment, rating, imageList))
+    dispatch(fetchProductComments(props.productId, props.userName, props.comments, comment, rating, imageList))
   }
 
   return (

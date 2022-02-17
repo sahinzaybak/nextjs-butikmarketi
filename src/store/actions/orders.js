@@ -82,12 +82,22 @@ export const fetchOrderDetailInfo = (orderNumber,securityCode) => (dispatch) => 
     });
 };
 
-export const fetchOrderCancel = (orderId) => (dispatch) =>{ //Siparişi iptal et
-  axios.put(`http://localhost:1337/api/order-inactives/${orderId}`, {
-    data: {
-      isOrderCancel: true,
-    },
-  });
+export const fetchOrderCancel = (orderId, isMember) => (dispatch) =>{ //Siparişi iptal et
+  const config = {headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}`}};
+  if(isMember){ //üye ise orders tablosunda değişiklik yap token ile beraber.
+    axios.put(`http://localhost:1337/api/orders/${orderId}`, {
+      data: {
+        isOrderCancel: true,
+      },
+    },config);
+  }
+  else{ // üye değilse order-inactives tablosunda değişiklik yap.
+    axios.put(`http://localhost:1337/api/order-inactives/${orderId}`, {
+      data: {
+        isOrderCancel: true,
+      },
+    });
+  }
 };
 
 export const fetchCargoInfo = () => (dispatch) => { //Kargo Takibi
@@ -97,13 +107,13 @@ export const fetchCargoInfo = () => (dispatch) => { //Kargo Takibi
   });
 };
 
-export const fetchProductComments = (productId,defaultComments,comment,rating, imageList) => (dispatch) =>{ //Ürüne yorum yap
+export const fetchProductComments = (productId,username,defaultComments,comment,rating, imageList) => (dispatch) =>{ //Ürüne yorum yap
   axios.put(`http://localhost:1337/api/products/${productId}`, {
     data: {
       comments:[
         ...defaultComments,
         {
-        comment_name:"maho",
+        comment_name: username,
         star: rating,
         comment:comment,
         commentImages:[
@@ -115,10 +125,11 @@ export const fetchProductComments = (productId,defaultComments,comment,rating, i
   });
 };
 
+//ÜYE
 //Siparişlerim
 export const fetchMyOrders = () => (dispatch) => { //Sipariş bilgilerini getir.
   const config = {headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}`}};
-  axios.get(`http://localhost:1337/api/orders?populate=products.butiks`, config)
+  axios.get(`http://localhost:1337/api/orders?populate=products.butiks,products.comments,products.comments.commentImages`, config)
   .then((response) => {
       dispatch({
         type: "MY_ORDER_LIST",

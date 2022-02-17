@@ -7,18 +7,22 @@ import { LoadingOutlined, DoubleRightOutlined, CheckOutlined, CloseOutlined } fr
 import MyOrders from '../../src/components/my-orders/my-orders'
 
 //actions
-import { fetchMyOrders } from '../../src/store/actions/orders'
+import { fetchMyOrders, fetchCargoInfo } from '../../src/store/actions/orders'
 
-let myOrderList, cargoInfo;
+import {loginUserInfo} from '../../src/helpers/auth'
+
+let myOrderList, cargoInfo, loginUserInfos;
 const myOrders = () => {
   const dispatch = useDispatch();
 
   myOrderList = useSelector((state) => state.orders.myOrderList); //Dolan "sipariş listesini" al.
   cargoInfo = useSelector((state) => state.orders.cargoInfo); //Dolan "kargo bilgilerini al"
+
   useEffect(() => {
     dispatch(fetchMyOrders()) //üyenin siparişlerini getir.
+    dispatch(fetchCargoInfo()) //Kargo bilgilerini getir.
+    loginUserInfos = loginUserInfo()
   }, [])
-
   return (
     <div className="my-orders">
       <div className="my-orders__header">
@@ -40,6 +44,7 @@ const myOrders = () => {
                     order={order}
                     myOrderList={myOrderList[indexs]}
                     cargoInfo={cargoInfo}
+                    orderedPersonName={loginUserInfos.nameSurname}
                   />
                 )}
               </>
@@ -47,7 +52,6 @@ const myOrders = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

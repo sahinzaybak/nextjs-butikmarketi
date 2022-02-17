@@ -7,13 +7,14 @@ import { Modal } from 'react-responsive-modal';
 import OrderDetail from '../../order-detail/order-detail'
 const orderDetailModal = (props) => {
 	return (
-		<Modal open={props.open} onClose={props.onClose} showCloseIcon={props.showCloseIcon} classNames={{ modal: 'modal-steps large' }} center>
+		<Modal open={props.open} onClose={props.onClose} showCloseIcon={props.showCloseIcon} classNames={{ modal: 'modal-steps xlarge' }} center>
 			<div className="modal-form">
 				<OrderDetail
 					orderDetailInfo={props.orderDetailInfo}
 					cargoInfo={props.cargoInfo}
 					orderNumber={props.orderNumber}
 					isMember={props.isMember}
+          orderedPersonName={props.orderedPersonName}
 				/>
 			</div>
 		</Modal>

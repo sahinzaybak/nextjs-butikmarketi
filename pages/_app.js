@@ -25,6 +25,7 @@ import "../src/assets/scss/center-layout.scss";
 import "../src/assets/scss/atoms/checkbox.scss";
 import "../src/assets/scss/order-detail.scss";
 import "../src/assets/scss/my-orders.scss";
+import "../src/assets/scss/my-favorite.scss";
 import "react-rater/lib/react-rater.css";
 import "react-notifications-component/dist/theme.css";
 import "animate.css/animate.min.css";

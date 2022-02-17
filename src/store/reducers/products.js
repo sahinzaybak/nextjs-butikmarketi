@@ -3,6 +3,7 @@ const initialState = {
   categoryProductList: [],
   detailProductInfo: [],
   productCategoryFilterList: [],
+  favoriteList: [],
   productDetailSelectedFilterSize: "",
   productDetailSelectedSizeTitle: "",
   productDetailSelectedFilterColor: "",
@@ -52,6 +53,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         detailProductInfo: action.payload,
+      };
+    case "FAVORITE_LIST":
+      return {
+        ...state,
+        favoriteList: action.payload,
       };
     default:
       return state;

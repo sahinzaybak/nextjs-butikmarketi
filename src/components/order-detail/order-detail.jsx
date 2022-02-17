@@ -12,7 +12,8 @@ import CargoTracking from '../../../src/components/modals/order-detail/cargo-tra
 //actions
 import { fetchOrderCancel } from '../../../src/store/actions/orders'
 
-const orderDetailComp = ({ orderDetailInfo, cargoInfo, orderNumber, isMember }) => {
+const orderDetailComp = ({ orderDetailInfo, cargoInfo, orderNumber, isMember, orderedPersonName}) => {
+  console.log(orderDetailInfo)
   const dispatch = useDispatch();
   const [orderCancelInfoText, setOrderCancelInfoText] = useState(false); //Sipariş iptal ettiğinde sipariş iptal yazısını görelim.
 
@@ -22,7 +23,7 @@ const orderDetailComp = ({ orderDetailInfo, cargoInfo, orderNumber, isMember }) 
   const [openComment, setOpenComment] = useState(false);
 
   function orderDoingCancel() { //Evet, sipraişimi iptal etmek istiyorum
-    dispatch(fetchOrderCancel(orderDetailInfo.id)) //Sipariş iptal => isOrderCancel = false
+    dispatch(fetchOrderCancel(orderDetailInfo.id, isMember ?  "orders" :  "orders-inactives")) //Sipariş iptal => isOrderCancel = false
     setOrderCancelInfoText(true) //Sipariş iptal ettiğinde sipariş iptal yazısını görelim.
   }
 
@@ -41,14 +42,14 @@ const orderDetailComp = ({ orderDetailInfo, cargoInfo, orderNumber, isMember }) 
                 {orderDetailInfo.attributes.attributes.cargoNo == "" ?
                   <>
                     {orderCancelInfoText || orderDetailInfo.attributes.attributes.isOrderCancel ?
-                      <div className="order-detail__status cancel">
+                      <div className="order-detail__status order-status cancel">
                         <div className="d-flex align-items-center">
                           <CloseOutlined style={{ fontSize: '20px' }} />
                           <p className="ml-3">Siparişiniz iptal edilmiştir.</p>
                         </div>
                       </div>
                       :
-                      <div className="order-detail__status prepare">
+                      <div className="order-detail__status order-status prepare">
                         <div className="d-flex align-items-center">
                           <LoadingOutlined style={{ fontSize: '20px' }} />
                           <p className="ml-3">Ürününüz xbutik tarafından kargoya verilmek üzere hazırlanıyor...</p>
@@ -73,7 +74,7 @@ const orderDetailComp = ({ orderDetailInfo, cargoInfo, orderNumber, isMember }) 
                   :
                   <>
                     {cargoInfo.statusDescription == "Teslim Edildi" || cargoInfo.statusDescription == "TESLİM EDİLDİ" ?
-                      <div className="order-detail__status success">
+                      <div className="order-detail__status order-status success">
                         <div className="d-flex align-items-center">
                           <CheckOutlined style={{ fontSize: '20px' }} />
                           <p className="ml-2">Ürününüz teslim edildi. Teslim tarihi: 17.03.2022</p>
@@ -86,12 +87,13 @@ const orderDetailComp = ({ orderDetailInfo, cargoInfo, orderNumber, isMember }) 
                             open={openComment}
                             productId={orderDetailInfo.attributes.attributes.products.data[0].id}
                             comments={orderDetailInfo.attributes.attributes.products.data[0].attributes.comments}
+                            orderedPersonName={orderedPersonName}
                             onClose={() => setOpenComment(false)}
                             classNames={{ modal: 'modal-comment' }} />
                         </div>
                       </div>
                       :
-                      <div className="order-detail__status cargo">
+                      <div className="order-detail__status order-status cargo">
                         <div className="d-flex align-items-center">
                           <DoubleRightOutlined style={{ fontSize: '20px' }} />
                           <p className="ml-2">Ürününüz kargoya verildi.. Tahmini teslimat tarihi: 12.03.2022.</p>

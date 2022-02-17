@@ -36,6 +36,7 @@ const orderConfirm = () => {
         orderDetailInfo={orderDetailInfo}
         cargoInfo={cargoInfo}
         orderNumber={orderNumber}
+        orderedPersonName= {orderDetailInfo.attributes && orderDetailInfo.attributes.attributes.nameSurname}
         />
     </>
   );

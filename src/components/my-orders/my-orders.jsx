@@ -6,17 +6,70 @@ import { LoadingOutlined, DoubleRightOutlined, CheckOutlined, CloseOutlined } fr
 //Modal Components
 import OrderDetailModal from '../../../src/components/modals/order-detail/index'
 
-
-let myOrderList, cargoInfo;
-const myOrders = ({ product, order, myOrderList, argoInfo }) => {
+const myOrders = ({ product, order, myOrderList, cargoInfo, orderedPersonName }) => {
+  const [orderCancelInfoText, setOrderCancelInfoText] = useState(false); //Sipariş iptal ettiğinde sipariş iptal yazısını görelim.
   const [open, setOpen] = useState(false);
+
+  //Borderlar
+  let isOrderPrepare = false
+  let isOrderCancel = false
+  let isOrderCargo = false
+  let isOrderSuccess = false
+
+  if (myOrderList.attributes.attributes.cargoNo == "") 
+    isOrderPrepare = true
+
+  if (myOrderList.attributes.attributes.cargoNo == "" && myOrderList.attributes.attributes.isOrderCancel) 
+    isOrderCancel = true
+  
+  if (myOrderList.attributes.attributes.cargoNo != "" && cargoInfo.statusDescription != "Teslim Edildi" || cargoInfo.statusDescription != "TESLİM EDİLDİ") 
+    isOrderCargo = true
+  
+  if (myOrderList.attributes.attributes.cargoNo != "" && cargoInfo.statusDescription == "Teslim Edildi" || cargoInfo.statusDescription == "TESLİM EDİLDİ") 
+    isOrderSuccess = true
+  
   return (
     <div className="col-md-6">
-      <div className="my-orders__cargo d-flex align-items-center">
-        <LoadingOutlined style={{ fontSize: '20px' }} />
-        <p className="ml-3">Ürününüz hazırlanıyor.</p>
-      </div>
-      <div className="my-orders__item">
+      {myOrderList.attributes.attributes.cargoNo == "" ?
+        <>
+          {myOrderList.attributes.attributes.isOrderCancel ?
+            <div className="my-orders__status order-status cancel">
+              <div className="d-flex align-items-center">
+                <CloseOutlined style={{ fontSize: '20px' }} />
+                <p className="ml-3">Siparişiniz iptal edilmiştir.</p>
+              </div>
+            </div>
+            :
+            <div className="my-orders__status order-status prepare">
+              <div className="d-flex align-items-center">
+                <LoadingOutlined style={{ fontSize: '20px' }} />
+                <p className="ml-3">Ürününüz kargoya verilmek üzere hazırlanıyor...</p>
+              </div>
+            </div>
+          }
+        </>
+        :
+        <>
+          {cargoInfo.statusDescription == "Teslim Edildi" || cargoInfo.statusDescription == "TESLİM EDİLDİ" ?
+            <div className="my-orders__status order-status success">
+              <div className="d-flex align-items-center">
+                <CheckOutlined style={{ fontSize: '20px' }} />
+                <p className="ml-2">Ürününüz teslim edildi. Teslim tarihi: 17.03.2022</p>
+              </div>
+            </div>
+            :
+            <div className="my-orders__status order-status cargo">
+              <div className="d-flex align-items-center">
+                <DoubleRightOutlined style={{ fontSize: '20px' }} />
+                <p className="ml-2">Ürününüz kargoya verildi..</p>
+              </div>
+            </div>
+          }
+        </>
+      }
+
+      <div className={`my-orders__item ${isOrderCancel ? "my-orders__item-cancel" : ""}  
+        ${!isOrderPrepare && isOrderCargo && !isOrderCancel ? "my-orders__item-cargo" : "my-orders__item-prepare"}`}>
         <div className="d-flex align-items-center">
           <div className="my-orders__item-image mr-3">
             <img src={product.attributes.image} alt="" />
@@ -35,6 +88,7 @@ const myOrders = ({ product, order, myOrderList, argoInfo }) => {
                   <FiArrowRight />
                 </div>
               </div>
+
               {open &&
                 <OrderDetailModal
                   open={open}
@@ -45,6 +99,7 @@ const myOrders = ({ product, order, myOrderList, argoInfo }) => {
                   cargoInfo={cargoInfo}
                   orderNumber={5484}
                   isMember={true}
+                  orderedPersonName={orderedPersonName}
                 />
               }
             </div>

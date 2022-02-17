@@ -1,10 +1,10 @@
 .my-orders {
   &__header {
     position: relative;
-    background-image: url("../images//my-orders.jpeg");
+    background-image: url("https://media.istockphoto.com/vectors/racks-with-clothes-on-hangers-flat-design-style-modern-vector-id612506266?k=20&m=612506266&s=612x612&w=0&h=naySlnwkIhRB5kUFgIlDyqkcHPBkEmF82F-he9jqTyA=");
     height: 150px;
     background-size: auto;
-    background-position: center;
+    background-position: 0% 25%;
     border-bottom: 1px solid #fdf1ea;
     &:after {
       content: "";
@@ -12,7 +12,7 @@
       width: 100%;
       height: 100%;
       top: 0;
-      background-color: #fffffff0;
+      background-color: #fffffff2;
     }
     p {
       width: max-content;
@@ -31,11 +31,11 @@
       z-index: 99;
     }
   }
-  &__cargo {
-    background-color: #f39f57;
+  &__status {
     color: white;
-    font-size: 15px;
-    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 20px;
     position: relative;
     top: 20px;
     border-top-right-radius: 6px;
@@ -44,7 +44,7 @@
   &__item {
     margin: 20px 0;
     border: 1px solid #f39f57;
-    padding: 22px;
+    padding: 30px 20px;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
     &-image {
@@ -99,6 +99,7 @@
       cursor: pointer;
       background-color: #7ac14e0a;
       transition: all 0.3s;
+      width: 250px;
       .icon {
         position: relative;
         left: 0;
@@ -112,5 +113,15 @@
         }
       }
     }
+    &-prepare {
+      border-color: #f39f57;
+    }
+    &-cargo{
+      border-color: #8bd169;
+    }
+    &-cancel{
+      border-color: #d95656;
+    }
+
   }
 }

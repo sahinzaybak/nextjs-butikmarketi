@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { fetchCategoryProductList, fetchProductFilterList, fetchProductFilterApply } from "../../../../src/store/actions/products";
+import { fetchCategoryProductList, fetchProductFilterList, fetchProductFilterApply, fetchSelectedFavoritesProductIds } from "../../../../src/store/actions/products";
 import ProductCard from "../../../../src/components/product-card";
 
 const categoryProducts = () => {
@@ -14,9 +14,12 @@ const categoryProducts = () => {
 
   let categoryProductList = useSelector((state) => state.products.categoryProductList); //Dolan "kategori ürünlerinin" listesini al.
   let filterList = useSelector((state) => state.products.productCategoryFilterList); //Dolan "filtre" listesini al.
+
   useEffect(() => {
-    if (categoryTitle != null)
+    if (categoryTitle != null){
       dispatch(fetchCategoryProductList(categoryTitle)); //"Girilen Kategoriye ait ürün listesini" doldurmak için action'a dispatch et.
+      dispatch(fetchSelectedFavoritesProductIds());
+    }
   }, [categoryTitle]);
 
   useEffect(() => {
@@ -45,8 +48,7 @@ const categoryProducts = () => {
                         <div className="filter-choose" key={index}>
                           <label className="checkbox">
                             <span className="checkbox__input">
-                              <input type="checkbox" value={filter.title} title={filterSub.main_title} name="checkbox"
-                                onChange={e => selectedFilter(e)} />
+                              <input type="checkbox" value={filter.title} title={filterSub.main_title} name="checkbox" onChange={e => selectedFilter(e)} />
                               <span className="checkbox__control">
                                 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
                                   <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' />

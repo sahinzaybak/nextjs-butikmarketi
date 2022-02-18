@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
 import React from 'react'
 import whatsapp from '../assets/images/whatsapp.svg'
-import heart from '../assets/images/heart.svg'
 import Link from "next/link";
 import { pageIncreaseCount } from '../helpers/pageIncreaseCounts'
+import { RiHeart3Line } from "react-icons/ri";
 
 //Actions
 import { fetchAddFavorite } from '../store/actions/products'
@@ -15,12 +15,25 @@ import { loginUserInfo } from '../helpers/auth'
 
 let userInfo;
 const ProductCard = ({ product, productId, slide }) => {
+  const [isActive, setActive] = useState(false);
   const dispatch = useDispatch();
 
+  let selectedFavoritiesProductIds = useSelector((state) => state.products.selectedFavoritesProductIds); //Dolan "seçili favori ıd'lerini" al.
+  
+  useEffect(() => {
+    if (selectedFavoritiesProductIds != null) {
+      const isSelectedFavoriteProduct = selectedFavoritiesProductIds.some(x => x == productId) //seçili favori ürünlerini bul.
+      if (isSelectedFavoriteProduct) //seçili favori ürünleri var ise
+        setActive(true) // onların favorilere ekli olarak işaretle => kırmızı kalp style
+    }
+  }, [selectedFavoritiesProductIds]);
+
   function addFavorite() {
+    setActive(!isActive);
     userInfo = loginUserInfo()
     dispatch(fetchAddFavorite(productId, userInfo.id)) //Favorilere Ekle
   }
+
   return (
     <div className={`product-card__cell ${slide ? "w-100 slide" : ""}`}>
       <div className="product-card__row">
@@ -33,8 +46,10 @@ const ProductCard = ({ product, productId, slide }) => {
             </div>
           </Link>
           <div className="product-card__image">
-            <div className="product-card__favorite" onClick={() => addFavorite()}>
-              <Image src={heart} alt="Favorilere Ekle" />
+            <div className={`product-card__favorite ${isActive ? "active" : ""}`} onClick={() => addFavorite()}>
+              <div className="product-card__favorite-icon">
+                <RiHeart3Line />
+              </div>
             </div>
             <Link href={`/${product.butiks?.data[0]?.attributes.butik_slug}/${product.slug}`}>
               <a href={`/${product.butiks?.data[0]?.attributes.butik_slug}/${product.slug}`} className="product-card__image--link d-flex h-100">

@@ -15,13 +15,11 @@ import { loginUserInfo } from '../helpers/auth'
 
 let userInfo;
 const ProductCard = ({ product, productId, slide }) => {
-  console.log(product)
   const dispatch = useDispatch();
 
-  //Favorilere Ekle
   function addFavorite() {
     userInfo = loginUserInfo()
-    dispatch(fetchAddFavorite(productId, userInfo.id))
+    dispatch(fetchAddFavorite(productId, userInfo.id)) //Favorilere Ekle
   }
   return (
     <div className={`product-card__cell ${slide ? "w-100 slide" : ""}`}>

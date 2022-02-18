@@ -48,17 +48,55 @@ export const fetchProductFilterApply = (categoryTitle, filterMainTitle, filterTe
   });
 };
 
-export const fetchAddFavorite = (productId, userId) => (dispatch) => { //Sipariş oluştur.
+export const fetchAddFavorite = (productId, userId) => async (dispatch) => { //Favorilere ekle
   const config = {headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}`}};
-  axios.post("http://localhost:1337/api/favorites", { //Sipariş oluştur
+  const favoriteList = await axios.get(`http://localhost:1337/api/favorites?populate=products`, config);
+  let defaultProductIdArray = [productId]
+  let deleteForDefaultProductArray = [] //favoriyi kaldırmak için
+
+  //Önceden üye favoriye ürün eklemiş mi? eklemişse eski verileri de alıp PUT yap. 
+  if(favoriteList.data.data.length > 0){ //Önceden üye favoriye ürün eklemiş mi?
+    const favoriteListId = favoriteList.data.data[0].id; //favori listemin ID'si => update bu değere göre oluyor.
+    favoriteList.data.data[0].attributes.attributes.products.data.forEach(element => { //Önceki favori ürünlerinin ID'lerini aldık.
+      defaultProductIdArray.push(element.id)
+      deleteForDefaultProductArray.push(element.id)
+    });
+    
+    const isFavoriteValue = favoriteList.data.data[0].attributes.attributes.products.data.some(x => x.id == productId) //eklenmiş favori ürünü var mı?
+    if(isFavoriteValue){ //Evet'se tıklanan ürünü favorilerden kaldır.
+      for( var i = 0; i < deleteForDefaultProductArray.length; i++){ 
+         if (deleteForDefaultProductArray[i] === productId) { //çıkarılacak değer => productId
+          deleteForDefaultProductArray.splice(i, 1);
+        }
+      }
+      axios.put(`http://localhost:1337/api/favorites/${favoriteListId}`, {
+        data: {
+          products: deleteForDefaultProductArray
+        },
+      }, config);
+    }
+
+    else{ //Hayır'sa tıklanan ürünü favorilere ekle.
+      axios.put(`http://localhost:1337/api/favorites/${favoriteListId}`, {
+        data: {
+          products: defaultProductIdArray //ProductId arrayları => defaultProductIdArray [1,3,5,6..]
+        },
+      }, config);
+    }
+  }
+
+  //Üye ilk defa ürünün favoriye ekleyecekse POST yap.
+  else{
+    axios.post("http://localhost:1337/api/favorites", {
       data: {
         userId: userId,
         products: productId
       },
-    },config)
+    }, config)
+  }
 };
 
-export const fetchFavoriteList = () => (dispatch) => { //Sipariş oluştur.
+export const fetchFavoriteList = () => (dispatch) => { //Üyenin favorilerini getir.
   const config = {headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}`}};
   axios.get(`http://localhost:1337/api/favorites?populate=products`, config).then((response) => {
     dispatch({

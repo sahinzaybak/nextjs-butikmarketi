@@ -4,6 +4,7 @@
   background-color: #fff;
   height: 90px;
   border-bottom: 1px solid #f9f8f8;
+  position: relative;
   z-index: 999;
   &-logo {
     position: relative;
@@ -18,8 +19,10 @@
     height: 45px;
     background: #f7f7f7;
     border: 1px solid #edf1f2;
-    border-radius: 28px;
-    padding: 0 4px 0 22px;
+    border-radius: 8px;
+    // padding: 0 4px 0 22px;
+    position: relative;
+    z-index: 99;
     img {
       width: 14px;
       opacity: 0.5;
@@ -30,6 +33,31 @@
       border: 0;
       text-indent: 14px;
       font-size: 15px;
+    }
+    &__result {
+      background-color: white;
+      width: 100%;
+      border: 2px solid #f09b51;
+      max-height: 400px;
+      overflow-y: scroll;
+      padding: 13px 6px;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+    &__item {
+      padding: 10px 10px;
+      border-bottom: 1px solid #f7f7f7;
+      margin: 0px 8px;
+      border-radius: 6px;
+      transition: all 0.3s;
+      cursor: pointer;
+      &:hover{
+        background-color: #f7f7f7;
+      }
+      h3 {
+        font-size: 16px;
+        color: #383838;
+      }
     }
   }
   &-action {
@@ -123,3 +151,4 @@
     }
   }
 }
+

@@ -1,12 +1,16 @@
 .categories {
   position: sticky;
   background-color: white;
-  z-index: 9;
+  z-index: 99;
   img {
     width: 40px;
     transition: all 0.3s;
     opacity: 0.6;
     bottom: auto !important;
+  }
+  &-product{
+    position: relative;
+    z-index: 9;
   }
   &-name {
     position: relative;
@@ -28,7 +32,7 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    padding: 16px 55.3px 10px;
+    padding: 16px 0px 10px;
     transition: all 0.3s;
     cursor: pointer;
     &:hover {

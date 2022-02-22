@@ -5,6 +5,7 @@ import butik from "./butik";
 import products from "./products";
 import orders from "./orders";
 import auth from "./auth";
+import search from "./search";
 
 export default combineReducers({
   category,
@@ -12,5 +13,6 @@ export default combineReducers({
   butik,
   products,
   orders,
-  auth
+  auth,
+  search
 });

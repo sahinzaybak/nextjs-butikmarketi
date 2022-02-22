@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "js-md5": "^0.7.3",
+    "lodash": "^4.17.21",
     "next": "^11.0.0",
     "next-redux-wrapper": "^7.0.2",
     "random-int": "^3.0.0",

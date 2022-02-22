@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
 import ship from '../../assets/images/shipped.svg'
 import Link from "next/link";
-import randomInteger from 'random-int';
 import 'react-responsive-modal/styles.css';
 
 //Modal Components

@@ -7,7 +7,7 @@ const Categories = ({ categoryList }) => {
       <div className="custom-container">
         <div className="categories-main d-flex justify-content-between">
           {categoryList.map((category, index) =>
-            <div className="categories-wrp" key={index}>
+            <div className="categories-wrp w-100" key={index}>
               <Link href={`../kategori/${category.slug}`}>
                 <div className="categories-item">
                   <span className="categories-name">{category.title}</span>

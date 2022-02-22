@@ -63,6 +63,8 @@
 }
 
 .product-detail {
+  position: relative;
+  z-index: 9;
   &__gallery {
     position: relative;
     border-radius: 12px;

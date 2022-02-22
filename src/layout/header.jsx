@@ -6,6 +6,7 @@ import logo from '../assets/images/logo-2.png'
 import search from '../assets/images/search.svg'
 import heart from '../assets/images/shopping-bag (2).svg'
 import { BiUser } from "react-icons/bi";
+import { debounce } from 'lodash'
 
 import { Form, Input } from 'antd';
 import 'antd/lib/form/style/index.css'
@@ -19,6 +20,7 @@ import Categories from '../components/categories'
 //Actions
 import { fetchCategoryList } from '../store/actions/category'
 import { confirmForSendWhatsappMessage, userMemberConfirm, userInfoUpdate } from '../store/actions/users'
+import { fetchSearch } from '../store/actions/search'
 
 let isLoginIn;
 const Header = () => {
@@ -28,9 +30,13 @@ const Header = () => {
   const dispatch = useDispatch()
   const [form] = Form.useForm();
 
+  //search
+  const [searchResultOpen, setSearchResultOpen] = useState(false);
+
   let categoryList = useSelector(state => state.category.categoryList) //Dolan kategori listesini al.
   let userInfo = useSelector(state => state.auth.authInfo)
-
+  let searchList = useSelector(state => state.search.searchList)
+  console.log(searchList)
   if (userInfo != "")
     localStorage.setItem("userInfo", JSON.stringify(userInfo)) // state userInfo yenilendiğinde localStorage'de yenilenir.
 
@@ -52,7 +58,8 @@ const Header = () => {
     });
   }, [userInfo]);
 
-  function onFinish(values) { //Form okeyse
+  //Form okeyse
+  function onFinish(values) {
     setFormValues(values);
     // confirmForSendWhatsappMessage(values.nameSurname, values.phone, userInfo.id) //Whatsapp onay mesajı gönder.
 
@@ -68,21 +75,56 @@ const Header = () => {
       dispatch(userMemberConfirm(confirmInputValue, userInfo.id, formValues.nameSurname, formValues.phone, formValues.address)) //onay kodunu gir ve üyeliği onayla => status=true
   }
 
+  const searchText = debounce(async (search) => { //async debounce
+    const searchedValue = search.target.value;
+    if (searchedValue.length >= 3) { //length 3 ten büyükse arama yap.
+      setSearchResultOpen(true)
+      await dispatch(fetchSearch(searchedValue))
+    }
+    //length 3'ten küçükse ise search array temizle
+    if (searchedValue.length < 3) {
+      dispatch({ type: 'SEARCH_LIST_CLEAR', payload: [] })
+      setSearchResultOpen(false)
+    }
+  }, 200)
+
   return (
     <>
+
       <div className="header d-flex align-items-center">
         <div className="custom-container">
           <div className="d-flex align-items-center justify-content-between">
             <a href="/" className="header-logo">
               <Image src={logo} alt="" />
             </a>
+            
             <div className="header-search">
               <div className="d-flex align-items-center w-100 h-100">
-                <div className="d-flex">
+                <div className="d-flex w-100 pl-4">
                   <Image src={search} alt="" />
-                  <input type="text" placeholder="Ürün Ara.." />
+                  <input type="text" placeholder="Ürün Ara.." onChange={e => searchText(e)} />
                 </div>
               </div>
+
+              {searchList.length != 0 && searchResultOpen &&
+                <div className="header-search__result">
+                  <>
+                    {searchList.map((searchList) =>
+                      <div className="header-search__item d-flex align-items-center">
+                        <div className="d-flex align-items-center justify-content-between w-100">
+                          <div className="d-flex align-items-center">
+                            <h3>{searchList.title}</h3>
+                          </div>
+                          <div className="d-flex align-items-center">
+                            <h3>{searchList.type}</h3>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                </div>
+              }
+
             </div>
             <div className="header-action">
               <div className="d-flex">
@@ -126,6 +168,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+ 
       <div className="custom-toggle">
         <div className="custom-toggle__wrp user-info">
           <h3 className="user-info__title mb-2">Merhaba Gamze.</h3>

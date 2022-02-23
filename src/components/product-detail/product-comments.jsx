@@ -28,7 +28,6 @@ const ProductComments = ({ comments }) => {
                 <div className="product-detail__comments-image mt-3" key={index}>
                   <img src={images.image} alt="" />
                 </div>
-
               ))}
             </div>
           </div>

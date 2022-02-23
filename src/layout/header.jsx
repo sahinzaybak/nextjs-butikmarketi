@@ -98,11 +98,12 @@ const Header = () => {
               <Image src={logo} alt="" />
             </a>
             
-            <div className="header-search">
+            <div className={`s ${searchList.length != 0 && searchResultOpen  ? "active" : ""}`} onClick={() => setSearchResultOpen(false) }></div>
+            <div className={`header-search ${searchList.length != 0 && searchResultOpen  ? "active" : ""}`}>
               <div className="d-flex align-items-center w-100 h-100">
                 <div className="d-flex w-100 pl-4">
                   <Image src={search} alt="" />
-                  <input type="text" placeholder="Ürün Ara.." onChange={e => searchText(e)} />
+                  <input type="text" placeholder="Ürün, Butik veya Kategori Arayın.." onChange={e => searchText(e)} onClick={() => setSearchResultOpen(true) }/>
                 </div>
               </div>
 
@@ -113,7 +114,7 @@ const Header = () => {
                       <div className="header-search__item d-flex align-items-center">
                         <div className="d-flex align-items-center justify-content-between w-100">
                           <div className="d-flex align-items-center">
-                            <h3>{searchList.title}</h3>
+                            <h3>- {searchList.title}</h3>
                           </div>
                           <div className="d-flex align-items-center">
                             <h3>{searchList.type}</h3>
@@ -126,13 +127,13 @@ const Header = () => {
               }
 
             </div>
-            <div className="header-action">
+            <div className={`header-action ${isLoginIn ? "member" : ""}`}>
               <div className="d-flex">
                 {isLoginIn ?
                   <>
                     <div className="header-action__item dropdown">
                       <BiUser color="#323232" fontSize={20} />
-                      <p className="header-action__name member">{userInfo.username}</p>
+                      <p className="header-action__name">{userInfo.username}</p>
                     </div>
                     <div className="header-action__dropdown">
                       <div className="header-action__dropdown--item">

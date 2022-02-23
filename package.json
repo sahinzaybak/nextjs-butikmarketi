@@ -9,14 +9,12 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
-    "antd": "^4.16.13",
+    "antd": "^4.12.3",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
-    "js-md5": "^0.7.3",
     "lodash": "^4.17.21",
     "next": "^11.0.0",
     "next-redux-wrapper": "^7.0.2",
-    "random-int": "^3.0.0",
     "react": "17.0.2",
     "react-avatar": "^3.10.0",
     "react-content-loader": "^6.0.3",
@@ -36,7 +34,6 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "sass": "^1.38.2",
-    "slick-carousel": "^1.8.1",
-    "unique-random": "^3.0.0"
+    "slick-carousel": "^1.8.1"
   }
 }

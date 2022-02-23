@@ -16,13 +16,16 @@
   &-search {
     position: relative;
     width: 45%;
-    height: 45px;
+    height: 48px;
     background: #f7f7f7;
-    border: 1px solid #edf1f2;
+    border: 2px solid #edf1f2;
     border-radius: 8px;
     // padding: 0 4px 0 22px;
     position: relative;
     z-index: 99;
+    &.active {
+      border: 0;
+    }
     img {
       width: 14px;
       opacity: 0.5;
@@ -43,15 +46,16 @@
       padding: 13px 6px;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
+      margin-top: -5px;
     }
     &__item {
-      padding: 10px 10px;
+      padding: 12px 10px;
       border-bottom: 1px solid #f7f7f7;
       margin: 0px 8px;
       border-radius: 6px;
       transition: all 0.3s;
       cursor: pointer;
-      &:hover{
+      &:hover {
         background-color: #f7f7f7;
       }
       h3 {
@@ -60,10 +64,29 @@
       }
     }
   }
+  .s {
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background-color: #0000004a;
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    &.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
   &-action {
-    border: 1px solid #8b8b8b;
-    padding: 7px 26px;
+    padding: 7px 0px 9px;
     border-radius: 50px;
+    &.member{
+      border: 1px solid #6e6e6e30;
+      border-color: #6e6e6e;
+      padding: 7px 26px 9px;
+    }
     &__item {
       display: flex;
       align-items: center;
@@ -95,15 +118,10 @@
       // font-family: "Comfortaa", cursive;
       position: relative;
       top: 2px;
-      font-size: 13px;
-      color: #333333;
-      font-weight: 600;
       margin-left: 5px;
-      &.member {
-        font-size: 15px;
-        color: #323232;
-        font-weight: 500;
-      }
+      font-size: 15px;
+      color: #323232;
+      font-weight: 500;
     }
     &__dropdown {
       opacity: 0;
@@ -151,4 +169,3 @@
     }
   }
 }
-

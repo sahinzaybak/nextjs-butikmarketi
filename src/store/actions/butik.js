@@ -2,10 +2,10 @@ import axios from "axios";
 // const BASE_URL = process.env.REACT_APP_API_URL
 
 export const fetchButikLogo = () => (dispatch) => { //Butik Logoları - Anasayfa carousel için
-  axios.get("http://localhost:1337/api/butiks").then((response) => {
+  axios.get("http://localhost:1337/api/butik-home-logos?populate[butiks][fields][0]=butik_name,butik_slug,butik_image").then((response) => {
     dispatch({
       type: "BUTIK_LOGOS",
-      payload: response.data.data,
+      payload: response.data.data[0].attributes.butiks.data,
     });
   });
 };

@@ -4,24 +4,47 @@
   .butik-slider {
     margin: 30px 0;
     .slick-slide {
-      margin: 0 10px;
+      margin: 0 12px;
+    }
+    &__wrp {
+      &:hover {
+        .butik-slider__item {
+          border-color: #f99348;
+        }
+        h2 {
+          color: #f99348;
+        }
+      }
     }
     &__item {
-      border: 1px solid #ececec;
+      width: 85px;
+      height: 85px;
+      padding: 2px;
+      border: 2px solid #00000017;
       border-radius: 50px;
       transition: all 0.3s;
       cursor: pointer;
       overflow: hidden;
-      width: 75px;
-      height: 75px;
-      &:hover {
-        border-color: #f99348;
-      }
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: 50px;
       }
+    }
+    .tooltip {
+      background-color: #f79953;
+      font-size: 12px;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: 14px;
+      margin-top: 6px;
+      color: #b3b3b3;
+      text-align: center;
+      transition: all .3s;
     }
   }
 }

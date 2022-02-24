@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
 import Image from 'next/image'
 import ship from '../../assets/images/shipped.svg'
 import Link from "next/link";
@@ -7,85 +6,26 @@ import 'react-responsive-modal/styles.css';
 
 //Modal Components
 import OrderCreateModal from '../modals/orderCreate'
-import ConfirmModal from '../modals/confirm'
-import InfoModal from '../modals/info'
 import OrderSuccessModal from '../modals/orderSuccess'
-
-//Actions
-import { fetchCreateOrder, fetchCreateOrderMember} from '../../store/actions/orders'
-
-//Helpers
-import { IsLoginIn } from '../../helpers/auth'
+import InfoModal from '../modals/info'
 
 const DetailHeader = ({ butikId, buticLogo, buticName, butikSlug, productId, productTitle, price, productColors, productPrice, productSize }) => {
-  let selecteFilterSizeTitle = useSelector((state) => state.products.productDetailSelectedSizeTitle); //Seçilen Beden Adı
-  let selecteFilterColorTitle = useSelector((state) => state.products.productDetailSelectedColorTitle); //Seçilen Renk Adı
-
-  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
-  const [openAlert, setOpenAlert] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
-  const [formValue, formValuesChild] = useState({}); //child için state.(formValuesChild)
-  const [totalPrice, setTotalPrice] = useState(price);
-  const [orderCount, setOrderCount] = useState(price);
 
-  // setOpenAlert(true)
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const onOpenModalInfo = () => setOpenInfo(true);
-  const onCloseModalInfo = () => setOpenInfo(false);
-  const onCloseModalAlert = () => setOpenAlert(false);
   const onCloseModalSuccess = () => setOpenSuccess(false);
+  const onCloseModalInfo = () => setOpenInfo(false);
 
-  let isLoginIn = IsLoginIn()
-  let userInfo = useSelector(state => state.auth.authInfo)
-  function orderProductSubmitConfirm() { //Evet, bilgilerim doğru, siparişimi oluşturabiliriz.
-    {
-      !isLoginIn ? //üyesiz sipariş
-      dispatch(fetchCreateOrder({
-        ...formValue.values,
-        "size": selecteFilterSizeTitle,
-        "color": selecteFilterColorTitle,
-        "price": totalPrice,
-        "count": orderCount,
-        "butikId": butikId,
-        "productId": productId,
-        "userId": userInfo.id,
-      }))
-      :
-      <>
-        {userInfo.status ? //üye sipariş => üyelik onaylı ise
-          dispatch(fetchCreateOrderMember({
-            ...formValue.values,
-            "namesurname": userInfo.namesurname,
-            "phone": userInfo.phone,
-            "address": userInfo.address,
-            "namesurname": userInfo.nameSurname,
-            "size": selecteFilterSizeTitle,
-            "color": selecteFilterColorTitle,
-            "price": totalPrice,
-            "count": orderCount,
-            "butikId": butikId,
-            "productId": productId,
-            "userId": userInfo.id,
-          }))
-          :
-          <p>
-            as
-          </p>
-        }
-      </>
-
-    }
+  function closeCreateModal(childPropsValue) { //Child'dan veriyi aldık. (false) => Confirm Modal'dan gelen props ile Create Modal'ı kapat. 
+    setOpen(childPropsValue)
   }
 
-  function getTotalPrice(getTotalPriceValue) { //Child'dan veriyi aldık.
-    setTotalPrice(getTotalPriceValue)
-  }
-
-  function getOrderCount(getOrderCountValue) { //Child'dan veriyi aldık.
-    setOrderCount(getOrderCountValue)
+  function openSuccesModal(childPropsValue) { //Child'dan veriyi aldık. (true) => Confirm Modal'dan gelen props ile Success Modal'ı aç.
+    setOpenSuccess(childPropsValue)
   }
 
   return (
@@ -125,35 +65,23 @@ const DetailHeader = ({ butikId, buticLogo, buticName, butikSlug, productId, pro
         </div>
       </div>
 
-      {/* Modallar */}
+      {/* Sipariş Ver, Sipariş Tamamlandı, ve Info Modal */}
       <OrderCreateModal
         open={open}
         onClose={onCloseModal}
-        formValuesChild={formValuesChild}
         productColors={productColors}
         productPrice={productPrice}
-        totalPrice={getTotalPrice} //child'dan gelen veri. getTotalPrice(val)
-        orderCount={getOrderCount} //child'dan gelen veri. getTotalPrice(val)
+        productId={productId}
+        butikId={butikId}
         productSize={productSize}
-        onClickOpenConfirmModal={(isValidationAllForm) => { if (isValidationAllForm) setOpenAlert(true) }} //confirmModal'ı aç.
+        closeCreateModal={closeCreateModal} //Child Props => Yukarıda props değerini aldık. (false)
+        openSuccesModal={openSuccesModal} //Child Props => Yukarıda props değerini aldık. (true)
       />
+
       <InfoModal
         open={openInfo}
-        onClose={onCloseModalInfo}
-      />
-      <ConfirmModal
-        open={openAlert}
-        onClose={onCloseModalAlert}
-        showCloseIcon={false}
-        classNames={{ modal: 'modal-steps' }}
-        onClickSuccess={() => {
-          setOpenSuccess(true)
-          orderProductSubmitConfirm()
-          setOpenAlert(false)
-          setOpen(false)
-        }}
-        onClickBack={() => setOpenAlert(false)}
-      />
+        onClose={onCloseModalInfo} />
+
       <OrderSuccessModal
         open={openSuccess}
         onClose={onCloseModalSuccess}

@@ -11,6 +11,7 @@ import { pageIncreaseCount } from '../../src/helpers/pageIncreaseCounts'
 import ProductCard from "../../src/components/product-card";
 //Action
 import { fetchButikProfileInfo } from '../../src/store/actions/butik'
+import {fetchSelectedFavoritesProductIds } from "../../src/store/actions/products";
 
 let butikProfileInfo;
 const ButicProfile = () => {
@@ -23,6 +24,7 @@ const ButicProfile = () => {
   useEffect(() => {
     if (buticSlug != null)
       dispatch(fetchButikProfileInfo(buticSlug)); //"Girilen butiğe ait butik profil bilgisini" doldurmak için action'a dispatch et.
+      dispatch(fetchSelectedFavoritesProductIds());
   }, [buticSlug]);
 
   useEffect(() => {
@@ -44,10 +46,17 @@ const ButicProfile = () => {
               </div>
               <div className="d-flex flex-column ml-3">
                 <div className="d-flex align-items-center">
-                  <p className="butic-header__title">{butikProfileInfo.attributes.butik}</p>
+                  <p className="butic-header__title">{butikProfileInfo.attributes.butik_name}</p>
                   <p className="butic-header__point">{butikProfileInfo.attributes.butik_points}</p>
                 </div>
-                <div className="butic-header__social d-flex align-items-center">
+                <div className="butic-header__info d-flex align-items-center">
+                  <span className="mr-1">Butik Sahibi: </span>
+                  {butikProfileInfo.attributes.owner != null ?
+                    <p className="butic-header__owner">{butikProfileInfo.attributes.owner}</p> :
+                    <p className="butic-header__owner">Belirtilmemiş</p>
+                  }
+                </div>
+                <div className="butic-header__social d-flex align-items-center mt-1">
                   <div className="mr-2"><Image src={whatsapp} alt="Ürün hakkında soru sor" /></div>
                   <div> <Image src={instagram} alt="Ürün hakkında soru sor" /></div>
                 </div>

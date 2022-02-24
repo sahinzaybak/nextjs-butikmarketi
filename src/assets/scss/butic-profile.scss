@@ -1,15 +1,17 @@
 .butic {
+  position: relative;
   padding: 25px 0;
+  z-index: 9;
   &-header {
     position: relative;
-    height: 120px;
+    height: 160px;
     padding: 22px 25px;
-    background-color: #0000005c;
+    background-color: #00000075;
     border-radius: 6px;
     margin-bottom: 25px;
     &__image {
       img {
-        width: 80px;
+        width: 94px;
         border-radius: 50px;
       }
     }
@@ -18,10 +20,21 @@
         width: 16px;
       }
     }
+    &__info {
+      color: #fffefc;
+      /* font-weight: 600; */
+      font-size: 15px;
+      p {
+        font-weight: 600;
+        color: #ffdba4;
+        text-decoration: underline;
+      }
+    }
     &__title {
       color: white;
-      font-size: 19px;
+      font-size: 25px;
       font-weight: 600;
+      text-transform: capitalize;
     }
     &__point {
       position: relative;
@@ -41,16 +54,16 @@
       height: 100%;
       top: 0;
       left: 0;
-      background-image: url(https://static8.depositphotos.com/1037238/818/v/600/depositphotos_8180555-stock-illustration-shopping.jpg);
-      background-size: cover;
-      background-position: center;
-      opacity: 0.5;
+      background-image: url(https://as2.ftcdn.net/v2/jpg/02/27/42/89/1000_F_227428913_5bOpKL0fkqH3Yic3HZcrd6yMXOgOI5CE.jpg);
+      background-size: inherit;
+      background-position: left;
+      opacity: 0.3;
       z-index: -1;
-      filter: blur(6px);
+      filter: blur(0px);
     }
   }
   &-info {
-    background-color: #0000002b;
+    background-color: #0404046e;
     padding: 14px 24px;
     border-radius: 6px;
     &__item {
@@ -67,17 +80,18 @@
     }
     &__title {
       width: 160px;
-      font-size: 14px;
+      font-size: 15px;
       color: #efefef;
     }
     &__count {
       display: flex;
       align-items: center;
       background-color: #ff9800;
-      font-size: 12px;
+      font-size: 15px;
       color: white;
-      padding: 1px 6px;
-      border-radius: 5px;
+      padding: 1px 8px;
+      border-radius: 24px;
+      font-weight: 800;
     }
   }
 }

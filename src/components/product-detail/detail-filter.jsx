@@ -24,19 +24,20 @@ const DetailFilter = ({ productSize, productColors, componentType }) => {
             </div>
           </div>
         }
-        {productColors.length != 0 &&
-          <div className="product-info__item mt-3">
-            <span className="product-info__title">Renk Seçenekleri</span>
-            <div className="d-flex mt-2">
-              {productColors.map((color, index) => (
-                <p className={`product-info__desc color ${selecteFilterIndexColor === index ? "selected" : ""}`} key={index}
-                  onClick={() => { dispatch({ type: 'SELECTED_FILTER_COLOR', payload: { index: index, selectedTitle: color.color_title } }) }}
-                  style={{ backgroundColor: color.color_code }}>
-                </p>
-              ))}
+       {productColors.length != 0 &&
+            <div className="product-info__item mt-3">
+              <span className="product-info__title">Renk Seçenekleri</span>
+              <div className="d-flex mt-2">
+                {productColors.map((color, index) => (
+                  <div className={`product-info__desc color ${selecteFilterIndexColor === index ? "selected" : ""}`} key={index}
+                    onClick={() => { dispatch({ type: 'SELECTED_FILTER_COLOR', payload: { index: index, selectedTitle: color.color_title } }) }}
+                    style={{ borderColor: color.color_code }}>
+                    <p style={{ backgroundColor: color.color_code }}></p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        }
+          }
       </div>
     </>
   );

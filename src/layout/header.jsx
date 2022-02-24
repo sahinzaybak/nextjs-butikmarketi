@@ -7,6 +7,7 @@ import search from '../assets/images/search.svg'
 import heart from '../assets/images/shopping-bag (2).svg'
 import { BiUser } from "react-icons/bi";
 import { debounce } from 'lodash'
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 import { Form, Input } from 'antd';
 import 'antd/lib/form/style/index.css'
@@ -26,6 +27,7 @@ let isLoginIn;
 const Header = () => {
   const [isOpenUserConfirm, setIsOpenUserConfirm] = useState(false);
   const [confirmInputValue, setConfirmInputValue] = useState("");
+  const [openToggleForm, setOpenToggleForm] = useState(false);
   const [formValues, setFormValues] = useState();
   const dispatch = useDispatch()
   const [form] = Form.useForm();
@@ -36,7 +38,6 @@ const Header = () => {
   let categoryList = useSelector(state => state.category.categoryList) //Dolan kategori listesini al.
   let userInfo = useSelector(state => state.auth.authInfo)
   let searchList = useSelector(state => state.search.searchList)
-  console.log(searchList)
   if (userInfo != "")
     localStorage.setItem("userInfo", JSON.stringify(userInfo)) // state userInfo yenilendiğinde localStorage'de yenilenir.
 
@@ -58,18 +59,18 @@ const Header = () => {
     });
   }, [userInfo]);
 
-  //Form okeyse
+  //Üye Kullanıcı Bilgileri Form okeyse
   function onFinish(values) {
     setFormValues(values);
     // confirmForSendWhatsappMessage(values.nameSurname, values.phone, userInfo.id) //Whatsapp onay mesajı gönder.
 
-    (userInfo.status) ? //eğer status=true ise onay modalı açma direk bilgileri kaydet
+    (userInfo.status) ? //eğer status=true ise onay modalı açma, direk bilgileri kaydet.
       dispatch(userInfoUpdate(userInfo.id, values.nameSurname, values.address)) //bilgileri güncelle.
       :
       setIsOpenUserConfirm(true) //status=false ise onay modalını aç.
   };
 
-  //Onay modal
+  //Üye Kullanıcı Bilgileri Onay modal
   function confirmUser() {
     if (!userInfo.status) //Status false ise 
       dispatch(userMemberConfirm(confirmInputValue, userInfo.id, formValues.nameSurname, formValues.phone, formValues.address)) //onay kodunu gir ve üyeliği onayla => status=true
@@ -90,20 +91,19 @@ const Header = () => {
 
   return (
     <>
-
       <div className="header d-flex align-items-center">
         <div className="custom-container">
           <div className="d-flex align-items-center justify-content-between">
             <a href="/" className="header-logo">
               <Image src={logo} alt="" />
             </a>
-            
-            <div className={`s ${searchList.length != 0 && searchResultOpen  ? "active" : ""}`} onClick={() => setSearchResultOpen(false) }></div>
-            <div className={`header-search ${searchList.length != 0 && searchResultOpen  ? "active" : ""}`}>
+
+            <div className={`s ${searchList.length != 0 && searchResultOpen ? "active" : ""}`} onClick={() => setSearchResultOpen(false)}></div>
+            <div className={`header-search ${searchList.length != 0 && searchResultOpen ? "active" : ""}`}>
               <div className="d-flex align-items-center w-100 h-100">
                 <div className="d-flex w-100 pl-4">
                   <Image src={search} alt="" />
-                  <input type="text" placeholder="Ürün, Butik veya Kategori Arayın.." onChange={e => searchText(e)} onClick={() => setSearchResultOpen(true) }/>
+                  <input type="text" placeholder="Ürün, Butik veya Kategori Arayın.." onChange={e => searchText(e)} onClick={() => setSearchResultOpen(true)} />
                 </div>
               </div>
 
@@ -137,7 +137,7 @@ const Header = () => {
                     </div>
                     <div className="header-action__dropdown">
                       <div className="header-action__dropdown--item">
-                        <Link href="/giris-yap">Kişisel Bilgilerim</Link>
+                        <p onClick={() => setOpenToggleForm(!openToggleForm)}>Kişisel Bilgilerim</p>
                         <Link href="/kayit-ol">Siparişlerim</Link>
                         <Link href="/kayit-ol">Favorilerim</Link>
                         <Link href="/kayit-ol">Çıkış Yap</Link>
@@ -169,9 +169,12 @@ const Header = () => {
           </div>
         </div>
       </div>
- 
-      <div className="custom-toggle">
+
+      <div className={`custom-toggle ${openToggleForm ? "active" : ""}`}>
         <div className="custom-toggle__wrp user-info">
+          <div className="custom-toggle__close" onClick={() => setOpenToggleForm(!openToggleForm)}>
+            <IoIosCloseCircleOutline />
+          </div>
           <h3 className="user-info__title mb-2">Merhaba Gamze.</h3>
           {!isOpenUserConfirm ?
             <>

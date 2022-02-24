@@ -74,7 +74,7 @@
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 12px;
     }
     .slick-track {
@@ -84,7 +84,7 @@
       height: 560px;
     }
     .slick-dots {
-      bottom: 6px;
+      bottom: -3px;
     }
     .slick-arrow {
       border: 1px solid #ececec;
@@ -124,13 +124,14 @@
         img {
           height: 100%;
           width: 100%;
-          border: 1px solid #e0e0e0;
+          border: 2px solid #e0e0e0;
           border-radius: 10px;
           padding: 2px;
+          object-fit: contain;
         }
         &.slick-current {
           img {
-            border-color: #edc489;
+            border-color: #edc483;
           }
         }
       }
@@ -138,6 +139,9 @@
   }
   .product-info {
     padding: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     &__name {
       font-size: 32px;
       font-weight: 600;
@@ -154,14 +158,27 @@
       user-select: none;
       &.color {
         position: relative;
-        width: 22px;
-        height: 22px;
-        border-radius: 12px;
-        border: 2px solid rgba(0, 0, 0, 0.1);
-        margin-right: 8px;
+        border-radius: 50px;
+        border: 2px solid transparent;
+        margin-right: 12px;
         cursor: pointer;
+        padding: 11px 11px;
+        margin-top: 6px;
+
+        transform: scale(1);
+        transition: all 0.3s;
         &.selected {
-          border-color: #edc489;
+          transform: scale(1.2);
+          // box-shadow: #8d8d8d 0px 8px 14px -5px;
+        }
+        p {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          border-radius: 12px;
+          opacity: 0.7;
         }
       }
       &.size {
@@ -185,6 +202,38 @@
       padding: 1px 10px;
       border-radius: 6px;
       margin-left: 10px;
+    }
+    &__action {
+      font-size: 22px;
+      border-radius: 50px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      cursor: pointer;
+      opacity: 0.3;
+      transition: all .3s;
+      border: 1px solid;
+      &.favorite{
+        color: #f16f93;
+        border-color: #f16f93;
+        background-color: #f16f9314;
+        &.active{
+          color: #fbfbfb;
+          background-color: #f16f94;
+          opacity: 1;
+        }
+      }
+      &.whatsapp{
+        color: #82bb79;
+        border-color: #82bb79;
+        background-color: #82bb7917;
+      }
+      &:hover{
+        opacity: 1;
+      }
     }
   }
   &__comments {

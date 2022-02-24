@@ -12,6 +12,7 @@ import { fetchHomeProductList } from "../src/store/actions/products";
 const Home = () => {
   const dispatch = useDispatch();
   let sliderBanners = useSelector((state) => state.banner.sliderBanners); //Dolan "banner" listesini al.
+  console.log(sliderBanners)
   let butikLogos = useSelector((state) => state.butik.butikLogos); //Dolan "butik logo" listesini al.
   let productList = useSelector((state) => state.products.homeProductList); //Dolan "5 li ürün" listesini al.
   useEffect(() => {

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import tick from '../../assets/images/tick.svg'
 import Link from "next/link";
 import addUser from '../../assets/images/add-user.svg'
+import check from '../../assets/images/check.png'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
@@ -45,9 +46,19 @@ const confirm = ({ ...props }) => {
             </div>
           </>
           :
-          <h3 className="large-title green mb-0">Tebrikler siparişiniz oluşturuldu.</h3>
+          <div className="modal-form__success text-center">
+            <Image src={check} alt="Sipariş oluşturuldu." />
+            <h3 className="large-title green mb-0 mt-2 mb-3">Tebrikler siparişiniz oluşturuldu.</h3>
+            <p>Siparişinizi satıcı butik tarafından kargoya verilmeden <br />  yaklaşık 1 gün içerisinde iptal edebilirsiniz.</p>
+            <Link href="/siparislerim">
+              <div className="green-button mx-auto mt-4">
+                <div className="d-flex align-items-center justify-content-center">
+                  <p className="button-text">Siparişlerim sayfasına git</p>
+                </div>
+              </div>
+            </Link>
+          </div>
         }
-
       </div>
     </Modal>
   );

@@ -17,7 +17,7 @@ import ProductCard from "../../src/components/product-card";
 import { pageIncreaseCount } from '../../src/helpers/pageIncreaseCounts'
 
 //Action
-import { fetchProductDetail } from '../../src/store/actions/products'
+import { fetchProductDetail, fetchSelectedFavoritesProductIds } from '../../src/store/actions/products'
 
 let productDetail;
 const ProductDetail = () => {
@@ -49,10 +49,10 @@ const ProductDetail = () => {
   productDetail = useSelector((state) => state.products.detailProductInfo); //Dolan "ürün bilgisini" al.
   // let similarProduct = useSelector((state) => state.products.categoryProductList); //Dolan "benzer ürün bilgisini" al.
   //"Girilen ürüne ait ürün detay bilgisi" doldurmak için action'a dispatch et. -> yesiltshirt
-  console.log(productDetail)
   useEffect(() => {
     dispatch({ type: 'PRODUCT_DETAIL_CLEAR', payload: [] })
-    dispatch(fetchProductDetail(productTitle));
+    dispatch(fetchProductDetail(productTitle)); //Ürün detay bilgileri
+    dispatch(fetchSelectedFavoritesProductIds());
   }, [productTitle]);
 
   //Sayfa yüklendiğinde filtreleme seçeneklerinin ilki seçili gelsin.
@@ -94,7 +94,6 @@ const ProductDetail = () => {
                         images={productDetail.attributes.images}
                         nav={nav2}
                         ref={slider => (setSlider1(slider))} />
-
                     </div>
                     <div className="col-md-6">
                       <div className="product-info">
@@ -108,10 +107,12 @@ const ProductDetail = () => {
                           nav={nav1}
                           ref={slider => (setSlider2(slider))} />
                         <ProductInfoBottom
-                          buticName={productDetail.attributes.butik}
+                          butikId={productDetail.attributes.butiks.data[0].id}
+                          buticName={productDetail.attributes.butiks.data[0].attributes.butik_name}
                           productColors={productDetail.attributes.colors}
                           productSize={productDetail.attributes.sizes}
-                          productLink= {productDetail.attributes.link}
+                          productPrice={productDetail.attributes.price}
+                          productLink={productDetail.attributes.link}
                           productId={productDetail.id}
                           productWhatsappClicksValues={productDetail.attributes.whatsappClicks}
                         />
@@ -165,7 +166,6 @@ const ProductDetail = () => {
         </div>
       }
     </>
-
   );
 };
 

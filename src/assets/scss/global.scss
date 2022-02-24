@@ -156,9 +156,18 @@ textarea {
 
 .category-title {
   // font-family: "Comfortaa", cursive; */
-  font-size: 23px;
-  color: #404040;
-  letter-spacing: 1.2px;
+  // font-size: 23px;
+  // color: #404040;
+  // letter-spacing: 1.2px;
+// font-family: "Comfortaa", cursive; 
+  font-size: 18px;
+    color: #484848;
+    letter-spacing: 0px;
+    border-bottom: 1px solid #f3f3f3;
+    margin-bottom: 30px;
+    padding-bottom: 6px;
+    font-weight: 400;
+    text-transform: uppercase;
   &__wrp {
     border-bottom: 1px solid #f1f1f1;
     padding: 6px 0;
@@ -285,10 +294,11 @@ textarea {
   inset: 0px;
   position: fixed;
   visibility: visible;
-  transition: visibility 0s linear 0s, opacity 250ms ease 0s;
+  transition: all 0.6s .1s;
   z-index: 1000;
-  display: none;
-
+  opacity: 0;
+  pointer-events: none;
+  width: 100%;
   &__wrp {
     position: fixed;
     right: 0;
@@ -300,7 +310,9 @@ textarea {
     bottom: 0px;
     box-sizing: border-box;
     overflow: hidden scroll;
-    padding: 50px 54px 40px;
+    padding: 20px 54px 40px;
+    transition: all 0.6s;
+    transform: translateX(110%);
     .modal-item {
       width: 47%;
       label {
@@ -363,6 +375,24 @@ textarea {
       }
     }
   }
+  &.active{
+    pointer-events: all;
+    opacity: 1;
+    .custom-toggle__wrp{
+      transform: none;
+    }
+  }
+  &__close{
+    width: max-content;
+    font-size: 36px;
+    color: #d5cec8;
+    opacity: 0.6;
+    transition: all .3s;
+    cursor: pointer;
+    &:hover{
+      opacity: 1;
+    }
+  }
 }
 
 
@@ -380,4 +410,8 @@ textarea {
   &.cancel {
     background-color: #d95656;
   }
+}
+
+.max-content{
+  width: max-content;
 }

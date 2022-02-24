@@ -7,6 +7,8 @@ const ProductGallerySlider = forwardRef((props, ref) => {
   const settingsMain = {
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    speed: 800,
     dots: true,
     arrows: true,
     touchThreshold: 100,

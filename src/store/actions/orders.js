@@ -11,8 +11,8 @@ let currentDay = function (sp) {
   if (mm < 10) mm = "0" + mm;
   return yyyy + sp + mm + sp + dd;
 };
-export const fetchCreateOrder = (getOrdersValue) => (dispatch) => { //Sipariş oluştur.
-  axios.post("http://localhost:1337/api/order-inactives", { //Sipariş oluştur
+export const fetchCreateOrder = (getOrdersValue) => (dispatch) => { //Sipariş oluştur. (Üyeliksiz)
+  axios.post("http://localhost:1337/api/order-inactives", {
       data: {
         butikId: getOrdersValue.butikId,
         products: getOrdersValue.productId,
@@ -40,9 +40,9 @@ export const fetchCreateOrder = (getOrdersValue) => (dispatch) => { //Sipariş o
     });
 };
 
-export const fetchCreateOrderMember = (getOrdersValue) => (dispatch) => { //Sipariş oluştur.
+export const fetchCreateOrderMember = (getOrdersValue) => (dispatch) => { //Sipariş oluştur. (Üye)
   const config = {headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}`}};
-  axios.post("http://localhost:1337/api/orders", { //Sipariş oluştur
+  axios.post("http://localhost:1337/api/orders", {
       data: {
         butikId: getOrdersValue.butikId,
         products: getOrdersValue.productId,
@@ -55,7 +55,7 @@ export const fetchCreateOrderMember = (getOrdersValue) => (dispatch) => { //Sipa
         count: getOrdersValue.count,
         cargoNo:"",
         isOrderCancel:false,
-        status: false, //üyeliksiz siparişlerde onay olmadan status false.
+        status: true, //üye siparişlerde status true.
         totalPrice: getOrdersValue.price,
         orderDate: currentDay("-"),
         userId: getOrdersValue.userId,

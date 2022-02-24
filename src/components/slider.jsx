@@ -11,31 +11,33 @@ const Slider = ({ banners }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  
+
   return (
     <div className="slider">
       <div className="row">
         <div className="col-md-7">
           <div className="slider-left">
             <SliderSlick {...settings}>
-              {banners && banners.map((banner, index) =>
-                <img src={banner.attributes.image} key={index} />
+              {banners.banners && banners.banners.data.map((banner, index) =>
+                <img src={`http://localhost:1337${banner.attributes.formats.medium.url}`} alt={banner.attributes.caption} key={index} />
               )}
             </SliderSlick>
           </div>
         </div>
         <div className="col-md-5">
-          <div className="banner">
-            <div className="banner-item">
-              <img src="https://cdn.dsmcdn.com/ty127/pimWidgetApi/webBig_20210608102632_c00eb5559e0new.jpg" alt="" />
+          {banners.smallbanner &&
+            <div className="banner">
+              <div className="banner-item">
+                <img src={`http://localhost:1337${banners.smallbanner.data[0].attributes.formats.medium.url}`} alt={banners.smallbanner.data[0].attributes.caption} />
+              </div>
+              <div className="banner-item">
+                <img src={`http://localhost:1337${banners.smallbanner.data[1].attributes.formats.medium.url}`} alt={banners.smallbanner.data[1].attributes.caption} />
+              </div>
+              <div className="banner-item">
+                <img src={`http://localhost:1337${banners.smallbanner.data[2].attributes.formats.medium.url}`} alt={banners.smallbanner.data[2].attributes.caption} />
+              </div>
             </div>
-            <div className="banner-item">
-              <img src="https://cdn.dsmcdn.com/ty125/pimWidgetApi/webBig_20210604115137_345678KadinWeb202106041352.jpg" alt="" />
-            </div>
-            <div className="banner-item">
-              <img src="https://cdn.dsmcdn.com/ty128/campaign/banners/original/568865/9c993d0c8a_2_new.jpg" alt="" />
-            </div>
-          </div>
+          }
 
         </div>
       </div>

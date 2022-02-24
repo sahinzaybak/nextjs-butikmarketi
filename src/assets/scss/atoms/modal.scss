@@ -97,6 +97,11 @@
       color: #489541;
       font-size: 16px;
     }
+    &__success{
+      img{
+        width: 120px !important;;
+      }
+    }
   }
   .modal-title {
     font-size: 21px;

@@ -39,8 +39,8 @@ export const fetchProductFilterList = (productMainCategory) => (dispatch) => { /
   
 };
 
-export const fetchProductFilterApply = (categotyMainTitle, filter) => (dispatch) => { //Filtre Uygula
-  axios.get(`http://localhost:1337/api/products?populate=sizes&filters[category]=${categotyMainTitle}${filter}`).then((response) => {
+export const fetchProductFilterApply = (categotyMainTitle, filter, selectedFilterTitle) => (dispatch) => { //Filtre Uygula
+  axios.get(`http://localhost:1337/api/products?populate=${selectedFilterTitle}&filters[category]=${categotyMainTitle}${filter}`).then((response) => {
     dispatch({
       type: "PRODUCT_FILTER_APPLY",
       payload: response.data.data

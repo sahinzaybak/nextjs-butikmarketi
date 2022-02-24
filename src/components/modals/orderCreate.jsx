@@ -22,6 +22,12 @@ const orderCreateModal = (props) => {
 
   let userInfo = useSelector(state => state.auth.authInfo)
 
+  //Confirm Modal'dan gelen props değerleri => Siparişi onaylaya basıldığında createModal kapat ve Success Modal aç. (Child props) 
+  function closeCreateModal(getChildPropsValue) {
+    props.closeCreateModal(getChildPropsValue)
+    props.openSuccesModal(true)
+  }
+
   //Form Tamam ise,
   function onFinish(values) {
     formValuesChild({ values })
@@ -32,12 +38,6 @@ const orderCreateModal = (props) => {
   function sendParentTotalPrice(productCount) {
     let totalPrice = productCount * props.productPrice
     setPrice(totalPrice)
-  }
-
-  //Confirm Modal'dan gelen props değerleri => Siparişi onaylaya basıldığında createModal kapat ve Success Modal aç. (Child props) 
-  function closeCreateModal(getChildPropsValue) {
-    props.closeCreateModal(getChildPropsValue)
-    props.openSuccesModal(true)
   }
 
   return (

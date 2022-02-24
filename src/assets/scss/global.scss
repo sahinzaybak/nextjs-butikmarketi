@@ -415,3 +415,21 @@ textarea {
 .max-content{
   width: max-content;
 }
+
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 0.012em;
+  z-index: 9;
+}
+
+.rnc__notification-message{
+  font-size: 18px !important;
+    /* font-weight: 500; */
+    padding: 2px;
+}
+
+.rnc__notification-item--success {
+  background-color: #81bb27 !important;
+  border-left: 8px solid #658b2a !important;
+}

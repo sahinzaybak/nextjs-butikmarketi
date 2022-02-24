@@ -8,6 +8,7 @@ import heart from '../assets/images/shopping-bag (2).svg'
 import { BiUser } from "react-icons/bi";
 import { debounce } from 'lodash'
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { ReactNotifications, Store } from 'react-notifications-component';
 
 import { Form, Input } from 'antd';
 import 'antd/lib/form/style/index.css'
@@ -29,6 +30,7 @@ const Header = () => {
   const [confirmInputValue, setConfirmInputValue] = useState("");
   const [openToggleForm, setOpenToggleForm] = useState(false);
   const [formValues, setFormValues] = useState();
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch()
   const [form] = Form.useForm();
 
@@ -64,10 +66,28 @@ const Header = () => {
     setFormValues(values);
     // confirmForSendWhatsappMessage(values.nameSurname, values.phone, userInfo.id) //Whatsapp onay mesajı gönder.
 
-    (userInfo.status) ? //eğer status=true ise onay modalı açma, direk bilgileri kaydet.
+    if (userInfo.status) {
       dispatch(userInfoUpdate(userInfo.id, values.nameSurname, values.address)) //bilgileri güncelle.
-      :
+      setLoading(true)
+      setTimeout(() => {
+        Store.addNotification({
+          message: "Bilgileriniz başarıyla güncellendi.",
+          type: "success",
+          insert: "bottom",
+          width: 420,
+          showIcon: true,
+          container: "bottom-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: { duration: 3000, onScreen: false },
+        })
+        setLoading(false)
+      }, 2500);
+
+    }
+    else {
       setIsOpenUserConfirm(true) //status=false ise onay modalını aç.
+    }
   };
 
   //Üye Kullanıcı Bilgileri Onay modal
@@ -91,6 +111,7 @@ const Header = () => {
 
   return (
     <>
+      <ReactNotifications />
       <div className="header d-flex align-items-center">
         <div className="custom-container">
           <div className="d-flex align-items-center justify-content-between">
@@ -138,8 +159,8 @@ const Header = () => {
                     <div className="header-action__dropdown">
                       <div className="header-action__dropdown--item">
                         <p onClick={() => setOpenToggleForm(!openToggleForm)}>Kişisel Bilgilerim</p>
-                        <Link href="/kayit-ol">Siparişlerim</Link>
-                        <Link href="/kayit-ol">Favorilerim</Link>
+                        <Link href="/siparislerim">Siparişlerim</Link>
+                        <Link href="/favorilerim">Favorilerim</Link>
                         <Link href="/kayit-ol">Çıkış Yap</Link>
                       </div>
                     </div>
@@ -228,10 +249,11 @@ const Header = () => {
                     <Input.TextArea className="textarea" />
                   </Form.Item>
                 </div>
-                <div className="green-button secondary center-layout__button mx-0 w-100 mt-3">
-                  <div className="d-flex align-items-center justify-content-center">
-                    <button type="submit" className="ant-btn ant-btn-primary button-text ml-0 text-white">
-                      <span>Bilgileri Kaydet</span>
+                <div className={`green-button secondary center-layout__button mx-0 w-100 mt-3 ${loading ? "disabled" : ""}`}>
+                  <div className="d-flex align-items-center justify-content-center h-100">
+                    <button type="submit" className="ant-btn ant-btn-primary button-text ml-0 text-white d-flex align-items-center justify-content-center w-100 h-100">
+                      <div className={`spinner-border position-absolute ${!loading ? "d-none" : ""}`} role="status"></div>
+                      <span>{!loading && "Bilgileri Kaydet"}</span>
                     </button>
                   </div>
                 </div>
@@ -243,7 +265,7 @@ const Header = () => {
                   <br /> <br /> Gönderilen 5 haneli onay kodunu giriniz.</p>
                 <input className="mt-1" type="text" placeholder="Onay kodu" autoFocus onChange={e => setConfirmInputValue(e.target.value)} />
                 <div class="green-button mx-0 w-100 mt-3">
-                  <div class="d-flex align-items-center justify-content-center" onClick={confirmUser}>
+                  <div class="d-flex align-items-center justify-content-center h-100" onClick={confirmUser}>
                     <button type="submit" class="ant-btn ant-btn-primary button-text ml-0 text-white">
                       <span>Üyeliğimi Onayla</span>
                     </button>

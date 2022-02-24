@@ -2,9 +2,8 @@ import ReactStars from 'react-stars'
 import Avatar from 'react-avatar';
 
 const ProductComments = ({ comments }) => {
-  console.log(comments)
   return (
-    <div id="comments" className="product-detail__comments mt-4 pt-3">
+    <div id="comments" className="product-detail__comments mt-4 pt-5">
       <h3 className="text-center mb-4">Ürün Değerlendirmeleri ({comments.length})</h3>
       <div className="product-detail__comments-wrp">
         {comments.map((comment, index) => (

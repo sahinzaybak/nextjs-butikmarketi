@@ -64,8 +64,13 @@
     background-color: #ff9f4b;
     color: white;
     border-color: #f19444;
+    height: 56px;
+    padding: 0;
     &:hover {
       background-color: #ec9242;
+    }
+    &.disabled{
+      pointer-events: none;
     }
   }
 }

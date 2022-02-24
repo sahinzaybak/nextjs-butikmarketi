@@ -19,7 +19,12 @@ import { pageIncreaseCount } from '../../src/helpers/pageIncreaseCounts'
 //Action
 import { fetchProductDetail, fetchSelectedFavoritesProductIds } from '../../src/store/actions/products'
 
-let productDetail;
+
+//Modal Components
+import OrderCreateModal from '../../src/components/modals/orderCreate'
+import OrderSuccessModal from '../../src/components/modals/orderSuccess'
+import InfoModal from '../../src/components/modals/info'
+
 const ProductDetail = () => {
   const router = useRouter();
   const productTitle = router.query.productTitle;
@@ -29,6 +34,23 @@ const ProductDetail = () => {
   const [slider1, setSlider1] = useState(null);
   const [slider2, setSlider2] = useState(null);
   const [load, setLoad] = useState(false);
+
+  //** Modallar için >
+  const [open, setOpen] = useState(false);
+  const [openInfo, setOpenInfo] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const onCloseModal = () => setOpen(false);
+  const onCloseModalSuccess = () => setOpenSuccess(false);
+  const onCloseModalInfo = () => setOpenInfo(false);
+
+  function closeCreateModal(childPropsValue) { //Child'dan veriyi aldık. (false) => Confirm Modal'dan gelen props ile Create Modal'ı kapat. 
+    setOpen(childPropsValue)
+  }
+
+  function openSuccesModal(childPropsValue) { //Child'dan veriyi aldık. (true) => Confirm Modal'dan gelen props ile Success Modal'ı aç.
+    setOpenSuccess(childPropsValue)
+  }
+  //** Modallar için />
 
   const settings = {
     lazyLoad: 'ondemand',
@@ -46,27 +68,35 @@ const ProductDetail = () => {
     setNav2(slider2);
   });
 
-  productDetail = useSelector((state) => state.products.detailProductInfo); //Dolan "ürün bilgisini" al.
+  let productDetail = useSelector((state) => state.products.detailProductInfo); //Dolan "ürün bilgisini" al.
   // let similarProduct = useSelector((state) => state.products.categoryProductList); //Dolan "benzer ürün bilgisini" al.
-  //"Girilen ürüne ait ürün detay bilgisi" doldurmak için action'a dispatch et. -> yesiltshirt
+
+  //productDetail 2 kere servise gitmesi problem çözümü.
+  useEffect(() => {
+    setLoad(true)
+  }, []);
+
+  //Girilen ürüne ait ürün detay bilgisi" doldurmak için action'a dispatch et. -> yesiltshirt
   useEffect(() => {
     dispatch({ type: 'PRODUCT_DETAIL_CLEAR', payload: [] })
     dispatch(fetchProductDetail(productTitle)); //Ürün detay bilgileri
     dispatch(fetchSelectedFavoritesProductIds());
   }, [productTitle]);
 
+
   //Sayfa yüklendiğinde filtreleme seçeneklerinin ilki seçili gelsin.
   useEffect(() => {
     if (productDetail != "") {
       dispatch({ type: 'SELECTED_FILTER_SIZE', payload: { index: 0, selectedTitle: productDetail?.attributes?.sizes[0]?.size_title } })
       dispatch({ type: 'SELECTED_FILTER_COLOR', payload: { index: 0, selectedTitle: productDetail?.attributes?.colors[0]?.color_title } })
-      if (load && productDetail) pageIncreaseCount(productDetail.id, productDetail.attributes.clicks, "products", "clicks"); //Görüntülenme sayısı arttırma (Helpers)
+
+      setTimeout(() => {
+        if (load && productDetail) pageIncreaseCount(productDetail.id, productDetail.attributes.clicks, "products", "clicks"); //Görüntülenme sayısı arttırma (Helpers)
+      }, 5000);
     }
   }, [productDetail]);
 
-  useEffect(() => { //productDetail 2 kere servise gitmesi problem çözümü.
-    setLoad(true)
-  }, []);
+
 
   return (
     <>
@@ -75,16 +105,13 @@ const ProductDetail = () => {
           {productDetail && productDetail?.attributes?.comments && productDetail?.attributes?.butiks.data[0] &&
             <>
               <DetailHeader
-                butikId={productDetail.attributes.butiks.data[0].id}
-                buticName={productDetail.attributes.butiks.data[0].attributes.butik_name}
-                butikSlug={productDetail.attributes.butiks.data[0].attributes.butik_slug}
                 buticLogo={productDetail.attributes.butiks.data[0].attributes.butik_image}
-                productId={productDetail.id}
+                butikSlug={productDetail.attributes.butiks.data[0].attributes.butik_slug}
+                buticName={productDetail.attributes.butiks.data[0].attributes.butik_name}
                 productTitle={productDetail.attributes.title}
-                productPrice={productDetail.attributes.price}
                 price={productDetail.attributes.price}
-                productColors={productDetail.attributes.colors}
-                productSize={productDetail.attributes.sizes}
+                onOpenModal={() => { setOpen(true) }}
+                onOpenModalInfo={() => { setOpenInfo(true) }}
               />
               <div className="custom-container">
                 <div className="product-detail__main">
@@ -107,14 +134,13 @@ const ProductDetail = () => {
                           nav={nav1}
                           ref={slider => (setSlider2(slider))} />
                         <ProductInfoBottom
-                          butikId={productDetail.attributes.butiks.data[0].id}
-                          buticName={productDetail.attributes.butiks.data[0].attributes.butik_name}
                           productColors={productDetail.attributes.colors}
                           productSize={productDetail.attributes.sizes}
-                          productPrice={productDetail.attributes.price}
                           productLink={productDetail.attributes.link}
                           productId={productDetail.id}
                           productWhatsappClicksValues={productDetail.attributes.whatsappClicks}
+                          onOpenModal={() => { setOpen(true) }}
+                          onOpenModalInfo={() => { setOpenInfo(true) }}
                         />
                       </div>
                     </div>
@@ -161,6 +187,32 @@ const ProductDetail = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Sipariş Ver, Sipariş Tamamlandı, ve Info Modal */}
+       
+                <>
+                  <OrderCreateModal
+                    open={open}
+                    onClose={onCloseModal}
+                    productColors={productDetail.attributes.colors}
+                    productPrice={productDetail.attributes.price}
+                    productId={productDetail.id}
+                    butikId={productDetail.attributes.butiks.data[0].id}
+                    productSize={productDetail.attributes.sizes}
+                    closeCreateModal={closeCreateModal} //Child Props => Yukarıda props değerini aldık. (false)
+                    openSuccesModal={openSuccesModal} //Child Props => Yukarıda props değerini aldık. (true)
+                  />
+
+                  <InfoModal
+                    open={openInfo}
+                    onClose={onCloseModalInfo} />
+
+                  <OrderSuccessModal
+                    open={openSuccess}
+                    onClose={onCloseModalSuccess}
+                    classNames={{ modal: 'modal-steps' }} />
+                </>
+            
             </>
           }
         </div>

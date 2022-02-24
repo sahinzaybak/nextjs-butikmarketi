@@ -14,6 +14,7 @@ const categoryProducts = () => {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState([]);
   const [isActive, setActive] = useState([]);
+  const [selectedFilterTitle, setSelectedFilterTitle] = useState([]);
 
   let categoryProductList = useSelector((state) => state.products.categoryProductList); //Dolan "kategori ürünlerinin" listesini al.
   let filterList = useSelector((state) => state.products.productCategoryFilterList); //Dolan "filtre" listesini al.
@@ -35,12 +36,13 @@ const categoryProducts = () => {
     let updatedList = [...checked];
     let selectedFilterArray = [...isActive]; //filtre seçince seçilen filtreye active class eklemek için. X,S,M 'leri arraya aldık ki class eklerken ...includes(X) == true olursa buna göre seçili filtreye class'ı ekleyelim. Diğer türlü bütün filtrelere class ekliyordu.
     if (event.target.checked) {
-      updatedList = [...checked, "&filters[sizes][size_title][$in]=" + event.target.value]; //filtre seç
+      setSelectedFilterTitle(event.target.title + 's'); //color+s, size+s
+      updatedList = [...checked, `&filters[${event.target.title}s][${event.target.title}_title][$in]=` + event.target.value]; //filtre seç
       selectedFilterArray = [...isActive, event.target.value]; //filtre seçince seçilen filtreye active class eklemek için. 
     }
 
     else{
-      updatedList.splice(checked.indexOf("&filters[sizes][size_title][$in]=" + event.target.value), 1); //filtre çıkar
+      updatedList.splice(checked.indexOf(`&filters[${event.target.title}s][${event.target.title}_title][$in]=` + event.target.value), 1); //filtre çıkar
       selectedFilterArray.splice(isActive.indexOf(event.target.value), 1); ///filtre seçince seçilen filtreye active class silmek için. 
     }
   
@@ -56,7 +58,7 @@ const categoryProducts = () => {
           return total + item;
         }) : "";
 
-      dispatch(fetchProductFilterApply(categoryTitle, checkedItems)); //Filtreyi Uygula
+      dispatch(fetchProductFilterApply(categoryTitle, checkedItems, selectedFilterTitle)); //Filtreyi Uygula
       //categoryTitle => elbise-x-c56 -- checkedItems => &filters[sizes][size_title][$in]=XXL&filters[sizes][size_title][$in]=XL
     }
   }, [checked]); //Filtreleden filtre seçildiği zaman çalışsın

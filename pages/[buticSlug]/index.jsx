@@ -7,24 +7,30 @@ import Image from 'next/image'
 import whatsapp from '../../src/assets/images/whatsapp.svg'
 import instagram from '../../src/assets/images/instagram.svg'
 import { pageIncreaseCount } from '../../src/helpers/pageIncreaseCounts'
+
 //Component
 import ProductCard from "../../src/components/product-card";
+
 //Action
 import { fetchButikProfileInfo } from '../../src/store/actions/butik'
-import {fetchSelectedFavoritesProductIds } from "../../src/store/actions/products";
+import { fetchSelectedFavoritesProductIds } from "../../src/store/actions/products";
 
-let butikProfileInfo;
+//Helpers
+import { IsLoginIn } from '../../src/helpers/auth'
+
 const ButicProfile = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const buticSlug = router.query.buticSlug;
   const [load, setLoad] = useState(false);
 
-  butikProfileInfo = useSelector((state) => state.butik.butikProfileInfo); //Dolan "butik profil bilgisini" al.
+  let butikProfileInfo = useSelector((state) => state.butik.butikProfileInfo); //Dolan "butik profil bilgisini" al.
   useEffect(() => {
-    if (buticSlug != null)
+    if (buticSlug != null) {
       dispatch(fetchButikProfileInfo(buticSlug)); //"Girilen butiğe ait butik profil bilgisini" doldurmak için action'a dispatch et.
-      dispatch(fetchSelectedFavoritesProductIds());
+      if (IsLoginIn())
+        dispatch(fetchSelectedFavoritesProductIds());
+    }
   }, [buticSlug]);
 
   useEffect(() => {

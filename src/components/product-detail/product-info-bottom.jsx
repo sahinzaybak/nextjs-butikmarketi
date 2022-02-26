@@ -64,9 +64,11 @@ const ProductInfoBottom = (props) => {
             <p className="button-text">Kapıda Ödeme İle Sipariş Oluştur</p>
           </div>
         </div>
-        <div className={`product-info__action favorite ml-3 ${isActiveFavorite ? "active" : ""}`} onClick={() => addFavorite()}>
-          <RiHeart3Line />
-        </div>
+        {props.isLoginIn &&
+          <div className={`product-info__action favorite ml-3 ${isActiveFavorite ? "active" : ""}`} onClick={() => addFavorite()}>
+            <RiHeart3Line />
+          </div>
+        }
         <div className="product-info__action whatsapp wp ml-2">
           <RiWhatsappFill />
         </div>

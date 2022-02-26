@@ -13,26 +13,36 @@ import { FiPlus, FiMinus } from "react-icons/fi";
 import ConfirmModal from '../modals/confirm'
 import DetailFilter from '../product-detail/detail-filter'
 
+//Helpers
+import { IsLoginIn } from '../../helpers/auth'
+
 const orderCreateModal = (props) => {
   const [openAlert, setOpenAlert] = useState(false);
   const [formValue, formValuesChild] = useState({}); //child için state.(formValuesChild)
   const [orderCount, setOrderCount] = useState(1);
   const [price, setPrice] = useState(props.productPrice);
+  const [isConfirmModal, setIsConfirmModal] = useState();
   const onCloseModalAlert = () => setOpenAlert(false);
 
   let userInfo = useSelector(state => state.auth.authInfo)
+  let isLoginIn = IsLoginIn()
 
   //Confirm Modal'dan gelen props değerleri => Siparişi onaylaya basıldığında createModal kapat ve Success Modal aç. (Child props) 
   function closeCreateModal(getChildPropsValue) {
     props.closeCreateModal(getChildPropsValue)
     props.openSuccesModal(true)
+    setOpenAlert(false)
   }
 
   //Form Tamam ise,
   function onFinish(values) {
     formValuesChild({ values })
-    setOpenAlert(true) //Confirm Modal aç
-  };
+    setOpenAlert(true) //Confirm Modal önce bi aç, sonra...
+
+    //Üye Onay Modal mı açılsın yoksa Sipariş Onay Modalı mı? confirmModal'a aşağıda props olarak gönderdik(isConfirmModal)
+    if (!isLoginIn) setIsConfirmModal(false);
+    else if (userInfo && userInfo.status && isLoginIn ? setIsConfirmModal(false) : setIsConfirmModal(true));
+  }
 
   //Toplam ürün adedi ve toplam fiyat
   function sendParentTotalPrice(productCount) {
@@ -133,6 +143,7 @@ const orderCreateModal = (props) => {
         totalPrice={price}
         orderCount={orderCount}
         closeCreateModal={closeCreateModal} //Child props. Yukarıda props değerini aldık.
+        isConfirmModal={isConfirmModal} //Üye Onay Modal mı açılsın yoksa Sipariş Onay Modalı mı?
         onClickSuccess={() => {
           setOpenAlert(false)
         }}

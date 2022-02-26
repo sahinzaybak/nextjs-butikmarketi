@@ -19,6 +19,8 @@ import { pageIncreaseCount } from '../../src/helpers/pageIncreaseCounts'
 //Action
 import { fetchProductDetail, fetchSelectedFavoritesProductIds } from '../../src/store/actions/products'
 
+//Helpers
+import { IsLoginIn } from '../../src/helpers/auth'
 
 //Modal Components
 import OrderCreateModal from '../../src/components/modals/orderCreate'
@@ -80,7 +82,8 @@ const ProductDetail = () => {
   useEffect(() => {
     dispatch({ type: 'PRODUCT_DETAIL_CLEAR', payload: [] })
     dispatch(fetchProductDetail(productTitle)); //Ürün detay bilgileri
-    dispatch(fetchSelectedFavoritesProductIds());
+    if (IsLoginIn())
+      dispatch(fetchSelectedFavoritesProductIds());
   }, [productTitle]);
 
 
@@ -95,8 +98,6 @@ const ProductDetail = () => {
       }, 5000);
     }
   }, [productDetail]);
-
-
 
   return (
     <>
@@ -139,6 +140,7 @@ const ProductDetail = () => {
                           productLink={productDetail.attributes.link}
                           productId={productDetail.id}
                           productWhatsappClicksValues={productDetail.attributes.whatsappClicks}
+                          isLoginIn={IsLoginIn()}
                           onOpenModal={() => { setOpen(true) }}
                           onOpenModalInfo={() => { setOpenInfo(true) }}
                         />
@@ -189,30 +191,30 @@ const ProductDetail = () => {
               </div>
 
               {/* Sipariş Ver, Sipariş Tamamlandı, ve Info Modal */}
-       
-                <>
-                  <OrderCreateModal
-                    open={open}
-                    onClose={onCloseModal}
-                    productColors={productDetail.attributes.colors}
-                    productPrice={productDetail.attributes.price}
-                    productId={productDetail.id}
-                    butikId={productDetail.attributes.butiks.data[0].id}
-                    productSize={productDetail.attributes.sizes}
-                    closeCreateModal={closeCreateModal} //Child Props => Yukarıda props değerini aldık. (false)
-                    openSuccesModal={openSuccesModal} //Child Props => Yukarıda props değerini aldık. (true)
-                  />
 
-                  <InfoModal
-                    open={openInfo}
-                    onClose={onCloseModalInfo} />
+              <>
+                <OrderCreateModal
+                  open={open}
+                  onClose={onCloseModal}
+                  productColors={productDetail.attributes.colors}
+                  productPrice={productDetail.attributes.price}
+                  productId={productDetail.id}
+                  butikId={productDetail.attributes.butiks.data[0].id}
+                  productSize={productDetail.attributes.sizes}
+                  closeCreateModal={closeCreateModal} //Child Props => Yukarıda props değerini aldık. (false)
+                  openSuccesModal={openSuccesModal} //Child Props => Yukarıda props değerini aldık. (true)
+                />
 
-                  <OrderSuccessModal
-                    open={openSuccess}
-                    onClose={onCloseModalSuccess}
-                    classNames={{ modal: 'modal-steps' }} />
-                </>
-            
+                <InfoModal
+                  open={openInfo}
+                  onClose={onCloseModalInfo} />
+
+                <OrderSuccessModal
+                  open={openSuccess}
+                  onClose={onCloseModalSuccess}
+                  classNames={{ modal: 'modal-steps' }} />
+              </>
+
             </>
           }
         </div>

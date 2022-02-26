@@ -18,7 +18,7 @@ export const userMemberConfirm = (_confirmCode, _userId,_nameSurname,_phone,_add
   axios.get("http://localhost:1337/api/users/me", config).then((value) => {//Önce wp mesajla vt'ye kaydedilen onay kodunu bi al.
     const getConfirmCode = value.data.confirmCode;
     if (getConfirmCode == _confirmCode) { //vt'deki onay kodu ile bizimkisi uyuyorsa
-      axios.put(`http://localhost:1337/api/users/${_userId}`, { //bilgilleri ekle ve üyeliği onayla
+      axios.put(`http://localhost:1337/api/users/${_userId}`, { //bilgileri ekle ve üyeliği onayla
 		nameSurname:_nameSurname,
 		phone:_phone,
 		address:_address,

@@ -11,7 +11,7 @@ import { RiHeart3Line } from "react-icons/ri";
 import { fetchAddFavorite } from '../store/actions/products'
 
 //helpers
-import { loginUserInfo } from '../helpers/auth'
+import { loginUserInfo, IsLoginIn } from '../helpers/auth'
 
 let userInfo;
 const ProductCard = ({ product, productId, slide }) => {
@@ -19,7 +19,8 @@ const ProductCard = ({ product, productId, slide }) => {
   const dispatch = useDispatch();
 
   let selectedFavoritiesProductIds = useSelector((state) => state.products.selectedFavoritesProductIds); //Dolan "seçili favori ıd'lerini" al.
-  
+  console.log(selectedFavoritiesProductIds)
+
   useEffect(() => {
     if (selectedFavoritiesProductIds != null) {
       const isSelectedFavoriteProduct = selectedFavoritiesProductIds.some(x => x == productId) //seçili favori ürünlerini bul.
@@ -27,6 +28,10 @@ const ProductCard = ({ product, productId, slide }) => {
         setActive(true) // onların favorilere ekli olarak işaretle => kırmızı kalp style
     }
   }, [selectedFavoritiesProductIds]);
+
+   useEffect(() => {
+    setActive(false) //sayfaya gelindiğinde önce bi tüm active'leri temizle.
+  }, []);
 
   function addFavorite() {
     setActive(!isActive);
@@ -46,11 +51,13 @@ const ProductCard = ({ product, productId, slide }) => {
             </div>
           </Link>
           <div className="product-card__image">
+            {IsLoginIn() &&
             <div className={`product-card__favorite ${isActive ? "active" : ""}`} onClick={() => addFavorite()}>
               <div className="product-card__favorite-icon">
                 <RiHeart3Line />
               </div>
             </div>
+            }
             <Link href={`/${product.butiks?.data[0]?.attributes.butik_slug}/${product.slug}`}>
               <a href={`/${product.butiks?.data[0]?.attributes.butik_slug}/${product.slug}`} className="product-card__image--link d-flex h-100">
                 <img src={product.image} alt={product.title} />

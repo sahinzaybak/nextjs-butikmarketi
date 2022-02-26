@@ -11,12 +11,12 @@ import { fetchMyOrders, fetchCargoInfo } from '../../src/store/actions/orders'
 
 import {loginUserInfo} from '../../src/helpers/auth'
 
-let myOrderList, cargoInfo, loginUserInfos;
+let loginUserInfos;
 const myOrders = () => {
   const dispatch = useDispatch();
 
-  myOrderList = useSelector((state) => state.orders.myOrderList); //Dolan "sipariş listesini" al.
-  cargoInfo = useSelector((state) => state.orders.cargoInfo); //Dolan "kargo bilgilerini al"
+  let myOrderList = useSelector((state) => state.orders.myOrderList); //Dolan "sipariş listesini" al.
+  let cargoInfo = useSelector((state) => state.orders.cargoInfo); //Dolan "kargo bilgilerini al"
 
   useEffect(() => {
     dispatch(fetchMyOrders()) //üyenin siparişlerini getir.

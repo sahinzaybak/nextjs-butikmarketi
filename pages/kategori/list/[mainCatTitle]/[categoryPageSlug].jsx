@@ -6,6 +6,9 @@ import { useRouter } from "next/router";
 import { fetchCategoryProductList, fetchProductFilterList, fetchProductFilterApply, fetchSelectedFavoritesProductIds } from "../../../../src/store/actions/products";
 import ProductCard from "../../../../src/components/product-card";
 
+//Helpers
+import { IsLoginIn } from '../../../../src/helpers/auth'
+
 const categoryProducts = () => {
   const router = useRouter();
   const isInitialMount = useRef(true);
@@ -18,11 +21,12 @@ const categoryProducts = () => {
 
   let categoryProductList = useSelector((state) => state.products.categoryProductList); //Dolan "kategori ürünlerinin" listesini al.
   let filterList = useSelector((state) => state.products.productCategoryFilterList); //Dolan "filtre" listesini al.
-
+  
   useEffect(() => {
     if (categoryTitle != null) {
       dispatch(fetchCategoryProductList(categoryTitle)); //"Girilen Kategoriye ait ürün listesini" doldurmak için action'a dispatch et.
-      dispatch(fetchSelectedFavoritesProductIds());
+      if (IsLoginIn())
+        dispatch(fetchSelectedFavoritesProductIds());
     }
   }, [categoryTitle]);
 
@@ -41,11 +45,11 @@ const categoryProducts = () => {
       selectedFilterArray = [...isActive, event.target.value]; //filtre seçince seçilen filtreye active class eklemek için. 
     }
 
-    else{
+    else {
       updatedList.splice(checked.indexOf(`&filters[${event.target.title}s][${event.target.title}_title][$in]=` + event.target.value), 1); //filtre çıkar
       selectedFilterArray.splice(isActive.indexOf(event.target.value), 1); ///filtre seçince seçilen filtreye active class silmek için. 
     }
-  
+
     setChecked(updatedList);
     setActive(selectedFilterArray);
   };
@@ -78,7 +82,7 @@ const categoryProducts = () => {
                     <div className="filter-item" key={index}>
                       <h6 className="filter-title">{filterSub.main_title_text}</h6>
                       {filterSub && filterSub.filter_sub.map((filter, index) =>
-                        <div className="filter-choose"key={index}>
+                        <div className="filter-choose" key={index}>
                           <label className="checkbox" className={`checkbox ${isActive.includes(filter.title) ? "active" : ""}`}>
                             <span className="checkbox__input">
                               <input type="checkbox" value={filter.title} title={filterSub.main_title} name="checkbox"

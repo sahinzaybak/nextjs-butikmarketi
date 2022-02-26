@@ -12,7 +12,7 @@
     &.medium {
       width: 460px;
     }
-    &.xlarge{
+    &.xlarge {
       width: 1186px;
       max-width: initial;
     }
@@ -97,10 +97,30 @@
       color: #489541;
       font-size: 16px;
     }
-    &__success{
-      img{
-        width: 120px !important;;
+    &__success {
+      img {
+        width: 120px !important;
       }
+    }
+  }
+  .member-confirm {
+    &__title {
+      font-size: 16.5px;
+      margin-bottom: 14px;
+      color: #85b723;
+    }
+    &__text {
+      font-size: 16px;
+      color: #585858;
+    }
+    input{
+      height: 50px;
+    }
+    .green-button {
+      background-color: #85b723;
+      border: 0;
+      border-radius: 6px;
+      padding: 12px;
     }
   }
   .modal-title {

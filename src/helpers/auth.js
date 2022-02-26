@@ -8,13 +8,17 @@ export const IsLogin = () => {
 
 //Sitede üye girişli kullanıcı var mı?
 export const IsLoginIn = () => {
- if(JSON.parse(localStorage.getItem("userInfo")) != null) return true
- else return false
+  if (typeof window !== "undefined") {
+    if (JSON.parse(localStorage.getItem("userInfo")) != null) return true;
+    else return false;
+  }
 };
 
 //Giriş yapılmış üyenin bilgileri
 export const loginUserInfo = () => {
-  if(JSON.parse(localStorage.getItem("userInfo")) != null) return JSON.parse(localStorage.getItem("userInfo"))
-  else return false
- };
-
+  if (typeof window !== "undefined") {
+    if (JSON.parse(localStorage.getItem("userInfo")) != null)
+      return JSON.parse(localStorage.getItem("userInfo"));
+    else return false;
+  }
+};

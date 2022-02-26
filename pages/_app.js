@@ -4,9 +4,8 @@ import { createWrapper } from "next-redux-wrapper";
 import { useRouter } from "next/router";
 import store from "../src/store/store";
 import Header from "../src/layout/header";
-
+import {IsLoginIn} from '../src/helpers/auth'
 import "bootstrap/dist/css/bootstrap.css";
-
 import "react-responsive-modal/styles.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -34,6 +33,7 @@ const myApp = ({ Component, pageProps }) => {
   const router = useRouter();
   const showHeader = router.pathname === "/kayit-ol" ? false : true;
   const showHeader2 = router.pathname === "/giris-yap" ? false : true;
+
   return (
     <Provider store={store}>
       {showHeader && showHeader2 && <Header />}

@@ -31,7 +31,7 @@
         font-size: 20px;
         color: #6197a9;
         font-weight: 500;
-        line-height: 1.3;
+        line-height: 1.5;
       }
     }
     .small-title {
@@ -113,7 +113,7 @@
       font-size: 16px;
       color: #585858;
     }
-    input{
+    input {
       height: 50px;
     }
     .green-button {
@@ -161,4 +161,40 @@
 }
 .react-responsive-modal-root {
   z-index: 99999;
+}
+
+.order-loading {
+  position: relative;
+  background-color: #fefdfb;
+  text-align: center;
+  font-size: 26px;
+  color: #5cb352;
+  height: 280px;
+  &__wrp{
+    position: absolute;
+    bottom: 48px;
+    width: 100%;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    background-image: url(https://www.marieclaire.co.uk/wp-content/plugins/snap-widget/js/snap-load2.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 23%;
+    height: 51%;
+    left: 0;
+    top: 20%;
+    opacity: 0.6;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    text-align: center;
+  }
+  p {
+    z-index: 9;
+    color: #666666;
+    right: 0;
+    font-size: 29px;
+  }
 }

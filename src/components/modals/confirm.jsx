@@ -17,6 +17,7 @@ import { IsLoginIn } from '../../helpers/auth'
 const confirmModal = (props) => {
   const [openMemberConfirmModal, setOpenMemberConfirmModal] = useState();
   const [confirmInputValue, setConfirmInputValue] = useState("");
+  const [orderLoading, setIsOrderLoading] = useState(false);
   const dispatch = useDispatch();
 
   let isLoginIn = IsLoginIn()
@@ -31,7 +32,15 @@ const confirmModal = (props) => {
 
   //Evet, bilgilerim doğru, siparişimi oluşturabiliriz.
   function orderProductSubmitConfirm() {
-    props.closeCreateModal(false) //orderCreate Modala yani parent'a child props gönderdik. Amaç: Siparişi onaylaya basıldığında createModal kapat ve Success Modal aç.
+    setIsOrderLoading(true)
+    setTimeout(() => {
+      props.onClickSuccess() //bu modalı kapat. //orderCreate Modala yani parent'a child props gönderdik.
+      props.closeCreateModal(false) //orderCreate Modala yani parent'a child props gönderdik. Amaç: Siparişi onaylaya basıldığında createModal kapat ve Success Modal aç.
+    }, 5000);
+    setTimeout(() => {
+      setIsOrderLoading(false)
+    }, 5001);
+
     {
       !isLoginIn ? //üyesiz sipariş
         dispatch(fetchCreateOrder({
@@ -91,23 +100,33 @@ const confirmModal = (props) => {
 
   return (
     <Modal open={props.open} onClose={props.onClose} showCloseIcon={props.showCloseIcon} classNames={{ modal: 'modal-steps medium' }} center>
+      {orderLoading &&
+        <div className="order-loading">
+          <div className="order-loading__wrp">
+            <p>Siparişiniz oluşturuluyor..</p>
+          </div>
+        </div>
+      }
+
       {!openMemberConfirmModal ? //üye onaylı ise.. Sipariş Onay Modal
         <>
-          <div className="d-flex modal-top">
-            <Image src={received} alt="Ürün hakkında soru sor" />
-            <h3 className="modal-title ml-3">Form onayı</h3>
-          </div>
-          <div className="modal-form">
-            <h3 className="large-title">Tüm bilgileriniz doğru ise, siparişinizi oluşturmak <br /> istiyor musunuz?</h3>
-            <div className="alert-modal__action d-flex align-items-center flex-column">
-              <div className="green-button d-flex align-items-center mt-3" onClick={() => { orderProductSubmitConfirm(); props.onClickSuccess() }}>
-                <Image src={tick} alt="Ürün hakkında soru sor" />
-                <p>Evet, bilgilerim doğru, siparişimi oluşturabiliriz.</p>
-              </div>
+          <div className={`${orderLoading ? "d-none" : ""}`}>
+            <div className="d-flex modal-top">
+              <Image src={received} alt="Ürün hakkında soru sor" />
+              <h3 className="modal-title ml-3">Form onayı</h3>
+            </div>
+            <div className="modal-form">
+              <h3 className="large-title">Tüm bilgileriniz doğru ise, siparişinizi oluşturmak <br /> istiyor musunuz?</h3>
+              <div className="alert-modal__action d-flex align-items-center flex-column">
+                <div className="green-button d-flex align-items-center mt-3" onClick={() => { orderProductSubmitConfirm() }}>
+                  <Image src={tick} alt="Ürün hakkında soru sor" />
+                  <p>Evet, bilgilerim doğru, siparişimi oluşturabiliriz.</p>
+                </div>
 
-              <div className="green-button danger d-flex align-items-center mt-3" onClick={() => props.onClickBack()}>
-                <Image src={close} alt="Ürün hakkında soru sor" />
-                <p>Hayır, bilgilerimi tekrar kontrol etmek istiyorum.</p>
+                <div className="green-button danger d-flex align-items-center mt-3" onClick={() => props.onClickBack()}>
+                  <Image src={close} alt="Ürün hakkında soru sor" />
+                  <p>Hayır, bilgilerimi tekrar kontrol etmek istiyorum.</p>
+                </div>
               </div>
             </div>
           </div>

@@ -22,7 +22,7 @@ export const fetchCategoryProductList = (categorySlug) => (dispatch) => { //Kate
 
 
 export const fetchProductDetail = (productSlug) => (dispatch) => { //Ürün Detay Bilgileri - Ürün Detay Sayfası
-  axios.get(`http://localhost:1337/api/products?filters[slug]=${productSlug}&populate=sizes,images,colors,comments,butiks`).then((response) => {
+  axios.get(`http://localhost:1337/api/products?filters[slug]=${productSlug}&populate=sizes,images,colors,comments,butiks,clicks`).then((response) => {
     dispatch({
       type: "PRODUCT_DETAIL_INFO",
       payload: response.data.data[0],

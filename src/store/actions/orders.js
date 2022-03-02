@@ -135,5 +135,9 @@ export const fetchMyOrders = () => (dispatch) => { //Sipariş bilgilerini getir.
         type: "MY_ORDER_LIST",
         payload: response.data.data
       });
+      dispatch({
+        type: "DEFAULT_MY_ORDER_LIST",
+        payload: response.data.data
+      });
     });
 };

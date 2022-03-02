@@ -16,6 +16,13 @@ export const fetchButikProfileInfo = (butikSlug) => (dispatch) => { //Butik Prof
         type: "BUTIK_PROFILE",
         payload: response.data.data[0], //id, attributes
       });
+      dispatch({
+        type: "BUTIK_PRODUCTS",
+        payload: response.data.data[0].attributes.products.data
+      });
+      dispatch({
+        type: "DEFAULT_BUTIK_PRODUCTS",
+      });
     });
 };
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import Link from "next/link";
@@ -8,47 +8,49 @@ import 'antd/lib/form/style/index.css'
 import { ReactNotifications, Store } from 'react-notifications-component';
 import Image from 'next/image'
 
-//Helpers
-import { IsLogin } from '../../src/helpers/auth'
-
 //Actions
 import { fetchLogin } from '../../src/store/actions/auth'
 
 const Login = () => {
-  const isInitialMount = useRef(true);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter()
 
-  let authInfo = useSelector((state) => state.auth.authInfo);
-  let isLogin = IsLogin(); //helpers
-
-  function onFinish(values) {
-    dispatch(fetchLogin(values))
-  };
-
-  //Giriş yapıldı mı ?
-  useEffect(() => {
-    if (isInitialMount.current) isInitialMount.current = false; // ilk sayfa yüklendiğinde useEffect çalışmasın. Mount & Update ayrımı => useRef()
-    else {
-      if (isLogin) { //true ise
+  async function onFinish(values) {
+    const isMember = await dispatch(fetchLogin(values))
+    if (isMember) {
+      setLoading(true)
+      setTimeout(() => {
         Store.addNotification({
-          message: isLogin ? "başarılı" : "as",
-          type: isLogin ? "success" : "danger",
+          message: "Giriş başarılı, yönlendiriliyorsunuz.",
+          type: "success",
           insert: "top",
-          width: isLogin ? 280 : 420,
+          width: 420,
           showIcon: true,
           container: "top-right",
           animationIn: ["animate__animated", "animate__fadeIn"],
           animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: { duration: 2000, onScreen: false },
+          dismiss: { duration: 2500, onScreen: false },
         })
-        setTimeout(() => {
-          router.push("/")
-        }, 2500);
-      }
+      }, 1000);
+      setTimeout(() => {
+        router.push("/")
+      }, 2500);
     }
-  }, [authInfo]);
-
+    else {
+      Store.addNotification({
+        message: "Hatalı kullanıcı adı veya şifre girdiniz. Lütfen tekrar deneyin.",
+        type: "danger",
+        insert: "top",
+        width: 420,
+        showIcon: true,
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: { duration: 2500, onScreen: false },
+      })
+    }
+  };
 
   return (
     <div className="center-layout header-none">
@@ -70,7 +72,6 @@ const Login = () => {
                 <Form.Item name="username" rules={[{ required: true, message: 'Lütfen kullanıcı adınızı giriniz.' }]}>
                   <Input placeholder="Kullanıcı Adınız" className="center-layout__input" />
                 </Form.Item>
-
               </div>
               <div className="center-layout__item">
                 <Form.Item name="password" rules={[{ required: true, message: 'Lütfen şifrenizi giriniz.' }]}>
@@ -78,9 +79,13 @@ const Login = () => {
                 </Form.Item>
                 <p className="center-layout__form--desc mt-1"><u>Şifremi unuttum</u></p>
               </div>
-              <div className="green-button secondary center-layout__button mx-0 w-100 mt-3">
-                <div className="d-flex align-items-center justify-content-center">
-                  <Button className="button-text ml-0 text-white" type="primary" htmlType="submit">Giriş Yap</Button>
+
+              <div className={`green-button secondary center-layout__button mx-0 w-100 mt-3 ${loading ? "disabled" : ""}`}>
+                <div className="d-flex align-items-center justify-content-center h-100">
+                  <button htmlType="submit" className="ant-btn ant-btn-primary button-text ml-0 text-white d-flex align-items-center justify-content-center w-100 h-100">
+                    <div className={`spinner-border position-absolute ${!loading ? "d-none" : ""}`} role="status"></div>
+                    <span>{!loading && "Giriş Yap"}</span>
+                  </button>
                 </div>
               </div>
             </div>

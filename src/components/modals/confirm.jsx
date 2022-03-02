@@ -39,7 +39,7 @@ const confirmModal = (props) => {
     }, 5000);
     setTimeout(() => {
       setIsOrderLoading(false)
-    }, 5001);
+    }, 6000);
 
     {
       !isLoginIn ? //üyesiz sipariş
@@ -79,7 +79,17 @@ const confirmModal = (props) => {
   //Üye onaylı değilse üyeliği onayla ve ardından siparişi oluştur.
   async function confirmUser() {
     if (!userInfo.status) { //Status false ise 
-      dispatch(userMemberConfirm(confirmInputValue, userInfo.id, props.formValue.values.username, props.formValue.values.phone, props.formValue.values.address)); //üyelik onayla
+      setIsOrderLoading(true)
+      setTimeout(() => {
+        props.onClickSuccess() //bu modalı kapat. //orderCreate Modala yani parent'a child props gönderdik.
+        props.closeCreateModal(false) //orderCreate Modala yani parent'a child props gönderdik. Amaç: Siparişi onaylaya basıldığında createModal kapat ve Success Modal aç.
+        setOpenMemberConfirmModal(false) // Onay formu kapat.
+      }, 5000);
+      setTimeout(() => {
+        setIsOrderLoading(false)
+      }, 6000);
+
+      await dispatch(userMemberConfirm(confirmInputValue, userInfo.id, props.formValue.values.username, props.formValue.values.phone, props.formValue.values.address)); //üyelik onayla
       dispatch(fetchCreateOrderMember({ //sipariş oluştur.
         ...props.formValue.values,
         "namesurname": props.formValue.values.username,
@@ -93,8 +103,6 @@ const confirmModal = (props) => {
         "productId": props.productId,
         "userId": userInfo.id,
       }))
-      props.closeCreateModal(false) //Create Modal kapat.
-      setOpenMemberConfirmModal(false) // Onay formu kapat.
     }
   }
 
@@ -122,7 +130,6 @@ const confirmModal = (props) => {
                   <Image src={tick} alt="Ürün hakkında soru sor" />
                   <p>Evet, bilgilerim doğru, siparişimi oluşturabiliriz.</p>
                 </div>
-
                 <div className="green-button danger d-flex align-items-center mt-3" onClick={() => props.onClickBack()}>
                   <Image src={close} alt="Ürün hakkında soru sor" />
                   <p>Hayır, bilgilerimi tekrar kontrol etmek istiyorum.</p>
@@ -132,19 +139,21 @@ const confirmModal = (props) => {
           </div>
         </>
         : //üye onaylı değilse.. Üye Onay Modal
-        <div className="modal-form member-confirm">
-          <h3 className="member-confirm__title">Sahte üyeliklere karşı önlem almak amacıyla sizden <br /> <strong>bir kereye mahsus </strong> üye onay kodu almamız gerekiyor.</h3>
-          <p className="member-confirm__title">Onay kodunuzu doğruladıktan sonra siparişiniz oluşturulacaktır.</p>
-          <p className="member-confirm__text">0539 506 69 51 numaralı telefonunuza whatsapp üzerinden onay kodu gönderidik.
-            <br /> <br /> Gönderilen 5 haneli onay kodunu giriniz.</p>
-          <div className="alert-modal__action d-flex align-items-center flex-column">
-            <div className="user-info__confirm w-100">
-              <input className="mt-1" type="text" placeholder="Onay kodu" autoFocus onChange={e => setConfirmInputValue(e.target.value)} />
-              <div class="green-button mx-0 w-100 mt-3">
-                <div class="d-flex align-items-center justify-content-center h-100" onClick={confirmUser}>
-                  <button type="submit" class="ant-btn ant-btn-primary button-text ml-0 text-white">
-                    <span>Üyeliğimi Onayla</span>
-                  </button>
+        <div className={`${orderLoading ? "d-none" : ""}`}>
+          <div className="modal-form member-confirm">
+            <h3 className="member-confirm__title">Sahte üyeliklere karşı önlem almak amacıyla sizden <br /> <strong>bir kereye mahsus </strong> üye onay kodu almamız gerekiyor.</h3>
+            <p className="member-confirm__title">Onay kodunuzu doğruladıktan sonra siparişiniz oluşturulacaktır.</p>
+            <p className="member-confirm__text">0539 506 69 51 numaralı telefonunuza whatsapp üzerinden onay kodu gönderidik.
+              <br /> <br /> Gönderilen 5 haneli onay kodunu giriniz.</p>
+            <div className="alert-modal__action d-flex align-items-center flex-column">
+              <div className="user-info__confirm w-100">
+                <input className="mt-1" type="text" placeholder="Onay kodu" autoFocus onChange={e => setConfirmInputValue(e.target.value)} />
+                <div class="green-button-confirm mx-0 w-100 mt-3">
+                  <div class="d-flex align-items-center justify-content-center h-100" onClick={confirmUser}>
+                    <button type="submit" class="ant-btn ant-btn-primary button-text ml-0 text-white">
+                      <span>Üyeliğimi Onayla ve Siparişimi Oluştur</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

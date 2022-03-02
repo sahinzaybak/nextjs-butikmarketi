@@ -264,7 +264,7 @@ const Header = () => {
                 <p className="user-info__confirm-text">0539 506 69 51 numaralı telefonunuza whatsapp üzerinden onay kodu gönderidik.
                   <br /> <br /> Gönderilen 5 haneli onay kodunu giriniz.</p>
                 <input className="mt-1" type="text" placeholder="Onay kodu" autoFocus onChange={e => setConfirmInputValue(e.target.value)} />
-                <div class="green-button mx-0 w-100 mt-3">
+                <div class="green-button-confirm mx-0 w-100 mt-3">
                   <div class="d-flex align-items-center justify-content-center h-100" onClick={confirmUser}>
                     <button type="submit" class="ant-btn ant-btn-primary button-text ml-0 text-white">
                       <span>Üyeliğimi Onayla</span>

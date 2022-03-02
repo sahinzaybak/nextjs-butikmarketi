@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { FiArrowRight } from "react-icons/fi";
-import { LoadingOutlined, DoubleRightOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 //Modal Components
 import MyOrders from '../../src/components/my-orders/my-orders'
-
+import Filters from '../../src/components/my-orders/filters'
 //actions
 import { fetchMyOrders, fetchCargoInfo } from '../../src/store/actions/orders'
 
-import {loginUserInfo} from '../../src/helpers/auth'
+import { loginUserInfo } from '../../src/helpers/auth'
 
 let loginUserInfos;
 const myOrders = () => {
@@ -17,12 +15,12 @@ const myOrders = () => {
 
   let myOrderList = useSelector((state) => state.orders.myOrderList); //Dolan "sipariş listesini" al.
   let cargoInfo = useSelector((state) => state.orders.cargoInfo); //Dolan "kargo bilgilerini al"
-
   useEffect(() => {
     dispatch(fetchMyOrders()) //üyenin siparişlerini getir.
     dispatch(fetchCargoInfo()) //Kargo bilgilerini getir.
     loginUserInfos = loginUserInfo()
   }, [])
+
   return (
     <div className="my-orders">
       <div className="my-orders__header">
@@ -33,6 +31,7 @@ const myOrders = () => {
           </div>
         </div>
       </div>
+      <Filters cargoInfo={cargoInfo} />
       <div className="custom-container">
         <div className="my-orders__wrp mt-3">
           <div className="row">

@@ -9,37 +9,6 @@
       .product-card__cell {
         width: 25%;
       }
-      .filter {
-        font-family: "Comfortaa", cursive;
-        position: sticky;
-        top: 20px;
-        height: 100vh;
-        &-item {
-          padding: 0px 0px 12px 0;
-          border-bottom: 1px solid #f1f1f1;
-          // margin: 0 20px 0 0;
-        }
-        &-title {
-          font-size: 12.4px;
-          font-weight: 900;
-          padding: 5px 0px;
-          margin: 12px 0 6px;
-        }
-        &-choose {
-          .checkbox{
-            padding: 10px 11px 8px 6px;
-            border-radius: 6px;
-            margin-bottom: 2px;
-            transition: all .3s;
-            &:hover{
-              background-color: whitesmoke;
-            }
-            &.active{
-              background-color: #f7923b1c;
-            }
-          }
-        }
-      }
     }
     &__cell {
       width: 20%;

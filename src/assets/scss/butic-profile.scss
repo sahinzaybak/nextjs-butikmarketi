@@ -94,4 +94,20 @@
       font-weight: 800;
     }
   }
+  &-filters {
+    margin: 16px 0;
+    &__item {
+      border: 1px solid #ededed;
+      margin: 0px 12px 11px 0px;
+      border-radius: 22px;
+      padding: 3px 18px;
+      color: #343434;
+    }
+  }
+  &-wrp{
+    &.col-10-custom{
+      flex: 0 0 83.333333%;
+      max-width: 83.333333%;
+    }
+  }
 }

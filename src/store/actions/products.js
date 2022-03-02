@@ -30,7 +30,7 @@ export const fetchProductDetail = (productSlug) => (dispatch) => { //Ürün Deta
   });
 };
 
-export const fetchProductFilterList = (productMainCategory) => (dispatch) => { //Kategoriye göre Filtre Seçeneklerini getir. (Giyim, Ayakkabı.vs)
+export const fetchProductFilterList = (productMainCategory) => (dispatch) => { //Kategoriye göre Filtre Seçeneklerini getir. (giyim, ayakkabi ..vs)
   const selectedFilterOptions = filterOptions.filter (x => x.main_category == productMainCategory)
     dispatch({
       type: "PRODUCT_CATEGORY_FILTER_LIST",
@@ -39,13 +39,24 @@ export const fetchProductFilterList = (productMainCategory) => (dispatch) => { /
   
 };
 
-export const fetchProductFilterApply = (categotyMainTitle, filter, selectedFilterTitle) => (dispatch) => { //Filtre Uygula
-  axios.get(`http://localhost:1337/api/products?populate=${selectedFilterTitle}&filters[category]=${categotyMainTitle}${filter}`).then((response) => {
-    dispatch({
-      type: "PRODUCT_FILTER_APPLY",
-      payload: response.data.data
+export const fetchProductFilterApply = (categotyMainTitle, filter, selectedFilterTitle, pageType, buticSlug) => (dispatch) => { //Filtre Uygula
+  if(pageType == "categoryProduct"){
+    axios.get(`http://localhost:1337/api/products?populate=${selectedFilterTitle}&filters[category]=${categotyMainTitle}${filter}`).then((response) => {
+      dispatch({
+        type: "PRODUCT_FILTER_APPLY",
+        payload: response.data.data
+      });
     });
-  });
+  }
+  else{
+    axios.get(`http://localhost:1337/api/products?populate=${selectedFilterTitle}&filters[category]=${categotyMainTitle}&filters[butik_slugs]=${buticSlug}${filter}`).then((response) => {
+      dispatch({
+        type: "BUTIK_PRODUCTS",
+        payload: response.data.data
+      });
+    });
+  }
+  
 };
 
 export const fetchAddFavorite = (productId, userId) => async (dispatch) => { //Favorilere ekle
@@ -102,7 +113,7 @@ export const fetchFavoriteList = () => (dispatch) => { //Üyenin favorilerini ge
   axios.get(`http://localhost:1337/api/favorites?populate=products`, config).then((response) => {
     dispatch({
       type: "FAVORITE_LIST",
-      payload: response.data.data[0].attributes.attributes.products.data
+      payload: response.data.data[0]?.attributes.attributes.products.data
     });
   });
 };

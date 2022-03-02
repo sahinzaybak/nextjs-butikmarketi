@@ -1,4 +1,6 @@
 .my-orders {
+  position: relative;
+  z-index: 9;
   &__header {
     position: relative;
     background-image: url("https://media.istockphoto.com/vectors/racks-with-clothes-on-hangers-flat-design-style-modern-vector-id612506266?k=20&m=612506266&s=612x612&w=0&h=naySlnwkIhRB5kUFgIlDyqkcHPBkEmF82F-he9jqTyA=");
@@ -31,11 +33,62 @@
       z-index: 99;
     }
   }
+  &__filter {
+    .filter-item {
+      position: relative;
+      padding:20px 0;
+      width: 100%;
+      text-align: center;
+      color: #585858;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:after{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        left:0;
+        bottom: 0;
+        opacity: 0.2;
+        transition: all .3s ease-in-out;
+      }
+      &:nth-child(1) {
+        &:after{
+          background-color: #5e5e5e;
+        }
+      }
+      &:nth-child(2) {
+        &:after{
+          background-color: #f49f57;
+        }
+      }
+      &:nth-child(3) {
+        &:after{
+          background-color: #9edf7b;
+        }
+      }
+      &:nth-child(4) {
+        &:after{
+          background-color: #df8483;
+        }
+      }
+      &:nth-child(5) {
+        &:after{
+          background-color: #85c563;;
+        }
+      }
+      &.active{
+        &:after{
+          opacity: 1;
+        }
+      }
+    }
+  }
   &__status {
     color: white;
     font-size: 16px;
     font-weight: 600;
-    padding: 14px 20px;
+    padding: 10px 20px;
     position: relative;
     top: 20px;
     border-top-right-radius: 6px;
@@ -44,7 +97,7 @@
   &__item {
     margin: 20px 0;
     border: 1px solid #f39f57;
-    padding: 30px 20px;
+    padding: 18px 20px;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
     &-image {
@@ -116,12 +169,11 @@
     &-prepare {
       border-color: #f39f57;
     }
-    &-cargo{
+    &-cargo {
       border-color: #8bd169;
     }
-    &-cancel{
+    &-cancel {
       border-color: #d95656;
     }
-
   }
 }

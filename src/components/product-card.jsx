@@ -19,7 +19,6 @@ const ProductCard = ({ product, productId, slide }) => {
   const dispatch = useDispatch();
 
   let selectedFavoritiesProductIds = useSelector((state) => state.products.selectedFavoritesProductIds); //Dolan "seçili favori ıd'lerini" al.
-  console.log(selectedFavoritiesProductIds)
 
   useEffect(() => {
     if (selectedFavoritiesProductIds != null) {

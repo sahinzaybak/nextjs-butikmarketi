@@ -10,6 +10,8 @@ import { Modal } from 'react-responsive-modal';
 import ImageUploading from 'react-images-uploading';
 import { CameraOutlined, DeleteOutlined } from '@ant-design/icons';
 
+
+
 //Actions
 import { fetchProductComments } from '../../store/actions/orders'
 const Comment = (props) => {
@@ -17,6 +19,7 @@ const Comment = (props) => {
   const [comment, setComment] = useState('');
   const [images, setImages] = useState([]);
   const [imageList, setImageList] = useState([]);
+  const [selectedImages, setSelectedImages] = useState([]);
   const [rating, setRating] = useState([]);
   const maxNumber = 3;
 
@@ -25,25 +28,43 @@ const Comment = (props) => {
   }
 
   let imageSliderArray = []
-  const onChange = (imageList, addUpdateIndex) => {// data for submit
+  let selectedAllImages = []
+  const onChange = async (imageList, addUpdateIndex) => {// data for submit
     setImages(imageList);
-    const fmData = new FormData();
-    const config = { headers: { "content-type": "multipart/form-data" } };
-    imageList.forEach((item) => { //Seçilen resimleri aktar
-      fmData.append("image", item.file);
-      try {
-        axios.post("https://api.imgbb.com/1/upload?key=8b372dc4d088f787a0516386606606eb", fmData, config).then(value => {
-          if (value != null) {
-            imageSliderArray.push({ image_slider: value.data.data.display_url })
-            setImageList(imageSliderArray)
-          }
-        })
-      } catch (err) { console.log(err) }
+    imageList.forEach(async (item) => { //Seçilen resimleri aktar
+      imageSliderArray.push(item)
+      setImageList(imageSliderArray)
     });
   };
 
-  function sendComment() {
-    dispatch(fetchProductComments(props.productId, props.userName, props.comments, comment, rating, imageList))
+  async function sendComment() {
+    let uploadImages = await uploadImage(); //resimleri s3'e yükle.
+    fetchComment(uploadImages) //Tüm form ve resimleri veritabanına yükle.
+  }
+
+  //Resimleri s3'e yükle.
+  async function uploadImage() {
+    let config = { headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}` }};
+    await Promise.all(imageList.map( async (item) => { //Seçilen resimleri aktar
+      let { url } = await fetch("http://localhost:1337/api/orders/productComment", config).then(res => res.json()); //AWS işlemleri
+
+      await fetch(url, { //aws url
+        method: "PUT",
+        headers: { "Content-Type": "multipart/form-data" },
+        body: item.file
+      })
+
+      let imageUrl = url.split('?')[0]
+      selectedAllImages.push(imageUrl)
+    }));
+
+    return selectedAllImages;
+  }
+
+  // Yukarıda ki uploadImage() fonksiyonu bitmeden burası çalışmaz. (Promise.all) Tüm seçilen resimleri s3'e yükledikten sonra yüklenen resimleri alırız.
+  function fetchComment(_uploadImages) {
+    console.log(_uploadImages)
+    dispatch(fetchProductComments(props.productId, props.userName, props.comments, comment, rating, _uploadImages))
   }
 
   return (
@@ -77,7 +98,7 @@ const Comment = (props) => {
           onChange={onChange}
           maxNumber={maxNumber}
           dataURLKey="data_url"
-          acceptType={['jpg', 'png']}>
+          acceptType={['jpg', 'jpeg', 'png',]}>
           {({ imageList, onImageUpload, onImageRemove, isDragging, dragProps, errors }) => (
             <>
               {errors &&

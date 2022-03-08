@@ -71,7 +71,7 @@ const ButicProfile = () => {
                   <p className="butic-header__point">{butikProfileInfo.attributes.butik_points}</p>
                 </div>
                 <div className="butic-header__info d-flex align-items-center">
-                  <span className="mr-1">Butik Sahibi: </span>
+                  <span className="mr-1">CEO ve kurucu karısı: </span>
                   {butikProfileInfo.attributes.owner != null ?
                     <p className="butic-header__owner">{butikProfileInfo.attributes.owner}</p> :
                     <p className="butic-header__owner">Belirtilmemiş</p>

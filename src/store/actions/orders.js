@@ -118,9 +118,11 @@ export const fetchProductComments = (productId,username,defaultComments,comment,
         comment:comment,
         commentImages:[
           {
-            image:imageList[0].image_slider
+            image:imageList
           }
-        ]}]
+        ]
+      }
+    ]
     },
   });
 };

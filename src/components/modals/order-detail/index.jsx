@@ -14,7 +14,7 @@ const orderDetailModal = (props) => {
 					cargoInfo={props.cargoInfo}
 					orderNumber={props.orderNumber}
 					isMember={props.isMember}
-          orderedPersonName={props.orderedPersonName}
+					orderedPersonName={props.orderedPersonName}
 				/>
 			</div>
 		</Modal>

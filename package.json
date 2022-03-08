@@ -10,7 +10,9 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "antd": "^4.12.3",
+    "aws-sdk": "^2.1088.0",
     "axios": "^0.21.1",
+    "axios-form-data": "^1.0.0",
     "bootstrap": "^4.6.0",
     "lodash": "^4.17.21",
     "next": "^11.0.0",

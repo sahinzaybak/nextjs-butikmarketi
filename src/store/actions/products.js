@@ -40,7 +40,7 @@ export const fetchProductFilterList = (productMainCategory) => (dispatch) => { /
 };
 
 export const fetchProductFilterApply = (categotyMainTitle, filter, selectedFilterTitle, pageType, buticSlug) => (dispatch) => { //Filtre Uygula
-  if(pageType == "categoryProduct"){
+  if(pageType == "categoryProduct"){ //kategori sayfası için ürün filtreleme
     axios.get(`http://localhost:1337/api/products?populate=${selectedFilterTitle}&filters[category]=${categotyMainTitle}${filter}`).then((response) => {
       dispatch({
         type: "PRODUCT_FILTER_APPLY",
@@ -48,7 +48,7 @@ export const fetchProductFilterApply = (categotyMainTitle, filter, selectedFilte
       });
     });
   }
-  else{
+  else{ //butik profil sayfası için ürün filtreleme
     axios.get(`http://localhost:1337/api/products?populate=${selectedFilterTitle}&filters[category]=${categotyMainTitle}&filters[butik_slugs]=${buticSlug}${filter}`).then((response) => {
       dispatch({
         type: "BUTIK_PRODUCTS",

@@ -107,24 +107,50 @@ export const fetchCargoInfo = () => (dispatch) => { //Kargo Takibi
   });
 };
 
-export const fetchProductComments = (productId,username,defaultComments,comment,rating, imageList) => (dispatch) =>{ //Ürüne yorum yap
-  axios.put(`http://localhost:1337/api/products/${productId}`, {
-    data: {
-      comments:[
-        ...defaultComments,
-        {
-        comment_name: username,
-        star: rating,
-        comment:comment,
-        commentImages:[
+export const fetchProductComments = (productId, username, userId, defaultComments, comment, rating, imageList) => async (dispatch) => { 
+  debugger;
+  //Ürüne Yorum Yap - Değerlendir.
+  const productInfo = await axios.get(`http://localhost:1337/api/products?filters[id]=${productId}&populate=comments`);
+  const isCommnet = productInfo.data.data[0].attributes.comments.some(x => x.userId == userId)
+  if(isCommnet){
+    const updateComment = []
+    updateComment.push({
+      userId:userId,
+      comment_name: username,
+      star: rating,
+      comment:comment,
+      commentImages: imageList,
+    }) 
+    for( var i = 0; i < defaultComments.length; i++){ 
+      if ( defaultComments[i].userId === userId) { //defaultComment'te var olan userID'li yorumu sil ve güncel yorumu pushla(aşağıda)
+        defaultComments.splice(i, 1); 
+      }
+   }
+    defaultComments.push(updateComment[0])
+    axios.put(`http://localhost:1337/api/products/${productId}`, {
+      data: {
+        comments:[
+          ...defaultComments
+        ]
+      },
+    });
+  }
+  else{
+    axios.put(`http://localhost:1337/api/products/${productId}`, {
+      data: {
+        comments:[
+          ...defaultComments,
           {
-            image:imageList
+            userId:userId,
+            comment_name: username,
+            star: rating,
+            comment:comment,
+            commentImages: imageList,
           }
         ]
-      }
-    ]
-    },
-  });
+      },
+    });
+  }
 };
 
 //ÜYE
@@ -140,6 +166,18 @@ export const fetchMyOrders = () => (dispatch) => { //Sipariş bilgilerini getir.
       dispatch({
         type: "DEFAULT_MY_ORDER_LIST",
         payload: response.data.data
+      });
+    });
+};
+
+//Ürün yorumlarım
+export const fetchUserProductComment = (productId) => (dispatch) => { //Sipariş bilgilerini getir.
+  const config = {headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}`}};
+  axios.get(`http://localhost:1337/api/products/userComment/${productId}?populate=comments.commentImages`, config)
+  .then((response) => {
+      dispatch({
+        type: "USER_PRODUCT_COMMENT",
+        payload: response.data
       });
     });
 };

@@ -214,24 +214,24 @@
       padding: 5px;
       cursor: pointer;
       opacity: 0.3;
-      transition: all .3s;
+      transition: all 0.3s;
       border: 1px solid;
-      &.favorite{
+      &.favorite {
         color: #f16f93;
         border-color: #f16f93;
         background-color: #f16f9314;
-        &.active{
+        &.active {
           color: #fbfbfb;
           background-color: #f16f94;
           opacity: 1;
         }
       }
-      &.whatsapp{
+      &.whatsapp {
         color: #82bb79;
         border-color: #82bb79;
         background-color: #82bb7917;
       }
-      &:hover{
+      &:hover {
         opacity: 1;
       }
     }
@@ -264,25 +264,34 @@
       }
     }
     &-avatar {
-      width: 60px !important;
-      height: 60px !important;
+      width: 45px !important;
+      height: 45px !important;
       div {
-        font-size: 20px !important;
+        font-size: 16px !important;
       }
     }
     &-name {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
+      color: #e18634;
     }
     &-text {
       width: 80%;
       color: #676767;
+      font-size: 15.6px;
+      color: #505050;
     }
+    &-confirm {
+      color: #2db720;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
     &-image {
       width: 64px;
       height: 64px;
       img {
-        object-fit: cover;
+        object-fit: contain;
         width: 100%;
         height: 100%;
         border-radius: 6px;

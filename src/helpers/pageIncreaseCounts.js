@@ -19,7 +19,7 @@ export const pageIncreaseCount = (increasePageItemId, defaultClicks, increasePag
 	  const todayValueIndexNo = defaultClicks.findIndex((x) => x.date == currentDay("-"));
 	  const todayValue = defaultClicks.find((x) => x.date == currentDay("-"));
 	  todayValue.clickCount++;
-	  defaultClicks[todayValueIndexNo] = todayValue; // butikClicks array içinde bugüne ait indexNo ile cC +1 olmuş objeyi güncelle.
+	  defaultClicks[todayValueIndexNo] = todayValue; // butikClicks array içinde bugüne ait indexNo ile +1 olmuş objeyi güncelle.
 	  axios.put(`http://localhost:1337/api/${increasePage}/${increasePageItemId}`, {
 		data: {
 		  [servicesAttr]: [

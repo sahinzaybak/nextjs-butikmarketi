@@ -1,7 +1,5 @@
 import { useState } from "react";
-import ReactStars from 'react-stars'
 import { Link } from 'react-scroll'
-import CommnetModal from '../modals/comment'
 import StarRatings from 'react-star-ratings';
 
 const ProductInfoTop = ({ productTitle, comments, commentsCount, productDescription }) => {
@@ -46,7 +44,6 @@ const ProductInfoTop = ({ productTitle, comments, commentsCount, productDescript
         <span className="product-info__title">Ürün Açıklaması</span>
         <p className="product-info__desc mt-1">{productDescription}</p>
       </div>
-      <CommnetModal open={openComment} onClose={onCloseComment} classNames={{ modal: 'modal-comment' }} />
     </>
   );
 };

@@ -13,6 +13,7 @@
   border-radius: 50px;
   transition: all 0.4s;
   letter-spacing: 1px;
+ 
   &-text {
     margin-right: 6px;
   }
@@ -72,6 +73,7 @@
     &.disabled{
       pointer-events: none;
     }
+    
   }
 }
 

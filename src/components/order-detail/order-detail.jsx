@@ -6,14 +6,16 @@ import { LoadingOutlined, DoubleRightOutlined, CheckOutlined, CloseOutlined } fr
 
 //Modal Components
 import OrderCancel from '../../../src/components/modals/order-detail/order-cancel'
-import ProductComment from '../../../src/components/modals/comment'
+import ProductComment from '../../../src/components/modals/order-detail/comment'
 import CargoTracking from '../../../src/components/modals/order-detail/cargo-tracking'
 
 //actions
-import { fetchOrderCancel } from '../../../src/store/actions/orders'
+import { fetchOrderCancel,fetchUserProductComment } from '../../../src/store/actions/orders'
 
-const orderDetailComp = ({ orderDetailInfo, cargoInfo, orderNumber, isMember, orderedPersonName}) => {
-  console.log(orderDetailInfo)
+//helpers
+import { loginUserInfo } from '../../helpers/auth'
+
+const orderDetailComp = ({ orderDetailInfo, cargoInfo, orderNumber, isMember, orderedPersonName }) => {
   const dispatch = useDispatch();
   const [orderCancelInfoText, setOrderCancelInfoText] = useState(false); //Sipariş iptal ettiğinde sipariş iptal yazısını görelim.
 
@@ -22,9 +24,14 @@ const orderDetailComp = ({ orderDetailInfo, cargoInfo, orderNumber, isMember, or
   const [openCargoTracking, setOpenCargoTracking] = useState(false);
   const [openComment, setOpenComment] = useState(false);
 
-  function orderDoingCancel() { //Evet, sipraişimi iptal etmek istiyorum
-    dispatch(fetchOrderCancel(orderDetailInfo.id, isMember ?  "orders" :  "orders-inactives")) //Sipariş iptal => isOrderCancel = false
+  let userProductComment = useSelector((state) => state.orders.userProductComment); //Dolan "seçili favori 
+  function orderDoingCancel() { //Evet, siparaişimi iptal etmek istiyorum
+    dispatch(fetchOrderCancel(orderDetailInfo.id, isMember ? "orders" : "orders-inactives")) //Sipariş iptal => isOrderCancel = false
     setOrderCancelInfoText(true) //Sipariş iptal ettiğinde sipariş iptal yazısını görelim.
+  }
+
+  function fetchUserComments(){
+    dispatch(fetchUserProductComment(orderDetailInfo.attributes.attributes.products.data[0].id))
   }
 
   return (
@@ -81,11 +88,20 @@ const orderDetailComp = ({ orderDetailInfo, cargoInfo, orderNumber, isMember, or
                         </div>
                         <div className="d-flex">
                           <a>Değişim Talebi</a>
-                          <a className="mr-2 ml-2" onClick={() => setOpenComment(true)}>Ürüne Yorum Yap</a>
+                          <>
+                            {orderDetailInfo.attributes.attributes.products.data[0].attributes.comments != "" ?
+                              <a className="mr-2 ml-2" onClick={() => (setOpenComment(true),fetchUserComments())}>Değerlendirmeyi Düzenle</a>
+                              :
+                              <a className="mr-2 ml-2" onClick={() => (setOpenComment(true), fetchUserComments())}>Ürünü Değerlendir</a>
+                            }
+                          </>
                           <a>Satıcıyı Değerlendir</a>
                           <ProductComment
                             open={openComment}
                             productId={orderDetailInfo.attributes.attributes.products.data[0].id}
+                            userName={loginUserInfo().nameSurname}
+                            userId={loginUserInfo().id}
+                            comment={userProductComment}
                             comments={orderDetailInfo.attributes.attributes.products.data[0].attributes.comments}
                             orderedPersonName={orderedPersonName}
                             onClose={() => setOpenComment(false)}

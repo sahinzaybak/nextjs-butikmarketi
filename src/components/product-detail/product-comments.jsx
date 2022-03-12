@@ -1,5 +1,6 @@
 import ReactStars from 'react-stars'
 import Avatar from 'react-avatar';
+import { GiConfirmed } from "react-icons/gi";
 
 const ProductComments = ({ comments }) => {
   return (
@@ -14,20 +15,29 @@ const ProductComments = ({ comments }) => {
             <div className="d-flex flex-column w-100">
               <div className="product-detail__comments-top mt-2 d-flex align-items-center justify-content-between w-100">
                 <h3 className="product-detail__comments-name mb-2">{comment.comment_name}</h3>
+
                 <ReactStars
                   count={5}
                   value={comment.star}
-                  size={26} half={false}
+                  size={22} half={false}
                   color1={'#e3eaea'}
                   color2={'#ffcc65'}
                 />
               </div>
               <p className="product-detail__comments-text">{comment.comment}</p>
-              {comment.commentImages.map((images, index) => (
-                <div className="product-detail__comments-image mt-3" key={index}>
-                  <img src={images.image} alt="" />
+              <div className="d-flex align-items-end justify-content-between">
+                <div className="d-flex mt-2">
+                  {comment.commentImages.map((images, index) => (
+                    <div className="product-detail__comments-image mt-3 mr-2" key={index}>
+                      <img src={images.image} alt="" />
+                    </div>
+                  ))}
                 </div>
-              ))}
+                <div className="product-detail__comments-confirm d-flex align-items-center">
+                  <GiConfirmed />
+                  <span className="ml-1">Ürünü satın aldı.</span>
+                </div>
+              </div>
             </div>
           </div>
         ))}
